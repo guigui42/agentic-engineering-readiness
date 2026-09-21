@@ -117,6 +117,8 @@ describe('AES readiness content', () => {
         placementAnswers({ governance, knowledge, adoption }),
         'Payments bug fixes',
       )
+      expect(result.baselineTotal).toBe(4)
+      expect(result.total).toBe(12)
       expect(result.quadrant?.id).toBe(expected)
     },
   )

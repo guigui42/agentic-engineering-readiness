@@ -76,6 +76,9 @@ describe('App', () => {
       }),
     ).toBeInTheDocument()
     expect(
+      screen.getByRole('heading', { name: 'Set the operating baseline once' }),
+    ).toBeInTheDocument()
+    expect(
       screen.getByLabelText('Name the workflow, team, or repository class'),
     ).toBeInTheDocument()
     expect(screen.getByText(/This is a label, not a search/i)).toBeInTheDocument()
@@ -106,14 +109,15 @@ describe('App', () => {
     )
 
     await waitFor(() => {
-      const stored = localStorage.getItem('agentic-engineering-readiness-v2')
-      expect(stored).toContain('"scope":"Payments bug fixes"')
-      expect(stored).toContain('"precondition-infrastructure":2')
+      const baseline = localStorage.getItem('agentic-engineering-baseline-v1')
+      const workflow = localStorage.getItem('agentic-engineering-workflow-v1')
+      expect(baseline).toContain('"precondition-infrastructure":2')
+      expect(workflow).toContain('"scope":"Payments bug fixes"')
     })
     expect(trackInteraction).toHaveBeenCalledWith({
       category: 'readiness',
       action: 'change',
-      label: 'response-selected',
+      label: 'baseline-response-selected',
     })
   })
 
@@ -199,5 +203,31 @@ describe('App', () => {
         name: 'Name the workflow you are checking',
       }),
     ).toBeInTheDocument()
+    expect(
+      localStorage.getItem('agentic-engineering-baseline-v1'),
+    ).toContain('"precondition-infrastructure":2')
+  })
+
+  it('resets the operating baseline without clearing workflow answers', async () => {
+    const user = userEvent.setup()
+    seedReadinessCheck()
+    render(<App />)
+
+    await user.click(
+      screen.getByRole('button', { name: 'Reset operating baseline' }),
+    )
+    await user.click(
+      screen.getByRole('button', { name: 'Confirm baseline reset' }),
+    )
+
+    expect(
+      screen.getByRole('heading', {
+        name: 'Resolve operating preconditions before placement',
+      }),
+    ).toBeInTheDocument()
+    expect(screen.getByText('Payments bug fixes', { exact: true })).toBeInTheDocument()
+    expect(
+      localStorage.getItem('agentic-engineering-workflow-v1'),
+    ).toContain('"scope":"Payments bug fixes"')
   })
 })

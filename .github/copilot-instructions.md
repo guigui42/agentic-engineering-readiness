@@ -24,7 +24,8 @@ turning AES into an opaque maturity score or certification.
   implementation steps in `src/assessment/githubActions.ts`, and rendering in
   `src/components/`.
 - Preserve the `/agentic-engineering-readiness/` GitHub Pages base path.
-- Store scope and answers only in browser local storage.
+- Store the reusable operating baseline separately from workflow scope and
+  workflow answers in browser local storage.
 - Keep Hydro analytics on app ID `aes-assessment` limited to page views and
   fixed interaction identifiers. Never transmit scope, answers, scores,
   placement, recommendation text, or Markdown output.

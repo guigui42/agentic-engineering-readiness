@@ -417,6 +417,7 @@ main,
 }
 
 .framework,
+.operating-baseline,
 .assessment,
 .results,
 .anti-patterns,
@@ -581,6 +582,31 @@ main,
 
 .mode-list strong {
   color: var(--fg);
+}
+
+.baseline-summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 8px;
+}
+
+.baseline-summary span {
+  color: var(--fg-muted);
+}
+
+.baseline-reset {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.baseline-reset span {
+  color: var(--danger);
+  font-size: 13px;
 }
 
 .progress-dock {
@@ -1769,6 +1795,7 @@ main,
 @media (max-width: 520px) {
   .hero,
   .framework,
+  .operating-baseline,
   .assessment,
   .results,
   .anti-patterns,
@@ -1813,6 +1840,12 @@ main,
   .dimension-summary article + article {
     border-top: 1px solid var(--border);
     border-left: 0;
+  }
+
+  .baseline-summary,
+  .baseline-reset {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .scope-panel {

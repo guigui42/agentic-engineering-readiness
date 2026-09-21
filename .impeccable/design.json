@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-21T16:44:39.171+02:00",
+  "generatedAt": "2026-09-21T17:40:01.959+02:00",
   "title": "Design System: Agentic Engineering readiness",
   "extensions": {
     "colorMeta": {
@@ -353,12 +353,20 @@
       "css": ".ds-response-option { position: relative; display: block; cursor: pointer; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; } .ds-response-option input { position: absolute; width: 1px; height: 1px; opacity: 0; } .ds-response-option span { min-height: 58px; display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 9px; align-items: center; border: 1px solid var(--accent, #0969da); padding: 9px 10px; color: var(--accent, #0969da); background: var(--accent-muted, #ddf4ff); box-shadow: inset 0 -3px 0 var(--accent, #0969da); font-size: 13px; font-weight: 650; } .ds-response-option b { display: grid; place-items: center; width: 27px; height: 27px; border-radius: 50%; color: #fff; background: var(--accent-emphasis, #1f6feb); } .ds-response-option input:focus-visible + span { outline: 3px solid var(--accent, #0969da); outline-offset: 2px; }"
     },
     {
+      "name": "Operating Baseline Summary",
+      "kind": "custom",
+      "refersTo": "operating-baseline-summary",
+      "description": "A ruled completion summary inside the visually separate four-item Operating baseline section. It states that baseline answers persist independently from workflow scope and workflow answers.",
+      "html": "<section class=\"ds-operating-baseline\"><div class=\"ds-baseline-heading\"><h2>Set the operating baseline once</h2><p>Review it when infrastructure, access, skills, or operating expectations change.</p></div><div class=\"ds-baseline-summary\"><strong>3 of 4 baseline items answered</strong><span>Stored separately from the workflow scope and workflow answers.</span></div><button type=\"button\">Reset operating baseline</button></section>",
+      "css": ".ds-operating-baseline { color: var(--fg, #1f2328); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; } .ds-baseline-heading { display: flex; align-items: end; justify-content: space-between; gap: 48px; margin-bottom: 34px; } .ds-baseline-heading h2 { max-width: 780px; margin: 0; font-size: clamp(32px, 4.2vw, 54px); line-height: 1.05; letter-spacing: -0.035em; } .ds-baseline-heading p { max-width: 610px; margin: 0; color: var(--fg-muted, #59636e); line-height: 1.65; } .ds-baseline-summary { display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid var(--border, #d1d9e0); border-bottom: 1px solid var(--border, #d1d9e0); padding: 16px 8px; } .ds-baseline-summary span { color: var(--fg-muted, #59636e); } .ds-operating-baseline button { min-height: 44px; margin-top: 22px; border: 0; padding: 0; color: var(--fg-muted, #59636e); background: transparent; font: inherit; font-weight: 650; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; } .ds-operating-baseline button:hover { color: var(--danger, #cf222e); } .ds-operating-baseline button:focus-visible { outline: 3px solid var(--accent, #0969da); outline-offset: 3px; } @media (max-width: 760px) { .ds-baseline-heading { align-items: start; flex-direction: column; gap: 18px; } } @media (max-width: 520px) { .ds-baseline-summary { align-items: flex-start; flex-direction: column; } }"
+    },
+    {
       "name": "Sticky Progress Dock",
       "kind": "custom",
       "refersTo": "progress-dock",
-      "description": "A compact orientation aid combining answered count, progress rail, and results link.",
-      "html": "<div class=\"ds-progress-dock\"><div><strong>7 of 16</strong><span>items answered</span></div><div class=\"ds-progress-track\"><span></span></div><a href=\"#\">View results</a></div>",
-      "css": ".ds-progress-dock { display: grid; grid-template-columns: auto minmax(140px, 1fr) auto; gap: 18px; align-items: center; border: 1px solid var(--border, #d1d9e0); padding: 12px 16px; color: var(--fg, #1f2328); background: color-mix(in srgb, var(--canvas, #fff) 95%, transparent); box-shadow: var(--shadow, 0 8px 24px rgba(140, 149, 159, 0.16)); backdrop-filter: blur(12px); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; } .ds-progress-dock > div:first-child { display: flex; align-items: baseline; gap: 7px; white-space: nowrap; } .ds-progress-dock span, .ds-progress-dock a { color: var(--fg-muted, #59636e); font-size: 13px; } .ds-progress-dock a { color: var(--accent, #0969da); font-weight: 650; text-decoration: none; } .ds-progress-track { height: 6px; overflow: hidden; background: var(--canvas-inset, #eff2f5); } .ds-progress-track span { display: block; width: 44%; height: 100%; background: var(--accent-emphasis, #1f6feb); } .ds-progress-dock a:focus-visible { outline: 3px solid var(--accent, #0969da); outline-offset: 3px; }"
+      "description": "A compact orientation aid combining the twelve workflow-specific items answered, a workflow-only progress rail, and the results link. Operating-baseline answers are excluded.",
+      "html": "<div class=\"ds-progress-dock\"><div><strong>7 of 12</strong><span>items answered</span></div><div class=\"ds-progress-track\"><span></span></div><a href=\"#\">View results</a></div>",
+      "css": ".ds-progress-dock { display: grid; grid-template-columns: auto minmax(140px, 1fr) auto; gap: 18px; align-items: center; border: 1px solid var(--border, #d1d9e0); padding: 12px 16px; color: var(--fg, #1f2328); background: color-mix(in srgb, var(--canvas, #fff) 95%, transparent); box-shadow: var(--shadow, 0 8px 24px rgba(140, 149, 159, 0.16)); backdrop-filter: blur(12px); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; } .ds-progress-dock > div:first-child { display: flex; align-items: baseline; gap: 7px; white-space: nowrap; } .ds-progress-dock span, .ds-progress-dock a { color: var(--fg-muted, #59636e); font-size: 13px; } .ds-progress-dock a { color: var(--accent, #0969da); font-weight: 650; text-decoration: none; } .ds-progress-track { height: 6px; overflow: hidden; background: var(--canvas-inset, #eff2f5); } .ds-progress-track span { display: block; width: 58.33%; height: 100%; background: var(--accent-emphasis, #1f6feb); } .ds-progress-dock a:focus-visible { outline: 3px solid var(--accent, #0969da); outline-offset: 3px; }"
     },
     {
       "name": "Result Summary Evidence",
@@ -419,13 +427,15 @@
   ],
   "narrative": {
     "northStar": "The Operational System Map",
-    "overview": "The system presents readiness as a connected operating model rather than a dashboard score. GitHub-native neutrals, one-pixel rules, direct typography, and source links create a technical field guide that supports both reading and operating. The instrument is a readiness check for one named workflow: a required scope field and 16 items establish preconditions, foundations, agent participation, customer value, and system learning before producing a result.\n\nThe visual voice is crisp, source-forward, and restrained. Violet, blue, and green identify the three AES stocks without turning the page into a multicolor dashboard. Dense readiness-check content stays legible through strong hierarchy, long reading measures, visible borders, and responsive reflow. Preconditions visibly block matrix placement; governance and shared knowledge determine foundations through the weaker stock; agent participation appears as a lifecycle position rather than a percentage. The hero carries a concise anonymous Hydro analytics and local-data summary without affiliation language; the independent, unofficial disclaimer is reserved for the footer.",
+    "overview": "The system presents readiness as a connected operating model rather than a dashboard score. GitHub-native neutrals, one-pixel rules, direct typography, and source links create a technical field guide that supports both reading and operating. The instrument separates a reusable four-item operating baseline from a twelve-item check for one named workflow. Together they establish preconditions, foundations, agent participation, customer value, and system learning before producing a result.\n\nThe visual voice is crisp, source-forward, and restrained. Violet, blue, and green identify the three AES stocks without turning the page into a multicolor dashboard. The operating baseline is a visually separate section with its own completion summary and reset action; its answers persist independently from the workflow scope and twelve workflow answers. Dense readiness-check content stays legible through strong hierarchy, long reading measures, visible borders, and responsive reflow. Preconditions visibly block matrix placement; governance and shared knowledge determine foundations through the weaker stock; agent participation appears as a lifecycle position rather than a percentage. The hero carries a concise anonymous Hydro analytics and local-data summary without affiliation language; the independent, unofficial disclaimer is reserved for the footer.",
     "keyCharacteristics": [
       "GitHub-native light and dark neutral surfaces.",
       "Strong editorial headings paired with practical evidence text.",
       "Crisp rules and square field structures instead of rounded dashboard cards.",
       "Three stock colors with stable semantic roles.",
-      "A workflow scope field followed by 16 items using distinct readiness and participation scales.",
+      "A visually separate four-item operating baseline, followed by a named twelve-item workflow check using distinct readiness and participation scales.",
+      "Independent persistence and reset controls for the reusable baseline and the scoped workflow check.",
+      "Workflow progress that counts only the twelve workflow-specific items.",
       "Preconditions that block placement before the result summaries and matrix are interpreted.",
       "A Stock-Adoption matrix that combines the weaker foundation stock with a lifecycle participation position.",
       "Percentage rails only for governance and shared knowledge, with display scores rounded down to the nearest five and bands derived from raw evidence; completed-item bands without rails for customer value and system learning.",
@@ -469,6 +479,16 @@
         "section": "layout"
       },
       {
+        "name": "The Two-Cadence Readiness Rule",
+        "body": "Set the four-item operating baseline once and review it when infrastructure, access, skills, or operating expectations change. Rerun the twelve-item workflow check for every team, repository class, or delivery workflow.",
+        "section": "layout"
+      },
+      {
+        "name": "The Independent State Rule",
+        "body": "Persist and reset baseline answers independently from the workflow scope and twelve workflow answers. Neither reset action may erase the other state.",
+        "section": "layout"
+      },
+      {
         "name": "The Flat-by-Default Rule",
         "body": "Use rules and tonal separation first. Add elevation only when an element floats, remains sticky, or represents a framed system object.",
         "section": "elevation"
@@ -482,12 +502,27 @@
         "name": "The Surface-to-Evidence Rule",
         "body": "Every implementation recommendation must name its GitHub or operating-model surface, provide ordered changes, state observable verification evidence, and link to its public sources in that sequence.",
         "section": "components"
+      },
+      {
+        "name": "The Visually Separate Baseline Rule",
+        "body": "Do not merge the four preconditions into workflow progress, the workflow scope panel, or the five workflow disclosure groups. Section spacing, heading hierarchy, and the ruled baseline summary must make the reusable baseline read as a distinct operating layer.",
+        "section": "components"
+      },
+      {
+        "name": "The Workflow-Only Progress Rule",
+        "body": "Workflow completion is always answered workflow items divided by twelve. Baseline completion belongs only in the operating-baseline summary.",
+        "section": "components"
       }
     ],
     "dos": [
       "Do use crisp one-pixel rules and GitHub-neutral surfaces to structure long reading flows.",
       "Do keep stock colors bound to governance, shared knowledge, and customer value.",
       "Do pair large operational headings with muted source-forward explanations.",
+      "Do present the four operating preconditions in a visually separate Operating baseline section before workflow progress and scope.",
+      "Do set the baseline once, then review it when infrastructure, access, skills, or operating expectations change.",
+      "Do rerun the twelve-item workflow check for each team, repository class, or delivery workflow.",
+      "Do persist and reset baseline answers independently from workflow scope and workflow answers.",
+      "Do calculate the sticky progress dock from only the twelve workflow-specific items.",
       "Do require one workflow scope before the readiness check can produce a placement.",
       "Do keep unresolved preconditions visibly blocking placement.",
       "Do use the weaker of governance and shared knowledge for the foundations position.",
@@ -506,6 +541,8 @@
       "Don't label the readiness check as a certification or organization-wide score.",
       "Don't turn the hero's 32px grid into a general page background or reusable panel texture.",
       "Don't replace the connected field with detached KPI cards or a generic metrics dashboard.",
+      "Don't fold operating-baseline answers into workflow progress or clear them when resetting a workflow check.",
+      "Don't reuse workflow answers across a different team, repository class, or delivery workflow without rerunning the check.",
       "Don't round major reading containers, matrices, warnings, or evidence groups.",
       "Don't use color without a text label, structural position, or state cue.",
       "Don't average governance and shared knowledge into a stronger-looking foundations placement.",

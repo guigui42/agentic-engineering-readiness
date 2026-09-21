@@ -65,6 +65,9 @@ safe-outputs:
       - src/assessment/questions.ts
       - src/assessment/githubActions.ts
       - src/App.tsx
+      - src/components/OperatingBaseline.tsx
+      - src/components/Assessment.tsx
+      - src/components/QuestionSection.tsx
       - README.md
       - index.html
       - public/robots.txt
@@ -74,7 +77,7 @@ safe-outputs:
       policy: blocked
       exclude:
         - README.md
-    max-patch-files: 7
+    max-patch-files: 10
     max-patch-size: 512
 ---
 
@@ -91,6 +94,9 @@ Review these files completely:
 - `src/assessment/questions.ts`
 - `src/assessment/githubActions.ts`
 - `src/App.tsx`
+- `src/components/OperatingBaseline.tsx`
+- `src/components/Assessment.tsx`
+- `src/components/QuestionSection.tsx`
 - `README.md`
 - `index.html`
 - `public/robots.txt`
@@ -122,6 +128,8 @@ links, or search-result summaries as publication evidence.
   check in `src/assessment/githubActions.ts`.
 - Preserve the distinction between leading stocks, customer value signals,
   operating preconditions, and agent participation.
+- Preserve the reusable operating baseline as separate from each
+  workflow-specific readiness check.
 - Preserve the independent, unofficial disclaimer.
 - Do not turn the readiness check into a certification or universal risk threshold.
 - Do not change scoring thresholds or recommendation priority logic. Those

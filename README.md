@@ -8,7 +8,10 @@ Agentic Engineering System (AES) framework.
 ## What it does
 
 - Checks one named team, repository class, or workflow at a time.
-- Treats missing operating preconditions as blockers to placement.
+- Saves a reusable four-item operating baseline separately from workflow
+  checks.
+- Runs twelve workflow-specific items for each scope.
+- Treats missing baseline preconditions as blockers to workflow placement.
 - Uses the weaker of governance and shared knowledge for the foundations axis.
 - Positions agent participation across define, deliver, and detect without
   treating more participation as a maturity goal.
@@ -78,7 +81,9 @@ e2e/site.spec.ts           Browser, accessibility, metadata, and local-data chec
 ## Content methodology
 
 - Keep the AES quadrant model faithful to the current public framework.
-- Run placement per workflow and require all operating preconditions.
+- Save operating preconditions as a reusable baseline and review it when the
+  operating environment changes.
+- Run placement per workflow and require the saved baseline.
 - Treat governance and shared knowledge as jointly necessary.
 - Keep participation positional rather than presenting it as a maturity score.
 - Treat thresholds as project-authored, directional, and visible.

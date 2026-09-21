@@ -32,6 +32,8 @@ publicly documented GitHub practices.
 - Used as a self-guided assessment or facilitated workshop.
 - Run once per team, repository class, or workflow rather than once per
   organization.
+- Store the four operating preconditions as a reusable baseline, separate from
+  each workflow scope and its twelve workflow-specific answers.
 - Answers and generated results stay in the visitor's browser.
 - Results can be copied as Markdown into an issue, planning document, or
   workshop record.

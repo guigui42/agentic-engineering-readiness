@@ -288,6 +288,7 @@ export function exportAssessmentMarkdown(
     '',
     `- Scope: ${scope.trim() || 'Not specified'}`,
     `- Content verified: ${verifiedDate}`,
+    `- Operating baseline: ${result.preconditionsReady ? 'Ready' : `${result.baselineAnswered} of ${result.baselineTotal} items answered; unresolved items remain`}`,
     `- Placement: ${result.quadrant?.label ?? 'Not available'}`,
     `- Placement status: ${placementStatusLabels[result.placementStatus]}`,
     `- Governance: ${result.dimensions.governance.band}${result.dimensions.governance.score === null ? '' : ` (${result.dimensions.governance.score}%)`}`,

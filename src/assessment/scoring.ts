@@ -233,13 +233,19 @@ export function calculateAssessment(
     ]),
   ) as Record<ScoredDimension, DimensionScore>
   const adoption = getAdoptionPosition(answers)
-  const answered = assessmentQuestions.filter(
-    (question) => answers[question.id] !== undefined,
-  ).length
 
   const preconditionQuestions = assessmentQuestions.filter(
     (question) => question.dimension === 'preconditions',
   )
+  const baselineAnswered = preconditionQuestions.filter(
+    (question) => answers[question.id] !== undefined,
+  ).length
+  const workflowQuestions = assessmentQuestions.filter(
+    (question) => question.dimension !== 'preconditions',
+  )
+  const answered = workflowQuestions.filter(
+    (question) => answers[question.id] !== undefined,
+  ).length
   const unresolvedPreconditions = preconditionQuestions.filter(
     (question) =>
       answers[question.id] === undefined || (answers[question.id] ?? 0) < 2,
@@ -301,11 +307,13 @@ export function calculateAssessment(
     quadrant,
     placementStatus,
     answered,
-    total: assessmentQuestions.length,
+    total: workflowQuestions.length,
+    baselineAnswered,
+    baselineTotal: preconditionQuestions.length,
     coreComplete,
     complete:
       Boolean(scope.trim()) &&
-      answered === assessmentQuestions.length &&
+      answered === workflowQuestions.length &&
       preconditionsReady,
     preconditionsReady,
     unresolvedPreconditions,

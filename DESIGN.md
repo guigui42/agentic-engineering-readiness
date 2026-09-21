@@ -128,6 +128,11 @@ components:
     textColor: "{colors.foreground-light}"
     rounded: "{rounded.none}"
     padding: "12px 16px"
+  operating-baseline-summary:
+    backgroundColor: "{colors.canvas-light}"
+    textColor: "{colors.foreground-light}"
+    rounded: "{rounded.none}"
+    padding: "16px 8px"
   participation-position:
     backgroundColor: "{colors.canvas-subtle-light}"
     textColor: "{colors.foreground-muted-light}"
@@ -173,16 +178,18 @@ components:
 
 **Creative North Star: "The Operational System Map"**
 
-The system presents readiness as a connected operating model rather than a dashboard score. GitHub-native neutrals, one-pixel rules, direct typography, and source links create a technical field guide that supports both reading and operating. The instrument is a readiness check for one named workflow: a required scope field and 16 items establish preconditions, foundations, agent participation, customer value, and system learning before producing a result.
+The system presents readiness as a connected operating model rather than a dashboard score. GitHub-native neutrals, one-pixel rules, direct typography, and source links create a technical field guide that supports both reading and operating. The instrument separates a reusable four-item operating baseline from a twelve-item check for one named workflow. Together they establish preconditions, foundations, agent participation, customer value, and system learning before producing a result.
 
-The visual voice is crisp, source-forward, and restrained. Violet, blue, and green identify the three AES stocks without turning the page into a multicolor dashboard. Dense readiness-check content stays legible through strong hierarchy, long reading measures, visible borders, and responsive reflow. Preconditions visibly block matrix placement; governance and shared knowledge determine foundations through the weaker stock; agent participation appears as a lifecycle position rather than a percentage. The hero carries a concise anonymous Hydro analytics and local-data summary without affiliation language; the independent, unofficial disclaimer is reserved for the footer.
+The visual voice is crisp, source-forward, and restrained. Violet, blue, and green identify the three AES stocks without turning the page into a multicolor dashboard. The operating baseline is a visually separate section with its own completion summary and reset action; its answers persist independently from the workflow scope and twelve workflow answers. Dense readiness-check content stays legible through strong hierarchy, long reading measures, visible borders, and responsive reflow. Preconditions visibly block matrix placement; governance and shared knowledge determine foundations through the weaker stock; agent participation appears as a lifecycle position rather than a percentage. The hero carries a concise anonymous Hydro analytics and local-data summary without affiliation language; the independent, unofficial disclaimer is reserved for the footer.
 
 **Key Characteristics:**
 - GitHub-native light and dark neutral surfaces.
 - Strong editorial headings paired with practical evidence text.
 - Crisp rules and square field structures instead of rounded dashboard cards.
 - Three stock colors with stable semantic roles.
-- A workflow scope field followed by 16 items using distinct readiness and participation scales.
+- A visually separate four-item operating baseline, followed by a named twelve-item workflow check using distinct readiness and participation scales.
+- Independent persistence and reset controls for the reusable baseline and the scoped workflow check.
+- Workflow progress that counts only the twelve workflow-specific items.
 - Preconditions that block placement before the result summaries and matrix are interpreted.
 - A Stock-Adoption matrix that combines the weaker foundation stock with a lifecycle participation position.
 - Percentage rails only for governance and shared knowledge; completed-item bands for customer value and system learning.
@@ -242,9 +249,9 @@ The palette uses GitHub neutrals as the operating field, GitHub blue for interac
 
 ## Layout
 
-The page is a centered field with a maximum width of 1440px. Major sections use fluid horizontal insets from 20px to 88px and a recurring 112px vertical interval. The first viewport pairs the operational promise with the circular AES system map, the 16-item effort estimate, and a concise analytics and local-data disclosure without the affiliation disclaimer. This composition becomes one column below 1050px.
+The page is a centered field with a maximum width of 1440px. Major sections use fluid horizontal insets from 20px to 88px and a recurring 112px vertical interval. The first viewport pairs the operational promise with the circular AES system map, the **4-item baseline once · 12-item workflow check per scope** effort estimate, and a concise analytics and local-data disclosure without the affiliation disclaimer. This composition becomes one column below 1050px.
 
-The readiness check begins with a required workflow-scope field, then six ruled disclosure sections containing 16 items. Preconditions, governance, shared knowledge, customer value, and system learning use the four-state readiness scale: Not present, Partially present, Established, and Measured and improving. Define, deliver, and detect use the participation scale: No agent participation, Agent assists, Agent performs, and Agent performs and assesses.
+The readiness flow has two cadences. A visually separate **Operating baseline** section contains the four preconditions, its own answered count, and its own destructive reset. Set this baseline once and review it when infrastructure, access, skills, or operating expectations change. The workflow section begins with a required scope field, then five ruled disclosure sections containing twelve workflow-specific items. Rerun that check for each team, repository class, or delivery workflow. Preconditions, governance, shared knowledge, customer value, and system learning use the four-state readiness scale: Not present, Partially present, Established, and Measured and improving. Define, deliver, and detect use the participation scale: No agent participation, Agent assists, Agent performs, and Agent performs and assesses.
 
 Result order is deliberate. The heading and scoped-workflow label come first. Any unresolved precondition appears immediately below as an amber blocking panel, before dimension summaries and the matrix. Governance, shared knowledge, customer value, and system learning occupy a four-column evidence row. Agent participation spans the full row beneath them as a Define-Deliver-Detect position panel, never as a percentage rail. The two-by-two matrix follows, placing foundations from the weaker of governance and shared knowledge on the vertical axis and broader agent participation on the horizontal axis.
 
@@ -263,6 +270,10 @@ Sticky elements remain functional rather than decorative. The 64px header and re
 **The Priority Disclosure Rule.** Keep the first three actions fully inspectable. Place lower-priority actions in one phase-grouped disclosure, with each action's GitHub or operating-model surface and source links visible before its detailed steps are opened.
 
 **The Placement Gate Rule.** Keep unresolved preconditions between the result heading and all placement evidence. Do not visually imply a matrix position while the gate is active.
+
+**The Two-Cadence Readiness Rule.** Set the four-item operating baseline once and review it when infrastructure, access, skills, or operating expectations change. Rerun the twelve-item workflow check for every team, repository class, or delivery workflow.
+
+**The Independent State Rule.** Persist and reset baseline answers independently from the workflow scope and twelve workflow answers. Neither reset action may erase the other state.
 
 ## Elevation & Depth
 
@@ -294,7 +305,7 @@ The circular hero map is a signature composition: three stock orbs orbit a dark 
 - **Primary:** White text on emphasized blue with 18px horizontal padding and a short structural bottom edge. The entry action reads **Start the readiness check**.
 - **Hover / Focus:** Primary actions lift by one pixel. Every interactive element receives a three-pixel blue focus outline with a three-pixel offset.
 - **Secondary:** Canvas background, foreground text, and a one-pixel border. Hover changes the border and text to action blue. The result export action reads **Copy implementation checklist**.
-- **Text / Danger:** Reset begins as **Reset local readiness check**, an underlined muted text action. Its armed state becomes the red bordered **Confirm reset** action.
+- **Text / Danger:** Workflow reset begins as **Reset local readiness check** and removes only the workflow scope and twelve workflow answers. Baseline reset begins as **Reset operating baseline** and removes only baseline answers. Both are underlined muted text actions whose armed states become red bordered confirmation actions.
 
 ### Cards / Containers
 - **Corner Style:** Square.
@@ -315,9 +326,17 @@ The circular hero map is a signature composition: three stock orbs orbit a dark 
 - **Style:** A sticky translucent header uses a bottom rule, compact semibold links, and a square 36px theme control. Hover changes text or border to blue.
 - **Mobile:** Text section links hide below 760px while repository and theme controls remain available.
 
+### Operating Baseline
+
+The operating baseline is a standalone major section before workflow progress and scope. Its heading explains the once-per-operating-environment cadence. A ruled summary row reports the four-item completion count and states that the saved answers are separate from workflow state. The precondition disclosure uses the same question-card and response-scale grammar as the workflow check, but its independent reset remains inside the baseline section.
+
+**The Visually Separate Baseline Rule.** Do not merge the four preconditions into workflow progress, the workflow scope panel, or the five workflow disclosure groups. Section spacing, heading hierarchy, and the ruled baseline summary must make the reusable baseline read as a distinct operating layer.
+
 ### Progress Dock
 
-The sticky progress dock combines an **items answered** count out of 16, a six-pixel inset track, and a **View results** link. It uses an ambient shadow and backdrop blur because it stays above readiness-check content while scrolling.
+The sticky progress dock combines an **items answered** count out of 12, a six-pixel inset track, and a **View results** link. It reports only the twelve workflow-specific items and never includes the four operating-baseline answers. It uses an ambient shadow and backdrop blur because it stays above workflow-check content while scrolling.
+
+**The Workflow-Only Progress Rule.** Workflow completion is always answered workflow items divided by twelve. Baseline completion belongs only in the operating-baseline summary.
 
 ### Result Summary
 
@@ -355,6 +374,11 @@ The hero system map uses three colored circular stock nodes around a central dar
 - **Do** use crisp one-pixel rules and GitHub-neutral surfaces to structure long reading flows.
 - **Do** keep stock colors bound to governance, shared knowledge, and customer value.
 - **Do** pair large operational headings with muted source-forward explanations.
+- **Do** present the four operating preconditions in a visually separate Operating baseline section before workflow progress and scope.
+- **Do** set the baseline once, then review it when infrastructure, access, skills, or operating expectations change.
+- **Do** rerun the twelve-item workflow check for each team, repository class, or delivery workflow.
+- **Do** persist and reset baseline answers independently from workflow scope and workflow answers.
+- **Do** calculate the sticky progress dock from only the twelve workflow-specific items.
 - **Do** require one workflow scope before the readiness check can produce a placement.
 - **Do** keep unresolved preconditions visibly blocking placement.
 - **Do** use the weaker of governance and shared knowledge for the foundations position.
@@ -373,6 +397,8 @@ The hero system map uses three colored circular stock nodes around a central dar
 - **Don't** label the readiness check as a certification or organization-wide score.
 - **Don't** turn the hero's 32px grid into a general page background or reusable panel texture.
 - **Don't** replace the connected field with detached KPI cards or a generic metrics dashboard.
+- **Don't** fold operating-baseline answers into workflow progress or clear them when resetting a workflow check.
+- **Don't** reuse workflow answers across a different team, repository class, or delivery workflow without rerunning the check.
 - **Don't** round major reading containers, matrices, warnings, or evidence groups.
 - **Don't** use color without a text label, structural position, or state cue.
 - **Don't** average governance and shared knowledge into a stronger-looking foundations placement.

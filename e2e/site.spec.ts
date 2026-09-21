@@ -80,14 +80,32 @@ async function seedReadinessCheck(
       resolved[dimension],
     ]),
   )
+  const baselineAnswers = Object.fromEntries(
+    Object.entries(answers).filter(([id]) =>
+      id.startsWith('precondition-'),
+    ),
+  )
+  const workflowAnswers = Object.fromEntries(
+    Object.entries(answers).filter(
+      ([id]) => !id.startsWith('precondition-'),
+    ),
+  )
   await page.evaluate(
-    ({ scope, storedAnswers }) => {
+    ({ scope, storedBaseline, storedWorkflow }) => {
       localStorage.setItem(
-        'agentic-engineering-readiness-v2',
-        JSON.stringify({ version: 2, scope, answers: storedAnswers }),
+        'agentic-engineering-baseline-v1',
+        JSON.stringify({ version: 1, answers: storedBaseline }),
+      )
+      localStorage.setItem(
+        'agentic-engineering-workflow-v1',
+        JSON.stringify({ version: 1, scope, answers: storedWorkflow }),
       )
     },
-    { scope: resolved.scope, storedAnswers: answers },
+    {
+      scope: resolved.scope,
+      storedBaseline: baselineAnswers,
+      storedWorkflow: workflowAnswers,
+    },
   )
   await page.reload()
 }
@@ -242,11 +260,15 @@ test('keeps Hydro analytics controlled and readiness content local', async ({
   await page
     .getByLabel('Name the workflow, team, or repository class')
     .fill('Payments bug fixes')
-  await page.getByRole('radio', { name: 'Established' }).first().check()
+  await page
+    .locator('#section-governance')
+    .getByRole('radio', { name: 'Established' })
+    .first()
+    .check()
 
   await expect.poll(() =>
     page.evaluate(() =>
-      localStorage.getItem('agentic-engineering-readiness-v2'),
+      localStorage.getItem('agentic-engineering-workflow-v1'),
     ),
   ).toContain('"scope":"Payments bug fixes"')
 

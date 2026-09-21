@@ -12,6 +12,7 @@ import {
   buildActionPlan,
   exportAssessmentMarkdown,
 } from './assessment/recommendations'
+import { assessmentQuestions } from './assessment/questions'
 import { calculateAssessment } from './assessment/scoring'
 import type { Answers, ResponseValue } from './assessment/types'
 import { trackInteraction } from './analytics'
@@ -19,46 +20,89 @@ import { ActionPlan } from './components/ActionPlan'
 import { Assessment } from './components/Assessment'
 import { DimensionSummary } from './components/DimensionSummary'
 import { FrameworkExplainer } from './components/FrameworkExplainer'
+import { OperatingBaseline } from './components/OperatingBaseline'
 import { SourceIndex } from './components/SourceIndex'
 import { StockAdoptionMatrix } from './components/StockAdoptionMatrix'
 
 const PAGE_LINK =
   'https://guigui42.github.io/agentic-engineering-readiness/'
-const STORAGE_KEY = 'agentic-engineering-readiness-v2'
-const LEGACY_STORAGE_KEY = 'agentic-engineering-readiness-v1'
+const BASELINE_STORAGE_KEY = 'agentic-engineering-baseline-v1'
+const WORKFLOW_STORAGE_KEY = 'agentic-engineering-workflow-v1'
+const LEGACY_STORAGE_KEYS = [
+  'agentic-engineering-readiness-v2',
+  'agentic-engineering-readiness-v1',
+]
 
-interface StoredReadinessCheck {
-  version: 2
+interface StoredBaseline {
+  version: 1
+  answers: Answers
+}
+
+interface StoredWorkflowCheck {
+  version: 1
   scope: string
   answers: Answers
 }
 
-function loadReadinessCheck(): StoredReadinessCheck {
+interface StoredState {
+  baseline: StoredBaseline
+  workflow: StoredWorkflowCheck
+}
+
+const preconditionIds = new Set(
+  assessmentQuestions
+    .filter((question) => question.dimension === 'preconditions')
+    .map((question) => question.id),
+)
+
+function loadReadinessCheck(): StoredState {
   try {
-    const stored = localStorage.getItem(STORAGE_KEY)
-    if (stored) {
-      const parsed = JSON.parse(stored) as StoredReadinessCheck
-      if (
-        parsed.version === 2 &&
-        typeof parsed.scope === 'string' &&
-        typeof parsed.answers === 'object'
-      ) {
-        return parsed
-      }
+    const storedBaseline = localStorage.getItem(BASELINE_STORAGE_KEY)
+    const storedWorkflow = localStorage.getItem(WORKFLOW_STORAGE_KEY)
+    if (storedBaseline || storedWorkflow) {
+      const baseline = storedBaseline
+        ? (JSON.parse(storedBaseline) as StoredBaseline)
+        : { version: 1 as const, answers: {} }
+      const workflow = storedWorkflow
+        ? (JSON.parse(storedWorkflow) as StoredWorkflowCheck)
+        : { version: 1 as const, scope: '', answers: {} }
+      return { baseline, workflow }
     }
 
-    const legacy = localStorage.getItem(LEGACY_STORAGE_KEY)
-    if (legacy) {
-      const parsed = JSON.parse(legacy) as { answers?: Answers }
+    for (const key of LEGACY_STORAGE_KEYS) {
+      const legacy = localStorage.getItem(key)
+      if (!legacy) {
+        continue
+      }
+      const parsed = JSON.parse(legacy) as { scope?: string; answers?: Answers }
       if (typeof parsed.answers === 'object') {
-        return { version: 2, scope: '', answers: parsed.answers }
+        const baselineAnswers: Answers = {}
+        const workflowAnswers: Answers = {}
+        for (const [questionId, value] of Object.entries(parsed.answers)) {
+          if (preconditionIds.has(questionId)) {
+            baselineAnswers[questionId] = value
+          } else {
+            workflowAnswers[questionId] = value
+          }
+        }
+        return {
+          baseline: { version: 1, answers: baselineAnswers },
+          workflow: {
+            version: 1,
+            scope: parsed.scope ?? '',
+            answers: workflowAnswers,
+          },
+        }
       }
     }
   } catch (error) {
     console.error('Unable to load the saved readiness check.', error)
   }
 
-  return { version: 2, scope: '', answers: {} }
+  return {
+    baseline: { version: 1, answers: {} },
+    workflow: { version: 1, scope: '', answers: {} },
+  }
 }
 
 async function copyText(value: string) {
@@ -102,8 +146,7 @@ function resultDescription(
 }
 
 function App() {
-  const [readinessCheck, setReadinessCheck] =
-    useState<StoredReadinessCheck>(loadReadinessCheck)
+  const [savedState, setSavedState] = useState<StoredState>(loadReadinessCheck)
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const stored = localStorage.getItem('agentic-engineering-theme')
     if (stored === 'light' || stored === 'dark') {
@@ -117,8 +160,14 @@ function App() {
   const [copiedPlan, setCopiedPlan] = useState(false)
   const [copyError, setCopyError] = useState<string | null>(null)
   const [resetArmed, setResetArmed] = useState(false)
+  const [baselineResetArmed, setBaselineResetArmed] = useState(false)
 
-  const { scope, answers } = readinessCheck
+  const { baseline, workflow } = savedState
+  const { scope } = workflow
+  const answers = useMemo(
+    () => ({ ...baseline.answers, ...workflow.answers }),
+    [baseline.answers, workflow.answers],
+  )
   const result = useMemo(
     () => calculateAssessment(answers, scope),
     [answers, scope],
@@ -135,9 +184,12 @@ function App() {
   }, [theme])
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(readinessCheck))
-    localStorage.removeItem(LEGACY_STORAGE_KEY)
-  }, [readinessCheck])
+    localStorage.setItem(BASELINE_STORAGE_KEY, JSON.stringify(baseline))
+    localStorage.setItem(WORKFLOW_STORAGE_KEY, JSON.stringify(workflow))
+    for (const key of LEGACY_STORAGE_KEYS) {
+      localStorage.removeItem(key)
+    }
+  }, [baseline, workflow])
 
   useEffect(() => {
     if (!resetArmed) {
@@ -147,15 +199,41 @@ function App() {
     return () => window.clearTimeout(timeout)
   }, [resetArmed])
 
+  useEffect(() => {
+    if (!baselineResetArmed) {
+      return undefined
+    }
+    const timeout = window.setTimeout(() => setBaselineResetArmed(false), 5000)
+    return () => window.clearTimeout(timeout)
+  }, [baselineResetArmed])
+
   const handleAnswer = (questionId: string, value: ResponseValue) => {
-    setReadinessCheck((current) => ({
+    setSavedState((current) => ({
       ...current,
-      answers: { ...current.answers, [questionId]: value },
+      workflow: {
+        ...current.workflow,
+        answers: { ...current.workflow.answers, [questionId]: value },
+      },
     }))
     trackInteraction({
       category: 'readiness',
       action: 'change',
       label: 'response-selected',
+    })
+  }
+
+  const handleBaselineAnswer = (questionId: string, value: ResponseValue) => {
+    setSavedState((current) => ({
+      ...current,
+      baseline: {
+        ...current.baseline,
+        answers: { ...current.baseline.answers, [questionId]: value },
+      },
+    }))
+    trackInteraction({
+      category: 'readiness',
+      action: 'change',
+      label: 'baseline-response-selected',
     })
   }
 
@@ -196,13 +274,33 @@ function App() {
       setResetArmed(true)
       return
     }
-    setReadinessCheck({ version: 2, scope: '', answers: {} })
+    setSavedState((current) => ({
+      ...current,
+      workflow: { version: 1, scope: '', answers: {} },
+    }))
     setResetArmed(false)
     setCopyError(null)
     trackInteraction({
       category: 'readiness',
       action: 'reset',
       label: 'local-readiness-check',
+    })
+  }
+
+  const handleBaselineReset = () => {
+    if (!baselineResetArmed) {
+      setBaselineResetArmed(true)
+      return
+    }
+    setSavedState((current) => ({
+      ...current,
+      baseline: { version: 1, answers: {} },
+    }))
+    setBaselineResetArmed(false)
+    trackInteraction({
+      category: 'readiness',
+      action: 'reset',
+      label: 'operating-baseline',
     })
   }
 
@@ -266,8 +364,8 @@ function App() {
               actions with observable verification.
             </p>
             <div className="hero__actions">
-              <a className="primary-button" href="#assessment">
-                Start the readiness check
+              <a className="primary-button" href="#baseline">
+                Set the baseline and start
               </a>
               <a
                 className="secondary-button"
@@ -280,7 +378,7 @@ function App() {
               </a>
             </div>
             <p className="effort-note">
-              16 items · about 20 minutes alone · 60–75 minutes as a team workshop
+              4-item baseline once · 12-item workflow check per scope
             </p>
             <p className="privacy-note">
               Anonymous usage analytics record page views and fixed
@@ -311,6 +409,13 @@ function App() {
 
         <FrameworkExplainer />
 
+        <OperatingBaseline
+          answers={baseline.answers}
+          resetArmed={baselineResetArmed}
+          onAnswer={handleBaselineAnswer}
+          onReset={handleBaselineReset}
+        />
+
         <div className="progress-dock" aria-label="Readiness check progress">
           <div>
             <strong>{result.answered} of {result.total}</strong>
@@ -331,11 +436,14 @@ function App() {
 
         <Assessment
           scope={scope}
-          answers={answers}
+          answers={workflow.answers}
           onScopeChange={(nextScope) =>
-            setReadinessCheck((current) => ({
+            setSavedState((current) => ({
               ...current,
-              scope: nextScope,
+              workflow: {
+                ...current.workflow,
+                scope: nextScope,
+              },
             }))
           }
           onAnswer={handleAnswer}
@@ -413,7 +521,10 @@ function App() {
               {resetArmed ? 'Confirm reset' : 'Reset local readiness check'}
             </button>
             {resetArmed ? (
-              <span>This removes the scope and answers saved in this browser.</span>
+              <span>
+                This removes the workflow scope and workflow answers. The
+                operating baseline is preserved.
+              </span>
             ) : null}
           </div>
         </section>

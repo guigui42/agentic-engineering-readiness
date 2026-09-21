@@ -92,6 +92,8 @@ export interface AssessmentResult {
   placementStatus: PlacementStatus
   answered: number
   total: number
+  baselineAnswered: number
+  baselineTotal: number
   coreComplete: boolean
   complete: boolean
   preconditionsReady: boolean

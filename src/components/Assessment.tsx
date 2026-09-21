@@ -1,21 +1,12 @@
-import { LinkExternalIcon } from '@primer/octicons-react'
-import {
-  assessmentQuestions,
-  dimensionContent,
-  sources,
-} from '../assessment/questions'
-import {
-  participationOptions,
-  readinessOptions,
-} from '../assessment/scoring'
+import { dimensionContent } from '../assessment/questions'
 import type {
   Answers,
   AssessmentDimension,
   ResponseValue,
 } from '../assessment/types'
+import { QuestionSection } from './QuestionSection'
 
-const dimensionOrder: AssessmentDimension[] = [
-  'preconditions',
+const workflowDimensions: AssessmentDimension[] = [
   'governance',
   'knowledge',
   'adoption',
@@ -34,8 +25,6 @@ export function Assessment({
   onScopeChange: (scope: string) => void
   onAnswer: (questionId: string, value: ResponseValue) => void
 }) {
-  const sourceMap = new Map(sources.map((source) => [source.id, source]))
-
   return (
     <section className="assessment" id="assessment" aria-labelledby="assessment-title">
       <div className="section-heading">
@@ -43,8 +32,8 @@ export function Assessment({
           <h2 id="assessment-title">Check one workflow, not the whole organization</h2>
         </div>
         <p>
-          Use one team, repository class, or delivery workflow. AES places each
-          process separately because the surrounding conditions differ.
+          Reuse the operating baseline, then run these twelve items separately
+          for each team, repository class, or delivery workflow.
         </p>
       </div>
 
@@ -69,115 +58,24 @@ export function Assessment({
       </div>
 
       <div className="assessment-sections">
-        {dimensionOrder.map((dimension, index) => {
-          const content = dimensionContent[dimension]
-          const questions = assessmentQuestions.filter(
-            (question) => question.dimension === dimension,
-          )
-          const answered = questions.filter(
-            (question) => answers[question.id] !== undefined,
-          ).length
-          const nextDimension = dimensionOrder[index + 1]
-          const nextTarget = nextDimension
-            ? `section-${nextDimension}`
-            : 'results'
-          const nextLabel = nextDimension
-            ? dimensionContent[nextDimension].label
-            : 'results'
-          const options =
-            dimension === 'adoption' ? participationOptions : readinessOptions
-
+        {workflowDimensions.map((dimension, index) => {
+          const nextDimension = workflowDimensions[index + 1]
           return (
-            <details
-              id={`section-${dimension}`}
-              className={`assessment-section assessment-section--${dimension}`}
+            <QuestionSection
               key={dimension}
+              dimension={dimension}
+              answers={answers}
+              onAnswer={onAnswer}
               open={index === 0}
-            >
-              <summary>
-                <span>
-                  <small>{content.eyebrow}</small>
-                  <strong>{content.label}</strong>
-                  <em>{content.description}</em>
-                </span>
-                <b>{answered}/{questions.length}</b>
-              </summary>
-              <div className="question-list">
-                <div className="section-scale" aria-label={`${content.label} response scale`}>
-                  {options.map((option) => (
-                    <span key={option.value}>
-                      <b>{option.value}</b>
-                      {option.label}
-                    </span>
-                  ))}
-                </div>
-                {questions.map((question, questionIndex) => (
-                  <fieldset className="question-card" key={question.id}>
-                    <legend>
-                      <span>{questionIndex + 1}</span>
-                      <strong>{question.title}</strong>
-                    </legend>
-                    <p>{question.prompt}</p>
-                    <div className="response-grid">
-                      {options.map((option) => (
-                        <label key={option.value}>
-                          <input
-                            type="radio"
-                            name={question.id}
-                            value={option.value}
-                            checked={answers[question.id] === option.value}
-                            onChange={() => onAnswer(question.id, option.value)}
-                          />
-                          <span>
-                            <b>{option.value}</b>
-                            {option.shortLabel}
-                          </span>
-                        </label>
-                      ))}
-                    </div>
-                    <details className="evidence">
-                      <summary>Evidence to look for</summary>
-                      <ul>
-                        {question.evidence.map((item) => (
-                          <li key={item}>{item}</li>
-                        ))}
-                      </ul>
-                      <div className="inline-sources">
-                        {question.sourceIds.map((sourceId) => {
-                          const source = sourceMap.get(sourceId)
-                          return source ? (
-                            <a
-                              href={source.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              key={source.id}
-                            >
-                              {source.title}
-                              <LinkExternalIcon />
-                            </a>
-                          ) : null
-                        })}
-                      </div>
-                    </details>
-                  </fieldset>
-                ))}
-                {answered === questions.length ? (
-                  <a
-                    className="continue-link"
-                    href={`#${nextTarget}`}
-                    onClick={() => {
-                      if (nextDimension) {
-                        document
-                          .getElementById(nextTarget)
-                          ?.setAttribute('open', '')
-                      }
-                    }}
-                  >
-                    Continue to {nextLabel}
-                  </a>
-                ) : null}
-              </div>
-            </details>
+              nextTarget={
+                nextDimension ? `section-${nextDimension}` : 'results'
+              }
+              nextLabel={
+                nextDimension
+                  ? dimensionContent[nextDimension].label
+                  : 'results'
+              }
+            />
           )
         })}
       </div>
