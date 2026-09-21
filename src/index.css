@@ -332,7 +332,7 @@ main,
 .orb {
   position: absolute;
   z-index: 2;
-  width: 34%;
+  width: 30%;
   min-width: 142px;
   aspect-ratio: 1;
   display: grid;
@@ -360,22 +360,22 @@ main,
 }
 
 .orb--governance {
-  top: 7%;
-  left: 8%;
+  top: 18%;
+  left: 5.5%;
   color: var(--governance);
   background: var(--governance-muted);
 }
 
 .orb--knowledge {
-  top: 10%;
-  right: 5%;
+  top: 18%;
+  right: 5.5%;
   color: var(--knowledge);
   background: var(--knowledge-muted);
 }
 
 .orb--value {
-  right: 33%;
-  bottom: 5%;
+  right: 35%;
+  bottom: 1%;
   color: var(--value);
   background: var(--value-muted);
 }
@@ -385,7 +385,7 @@ main,
   z-index: 3;
   top: 50%;
   left: 50%;
-  width: 34%;
+  width: 30%;
   aspect-ratio: 1;
   display: grid;
   place-content: center;
