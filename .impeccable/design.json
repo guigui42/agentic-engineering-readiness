@@ -1,0 +1,459 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-21T13:19:12.965+02:00",
+  "title": "Design System: Agentic Engineering readiness",
+  "extensions": {
+    "colorMeta": {
+      "canvas-light": {
+        "role": "neutral",
+        "displayName": "Light Canvas",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#121212", "#2b2b2b", "#484848", "#666666", "#868686", "#a8a8a8", "#cacaca", "#eeeeee"]
+      },
+      "canvas-subtle-light": {
+        "role": "neutral",
+        "displayName": "Light Subtle Canvas",
+        "canonical": "#f6f8fa",
+        "tonalRamp": ["#101213", "#2a2b2d", "#464849", "#646668", "#848688", "#a6a8aa", "#c9cbcd", "#edeff1"]
+      },
+      "canvas-inset-light": {
+        "role": "neutral",
+        "displayName": "Light Inset Canvas",
+        "canonical": "#eff2f5",
+        "tonalRamp": ["#101214", "#292c2e", "#46484a", "#646669", "#848689", "#a5a8ab", "#c8cbce", "#eceff2"]
+      },
+      "foreground-light": {
+        "role": "neutral",
+        "displayName": "Light Foreground",
+        "canonical": "#1f2328",
+        "tonalRamp": ["#0e1216", "#282c31", "#44484e", "#62676c", "#82878d", "#a3a8af", "#c6cbd2", "#e9eff6"]
+      },
+      "foreground-muted-light": {
+        "role": "neutral",
+        "displayName": "Light Muted Foreground",
+        "canonical": "#59636e",
+        "tonalRamp": ["#0a121b", "#232c36", "#3f4953", "#5d6772", "#7d8793", "#9ea9b5", "#c1ccd8", "#e4f0fd"]
+      },
+      "border-light": {
+        "role": "neutral",
+        "displayName": "Light Border",
+        "canonical": "#d1d9e0",
+        "tonalRamp": ["#0d1217", "#262c31", "#42494e", "#60676d", "#80878e", "#a1a9af", "#c4ccd3", "#e7f0f7"]
+      },
+      "border-muted-light": {
+        "role": "neutral",
+        "displayName": "Light Muted Border",
+        "canonical": "#e7ebef",
+        "tonalRamp": ["#0f1215", "#292c2f", "#45484b", "#63666a", "#83878a", "#a4a8ac", "#c7cbcf", "#ebeff3"]
+      },
+      "accent-light": {
+        "role": "primary",
+        "displayName": "GitHub Action Blue",
+        "canonical": "#0969da",
+        "tonalRamp": ["#01102c", "#01295d", "#054491", "#0961ca", "#2d82f6", "#6da9fe", "#accdfc", "#e5efff"]
+      },
+      "accent-emphasis": {
+        "role": "primary",
+        "displayName": "Action Blue Emphasis",
+        "canonical": "#1f6feb",
+        "tonalRamp": ["#000f30", "#002663", "#02409a", "#035cd7", "#3180fd", "#72a8ff", "#aeccfc", "#e6efff"]
+      },
+      "accent-muted-light": {
+        "role": "primary",
+        "displayName": "Light Muted Action Blue",
+        "canonical": "#ddf4ff",
+        "tonalRamp": ["#03141b", "#1c2e37", "#384b54", "#556a73", "#758a94", "#96acb6", "#b8cfd9", "#dcf3fe"]
+      },
+      "governance-light": {
+        "role": "secondary",
+        "displayName": "Governance Violet",
+        "canonical": "#8250df",
+        "tonalRamp": ["#170037", "#35066c", "#5611a8", "#733ecd", "#9263f3", "#af92fc", "#cec0fe", "#efecfe"]
+      },
+      "governance-muted-light": {
+        "role": "secondary",
+        "displayName": "Light Muted Governance Violet",
+        "canonical": "#f5f0ff",
+        "tonalRamp": ["#130f19", "#2d2934", "#494551", "#686470", "#888391", "#aaa5b3", "#cdc8d6", "#f1ecfb"]
+      },
+      "knowledge-light": {
+        "role": "secondary",
+        "displayName": "Shared-Knowledge Blue",
+        "canonical": "#0969da",
+        "tonalRamp": ["#01102c", "#01295d", "#054491", "#0961ca", "#2d82f6", "#6da9fe", "#accdfc", "#e5efff"]
+      },
+      "knowledge-muted-light": {
+        "role": "secondary",
+        "displayName": "Light Muted Shared-Knowledge Blue",
+        "canonical": "#ddf4ff",
+        "tonalRamp": ["#03141b", "#1c2e37", "#384b54", "#556a73", "#758a94", "#96acb6", "#b8cfd9", "#dcf3fe"]
+      },
+      "value-light": {
+        "role": "secondary",
+        "displayName": "Customer-Value Green",
+        "canonical": "#1a7f37",
+        "tonalRamp": ["#011705", "#033612", "#0b5722", "#127b33", "#3f9c53", "#63bf74", "#87e496", "#cbfed1"]
+      },
+      "value-muted-light": {
+        "role": "secondary",
+        "displayName": "Light Muted Customer-Value Green",
+        "canonical": "#dafbe1",
+        "tonalRamp": ["#011707", "#17321f", "#334f3a", "#516e58", "#718f78", "#92b199", "#b4d4bb", "#d8f9df"]
+      },
+      "attention-light": {
+        "role": "tertiary",
+        "displayName": "Attention Amber",
+        "canonical": "#9a6700",
+        "tonalRamp": ["#1b0f01", "#3c2602", "#614007", "#885c0c", "#af7b25", "#d29c4c", "#f7bf6f", "#feebd3"]
+      },
+      "attention-muted-light": {
+        "role": "tertiary",
+        "displayName": "Light Muted Attention Amber",
+        "canonical": "#fff8c5",
+        "tonalRamp": ["#151201", "#322c02", "#4f491a", "#6e6739", "#8e8859", "#b0a979", "#d3cc9b", "#f8f1be"]
+      },
+      "danger-light": {
+        "role": "tertiary",
+        "displayName": "Danger Red",
+        "canonical": "#cf222e",
+        "tonalRamp": ["#2a0002", "#56060c", "#8a0315", "#c00421", "#e83f43", "#fc7a74", "#feb5af", "#fee9e7"]
+      },
+      "danger-muted-light": {
+        "role": "tertiary",
+        "displayName": "Light Muted Danger Red",
+        "canonical": "#ffebe9",
+        "tonalRamp": ["#1a0e0d", "#362726", "#534342", "#726160", "#938180", "#b5a3a1", "#d9c5c3", "#fde9e7"]
+      },
+      "canvas-dark": {
+        "role": "neutral",
+        "displayName": "Dark Canvas",
+        "canonical": "#0d1117",
+        "tonalRamp": ["#0e1218", "#272c32", "#43484f", "#61666e", "#81878f", "#a2a8b1", "#c5cbd4", "#e9eff8"]
+      },
+      "canvas-subtle-dark": {
+        "role": "neutral",
+        "displayName": "Dark Subtle Canvas",
+        "canonical": "#161b22",
+        "tonalRamp": ["#0d1219", "#262c33", "#424850", "#60676f", "#808790", "#a2a8b2", "#c4cbd5", "#e8eff9"]
+      },
+      "canvas-inset-dark": {
+        "role": "neutral",
+        "displayName": "Dark Inset Canvas",
+        "canonical": "#010409",
+        "tonalRamp": ["#0b121a", "#242c35", "#404952", "#5e6771", "#7d8792", "#9fa9b4", "#c1ccd7", "#e5f0fb"]
+      },
+      "foreground-dark": {
+        "role": "neutral",
+        "displayName": "Dark Foreground",
+        "canonical": "#f0f6fc",
+        "tonalRamp": ["#0e1216", "#272c30", "#43484d", "#62676c", "#81878c", "#a3a8ae", "#c5cbd1", "#e9eff5"]
+      },
+      "foreground-muted-dark": {
+        "role": "neutral",
+        "displayName": "Dark Muted Foreground",
+        "canonical": "#9198a1",
+        "tonalRamp": ["#0d1218", "#262c33", "#424850", "#60676f", "#808790", "#a1a8b2", "#c4cbd5", "#e8eff9"]
+      },
+      "border-dark": {
+        "role": "neutral",
+        "displayName": "Dark Border",
+        "canonical": "#3d444d",
+        "tonalRamp": ["#0c1219", "#252c34", "#414851", "#5f6770", "#7f8791", "#a0a9b3", "#c3cbd6", "#e7effb"]
+      },
+      "border-muted-dark": {
+        "role": "neutral",
+        "displayName": "Dark Muted Border",
+        "canonical": "#262c36",
+        "tonalRamp": ["#0c121b", "#262c36", "#424853", "#606672", "#7f8793", "#a1a8b5", "#c3cbd8", "#e7effd"]
+      },
+      "accent-dark": {
+        "role": "primary",
+        "displayName": "Dark GitHub Action Blue",
+        "canonical": "#58a6ff",
+        "tonalRamp": ["#011228", "#022b55", "#084885", "#0e66ba", "#3988de", "#62abff", "#a8cefc", "#e4f0ff"]
+      },
+      "accent-muted-dark": {
+        "role": "primary",
+        "displayName": "Dark Muted Action Blue",
+        "canonical": "#121d2f",
+        "tonalRamp": ["#071122", "#202c3f", "#3c485d", "#59677d", "#79879e", "#9aa9c1", "#bccce4", "#e5efff"]
+      },
+      "governance-dark": {
+        "role": "secondary",
+        "displayName": "Dark Governance Violet",
+        "canonical": "#a371f7",
+        "tonalRamp": ["#180133", "#38046a", "#59199f", "#7741c3", "#9764e9", "#b58ffe", "#d1bffc", "#f0ebff"]
+      },
+      "governance-muted-dark": {
+        "role": "secondary",
+        "displayName": "Dark Muted Governance Violet",
+        "canonical": "#271842",
+        "tonalRamp": ["#16062e", "#30214c", "#4c3e6c", "#6b5d8d", "#8b7daf", "#ac9ed3", "#cfc1f7", "#f0ebff"]
+      },
+      "knowledge-dark": {
+        "role": "secondary",
+        "displayName": "Dark Shared-Knowledge Blue",
+        "canonical": "#58a6ff",
+        "tonalRamp": ["#011228", "#022b55", "#084885", "#0e66ba", "#3988de", "#62abff", "#a8cefc", "#e4f0ff"]
+      },
+      "knowledge-muted-dark": {
+        "role": "secondary",
+        "displayName": "Dark Muted Shared-Knowledge Blue",
+        "canonical": "#121d2f",
+        "tonalRamp": ["#071122", "#202c3f", "#3c485d", "#59677d", "#79879e", "#9aa9c1", "#bccce4", "#e5efff"]
+      },
+      "value-dark": {
+        "role": "secondary",
+        "displayName": "Dark Customer-Value Green",
+        "canonical": "#3fb950",
+        "tonalRamp": ["#011703", "#03360c", "#0a571a", "#117b28", "#1da138", "#4cc45b", "#73e97e", "#caffcc"]
+      },
+      "value-muted-dark": {
+        "role": "secondary",
+        "displayName": "Dark Muted Customer-Value Green",
+        "canonical": "#10291b",
+        "tonalRamp": ["#01170a", "#193223", "#354f3f", "#536e5d", "#728e7c", "#93b09e", "#b5d3c0", "#d9f7e4"]
+      },
+      "attention-dark": {
+        "role": "tertiary",
+        "displayName": "Dark Attention Amber",
+        "canonical": "#d29922",
+        "tonalRamp": ["#1a0f01", "#3b2701", "#5e4205", "#855e08", "#ad7c12", "#d59c27", "#fabf53", "#feeccf"]
+      },
+      "attention-muted-dark": {
+        "role": "tertiary",
+        "displayName": "Dark Muted Attention Amber",
+        "canonical": "#2b230b",
+        "tonalRamp": ["#171101", "#332b13", "#50472f", "#6f664c", "#8f866b", "#b1a78c", "#d4caae", "#f8eed1"]
+      },
+      "danger-dark": {
+        "role": "tertiary",
+        "displayName": "Dark Danger Red",
+        "canonical": "#f85149",
+        "tonalRamp": ["#2a0101", "#580105", "#8a050d", "#c00816", "#e8413b", "#fc7b6f", "#feb5ac", "#fee9e6"]
+      },
+      "danger-muted-dark": {
+        "role": "tertiary",
+        "displayName": "Dark Muted Danger Red",
+        "canonical": "#32161a",
+        "tonalRamp": ["#22080c", "#3f2125", "#5e3e41", "#7e5c5f", "#a07b7f", "#c29da0", "#e6bfc3", "#fee8ea"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Operational Display",
+        "purpose": "The first-viewport promise only."
+      },
+      "headline": {
+        "displayName": "Section Headline",
+        "purpose": "Major framework, assessment, result, and source sections."
+      },
+      "title": {
+        "displayName": "System Title",
+        "purpose": "Stock names, matrix positions, and action titles."
+      },
+      "body": {
+        "displayName": "Evidence Body",
+        "purpose": "Explanations, prompts, evidence, thresholds, and plans."
+      },
+      "control": {
+        "displayName": "Control",
+        "purpose": "Buttons and selectable response controls."
+      },
+      "label": {
+        "displayName": "Operational Label",
+        "purpose": "Eyebrows, phases, axes, categories, and compact metadata."
+      }
+    },
+    "shadows": [
+      {
+        "name": "ambient-field-light",
+        "value": "0 8px 24px rgba(140, 149, 159, 0.16)",
+        "purpose": "Light-theme system map, framework flow, and sticky progress dock."
+      },
+      {
+        "name": "ambient-field-dark",
+        "value": "0 12px 32px rgba(1, 4, 9, 0.4)",
+        "purpose": "Dark-theme system map, framework flow, and sticky progress dock."
+      },
+      {
+        "name": "question-structural-edge",
+        "value": "0 3px 0 color-mix(in srgb, var(--border) 60%, transparent)",
+        "purpose": "Short bottom edge under question cards."
+      },
+      {
+        "name": "primary-action-edge",
+        "value": "0 3px 0 color-mix(in srgb, var(--accent-emphasis) 72%, #000000)",
+        "purpose": "Tactile bottom edge under primary actions."
+      },
+      {
+        "name": "active-matrix-inset",
+        "value": "inset 0 0 0 3px var(--accent)",
+        "purpose": "Current Stock-Adoption quadrant placement."
+      }
+    ],
+    "motion": [
+      {
+        "name": "system-map-settle",
+        "value": "720ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "One-time blur, rise, and scale settle on the hero system map."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "0.01ms",
+        "purpose": "Near-zero animation and transition duration under prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "stack-wide",
+        "value": "1050px"
+      },
+      {
+        "name": "mobile",
+        "value": "760px"
+      },
+      {
+        "name": "mobile-compact",
+        "value": "520px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The main assessment action with a restrained radius and tactile bottom edge.",
+      "html": "<button class=\"ds-button-primary\">Start the assessment</button>",
+      "css": ".ds-button-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; border: 1px solid rgba(31, 35, 40, 0.15); border-radius: 6px; padding: 0 18px; color: #fff; background: var(--accent-emphasis, #1f6feb); box-shadow: 0 3px 0 color-mix(in srgb, var(--accent-emphasis, #1f6feb) 72%, #000); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 16px; font-weight: 650; cursor: pointer; } .ds-button-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 0 color-mix(in srgb, var(--accent-emphasis, #1f6feb) 72%, #000); } .ds-button-primary:focus-visible { outline: 3px solid var(--accent, #0969da); outline-offset: 3px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "A bordered canvas action for secondary navigation and plan export.",
+      "html": "<button class=\"ds-button-secondary\">Copy as Markdown</button>",
+      "css": ".ds-button-secondary { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; border: 1px solid var(--border, #d1d9e0); border-radius: 6px; padding: 0 18px; color: var(--fg, #1f2328); background: var(--canvas, #fff); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 16px; font-weight: 650; cursor: pointer; } .ds-button-secondary:hover { border-color: var(--accent, #0969da); color: var(--accent, #0969da); } .ds-button-secondary:focus-visible { outline: 3px solid var(--accent, #0969da); outline-offset: 3px; }"
+    },
+    {
+      "name": "Question Card",
+      "kind": "card",
+      "refersTo": "question-card",
+      "description": "A square evidence field with a numbered legend and structural bottom edge.",
+      "html": "<fieldset class=\"ds-question-card\"><legend><span>1</span><strong>Is delegation bounded by documented policy?</strong></legend><p>Choose the answer supported by evidence today.</p></fieldset>",
+      "css": ".ds-question-card { min-width: 0; margin: 0; border: 1px solid var(--border, #d1d9e0); padding: 26px; color: var(--fg, #1f2328); background: var(--canvas, #fff); box-shadow: 0 3px 0 color-mix(in srgb, var(--border, #d1d9e0) 60%, transparent); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; } .ds-question-card legend { display: flex; gap: 12px; align-items: center; padding-right: 10px; font-size: 20px; letter-spacing: -0.015em; } .ds-question-card legend span { display: grid; place-items: center; width: 28px; height: 28px; border: 1px solid var(--border, #d1d9e0); border-radius: 50%; color: var(--fg-muted, #59636e); font-size: 13px; } .ds-question-card p { margin: 6px 0 0 40px; color: var(--fg-muted, #59636e); line-height: 1.6; }"
+    },
+    {
+      "name": "Selected Response Option",
+      "kind": "input",
+      "refersTo": "response-option-selected",
+      "description": "A selected evidence response with a circular value marker and inset confirmation edge.",
+      "html": "<label class=\"ds-response-option\"><input type=\"radio\" checked><span><b>3</b>Established</span></label>",
+      "css": ".ds-response-option { position: relative; display: block; cursor: pointer; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; } .ds-response-option input { position: absolute; width: 1px; height: 1px; opacity: 0; } .ds-response-option span { min-height: 58px; display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 9px; align-items: center; border: 1px solid var(--accent, #0969da); padding: 9px 10px; color: var(--accent, #0969da); background: var(--accent-muted, #ddf4ff); box-shadow: inset 0 -3px 0 var(--accent, #0969da); font-size: 13px; font-weight: 650; } .ds-response-option b { display: grid; place-items: center; width: 27px; height: 27px; border-radius: 50%; color: #fff; background: var(--accent-emphasis, #1f6feb); } .ds-response-option input:focus-visible + span { outline: 3px solid var(--accent, #0969da); outline-offset: 2px; }"
+    },
+    {
+      "name": "Sticky Progress Dock",
+      "kind": "custom",
+      "refersTo": "progress-dock",
+      "description": "A compact orientation aid combining answered count, progress rail, and results link.",
+      "html": "<div class=\"ds-progress-dock\"><div><strong>12 of 26</strong><span>questions answered</span></div><div class=\"ds-progress-track\"><span></span></div><a href=\"#\">View results</a></div>",
+      "css": ".ds-progress-dock { display: grid; grid-template-columns: auto minmax(140px, 1fr) auto; gap: 18px; align-items: center; border: 1px solid var(--border, #d1d9e0); padding: 12px 16px; color: var(--fg, #1f2328); background: color-mix(in srgb, var(--canvas, #fff) 95%, transparent); box-shadow: var(--shadow, 0 8px 24px rgba(140, 149, 159, 0.16)); backdrop-filter: blur(12px); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; } .ds-progress-dock > div:first-child { display: flex; align-items: baseline; gap: 7px; white-space: nowrap; } .ds-progress-dock span, .ds-progress-dock a { color: var(--fg-muted, #59636e); font-size: 13px; } .ds-progress-dock a { color: var(--accent, #0969da); font-weight: 650; text-decoration: none; } .ds-progress-track { height: 6px; overflow: hidden; background: var(--canvas-inset, #eff2f5); } .ds-progress-track span { display: block; width: 46%; height: 100%; background: var(--accent-emphasis, #1f6feb); } .ds-progress-dock a:focus-visible { outline: 3px solid var(--accent, #0969da); outline-offset: 3px; }"
+    },
+    {
+      "name": "Active Matrix Cell",
+      "kind": "custom",
+      "refersTo": "stock-adoption-matrix",
+      "description": "The current Stock-Adoption quadrant, shown within a ruled two-axis field.",
+      "html": "<article class=\"ds-matrix-cell\"><span>Your result</span><strong>Healthy foundations, broader adoption</strong><p>Continue expanding participation with outcome evidence.</p></article>",
+      "css": ".ds-matrix-cell { min-height: 230px; border: 1px solid var(--border, #d1d9e0); padding: 40px; color: var(--accent, #0969da); background: var(--accent-muted, #ddf4ff); box-shadow: inset 0 0 0 3px var(--accent, #0969da); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; } .ds-matrix-cell span { color: var(--fg-muted, #59636e); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; } .ds-matrix-cell strong { display: block; max-width: 24ch; margin-top: 18px; font-size: 30px; line-height: 1.08; letter-spacing: -0.025em; } .ds-matrix-cell p { max-width: 54ch; margin: 14px 0 0; color: color-mix(in srgb, var(--accent, #0969da) 65%, var(--fg, #1f2328)); line-height: 1.55; }"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "site-header",
+      "description": "A sticky translucent GitHub-native header with compact links and bordered icon control.",
+      "html": "<nav class=\"ds-header-nav\"><a href=\"#\">Assessment</a><a href=\"#\">Results</a><button aria-label=\"Use dark theme\">◐</button></nav>",
+      "css": ".ds-header-nav { min-height: 64px; display: flex; align-items: center; justify-content: flex-end; gap: 18px; border-bottom: 1px solid var(--border, #d1d9e0); padding: 10px 24px; background: color-mix(in srgb, var(--canvas, #fff) 92%, transparent); backdrop-filter: blur(14px); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; } .ds-header-nav a { color: var(--fg-muted, #59636e); font-size: 14px; font-weight: 600; text-decoration: none; } .ds-header-nav a:hover { color: var(--fg, #1f2328); } .ds-header-nav button { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--border, #d1d9e0); border-radius: 6px; color: var(--fg, #1f2328); background: var(--canvas, #fff); cursor: pointer; } .ds-header-nav button:hover { border-color: var(--accent, #0969da); color: var(--accent, #0969da); } .ds-header-nav a:focus-visible, .ds-header-nav button:focus-visible { outline: 3px solid var(--accent, #0969da); outline-offset: 3px; }"
+    },
+    {
+      "name": "Source Row",
+      "kind": "custom",
+      "refersTo": "source-index",
+      "description": "A full-width source link structured as category, title, and external destination.",
+      "html": "<a class=\"ds-source-row\" href=\"#\"><span>Framework</span><strong>Agentic Engineering System</strong><b aria-hidden=\"true\">↗</b></a>",
+      "css": ".ds-source-row { display: grid; grid-template-columns: minmax(160px, 0.26fr) minmax(0, 1fr) 20px; gap: 24px; align-items: center; min-height: 68px; border-top: 1px solid var(--border, #d1d9e0); border-bottom: 1px solid var(--border, #d1d9e0); color: var(--fg, #1f2328); text-decoration: none; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; } .ds-source-row span { color: var(--fg-muted, #59636e); font-size: 13px; } .ds-source-row:hover { color: var(--accent, #0969da); background: var(--canvas-subtle, #f6f8fa); } .ds-source-row:focus-visible { outline: 3px solid var(--accent, #0969da); outline-offset: 3px; }"
+    },
+    {
+      "name": "Governance Stock Node",
+      "kind": "custom",
+      "refersTo": "stock-node",
+      "description": "A circular semantic node used inside the AES system-map visual.",
+      "html": "<div class=\"ds-stock-node\"><span>Stock</span><strong>Governance</strong></div>",
+      "css": ".ds-stock-node { width: 170px; aspect-ratio: 1; display: grid; place-content: center; gap: 4px; border: 1px solid var(--governance, #8250df); border-radius: 50%; padding: 18px; color: var(--fg, #1f2328); background: var(--governance-muted, #f5f0ff); text-align: center; box-shadow: 0 12px 30px color-mix(in srgb, var(--governance, #8250df) 16%, transparent); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; } .ds-stock-node span { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; } .ds-stock-node strong { font-size: 20px; line-height: 1.15; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Operational System Map",
+    "overview": "The system presents readiness as a connected operating model rather than a dashboard score. GitHub-native neutrals, one-pixel rules, direct typography, and source links create a technical field guide that supports both reading and operating. Large statements establish the consequence of the work, while evidence controls, the Stock-Adoption matrix, and the preparation plan make the model actionable.\n\nThe visual voice is crisp, source-forward, and restrained. Violet, blue, and green identify the three AES stocks without turning the page into a multicolor dashboard. Dense assessment content stays legible through strong hierarchy, long reading measures, visible borders, and responsive reflow.",
+    "keyCharacteristics": [
+      "GitHub-native light and dark neutral surfaces.",
+      "Strong editorial headings paired with practical evidence text.",
+      "Crisp rules and square field structures instead of rounded dashboard cards.",
+      "Three stock colors with stable semantic roles.",
+      "System diagrams and matrices that explain relationships, not isolated metrics.",
+      "Public sources and local-data assurances placed in the reading flow."
+    ],
+    "rules": [
+      {
+        "name": "The Three Stocks Rule",
+        "body": "Keep violet, blue, and green bound to governance, shared knowledge, and customer value. Do not reassign them for decoration.",
+        "section": "colors"
+      },
+      {
+        "name": "The Neutral Field Rule",
+        "body": "Let neutral canvases and rules carry most of the interface. Color marks meaning, state, or action.",
+        "section": "colors"
+      },
+      {
+        "name": "The Operational Promise Rule",
+        "body": "Use the largest type for consequential statements about the system. Do not spend display scale on ornamental labels or raw scores.",
+        "section": "typography"
+      },
+      {
+        "name": "The Connected Field Rule",
+        "body": "Prefer adjacent regions separated by shared one-pixel rules over collections of detached cards.",
+        "section": "layout"
+      },
+      {
+        "name": "The Hero Grid Is Local Rule",
+        "body": "The 32px grid and concentric rings belong only to the circular system-map visual. They are not a page background, section texture, or reusable panel treatment.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat-by-Default Rule",
+        "body": "Use rules and tonal separation first. Add elevation only when an element floats, remains sticky, or represents a framed system object.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Circle Means System Rule",
+        "body": "Use circles for stocks, cycles, markers, and bounded positions. Keep reading containers rectilinear.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do use crisp one-pixel rules and GitHub-neutral surfaces to structure long reading flows.",
+      "Do keep stock colors bound to governance, shared knowledge, and customer value.",
+      "Do pair large operational headings with muted source-forward explanations.",
+      "Do collapse multi-column evidence controls into a clear single-column mobile flow.",
+      "Do preserve visible keyboard focus and reduced-motion behavior."
+    ],
+    "donts": [
+      "Don't turn the hero's 32px grid into a general page background or reusable panel texture.",
+      "Don't replace the connected field with detached KPI cards or a generic metrics dashboard.",
+      "Don't round major reading containers, matrices, warnings, or evidence groups.",
+      "Don't use color without a text label, structural position, or state cue.",
+      "Don't add ambient shadows to every card."
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0d1117"/>
+  <g stroke="#262c36" stroke-width="1">
+    <path d="M0 90h1200M0 180h1200M0 270h1200M0 360h1200M0 450h1200M0 540h1200"/>
+    <path d="M90 0v630M180 0v630M270 0v630M360 0v630M450 0v630M540 0v630M630 0v630M720 0v630M810 0v630M900 0v630M990 0v630M1080 0v630"/>
+  </g>
+  <text x="72" y="112" fill="#9198a1" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="24" font-weight="600">GITHUB AGENTIC ENGINEERING SYSTEM</text>
+  <text x="72" y="220" fill="#f0f6fc" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="64" font-weight="700">Agentic Engineering</text>
+  <text x="72" y="292" fill="#f0f6fc" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="64" font-weight="700">readiness assessment</text>
+  <text x="72" y="365" fill="#9198a1" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="28">Assess the system around agent work. Build a prioritized GitHub preparation plan.</text>
+  <g transform="translate(840 170)">
+    <circle cx="90" cy="60" r="78" fill="#271842" stroke="#a371f7" stroke-width="3"/>
+    <circle cx="210" cy="60" r="78" fill="#121d2f" stroke="#58a6ff" stroke-width="3"/>
+    <circle cx="150" cy="188" r="78" fill="#10291b" stroke="#3fb950" stroke-width="3"/>
+    <circle cx="150" cy="110" r="58" fill="#f0f6fc"/>
+    <text x="150" y="105" text-anchor="middle" fill="#0d1117" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="18" font-weight="700">DEFINE</text>
+    <text x="150" y="130" text-anchor="middle" fill="#0d1117" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="18" font-weight="700">DELIVER · DETECT</text>
+  </g>
+  <text x="72" y="564" fill="#58a6ff" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="24" font-weight="600">guigui42.github.io/agentic-engineering-readiness</text>
+</svg>

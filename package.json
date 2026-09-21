@@ -1,0 +1,40 @@
+{
+  "name": "agentic-engineering-readiness",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Interactive readiness assessment for GitHub Agentic Engineering System adoption",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "preview": "vite preview",
+    "check": "bun run lint && bun run test && bun run build && bun run test:e2e"
+  },
+  "dependencies": {
+    "@github/hydro-analytics-client": "^2.4.1",
+    "@primer/octicons-react": "^19.35.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.7",
+    "@types/bun": "^1.4.2",
+    "@types/node": "^24.13.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "jsdom": "^30.0.1",
+    "oxlint": "^1.82.0",
+    "typescript": "~7.0.2",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.0"
+  }
+}

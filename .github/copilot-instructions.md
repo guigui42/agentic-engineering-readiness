@@ -1,0 +1,35 @@
+# Copilot instructions
+
+## Project goal
+
+Maintain a public, source-backed readiness assessment for GitHub's Agentic
+Engineering System. Help readers assess the system around agent work without
+turning AES into an opaque maturity score or certification.
+
+## Content rules
+
+- Ground framework claims in the current public AES page and GitHub
+  Well-Architected recommendation.
+- Ground GitHub product recommendations in current public GitHub Docs.
+- Keep the Stock-Adoption quadrant model, thresholds, and limitations
+  transparent.
+- Use neutral examples. Never add customer data, credentials, internal links,
+  private roadmap details, or copied internal collateral.
+- Keep the assessment directional. Risk appetite and consequence of failure
+  still determine the real delegation boundary.
+
+## Engineering rules
+
+- Keep typed content in `src/assessment/` and rendering in `src/components/`.
+- Preserve the `/agentic-engineering-readiness/` GitHub Pages base path.
+- Store answers only in browser local storage.
+- Analytics may use controlled interaction identifiers only. Never include
+  answers, scores, quadrant placement, recommendation text, or Markdown output.
+- Preserve responsive behavior, keyboard access, reduced motion, secure
+  external links, and WCAG A/AA checks.
+- Update focused tests when scoring, recommendations, metadata, persistence, or
+  analytics contracts change.
+- When verified content changes, synchronize `verifiedDate`, structured
+  metadata, and the sitemap date.
+- Edit agentic workflow Markdown sources and regenerate generated workflow
+  files with `gh aw compile`.
