@@ -632,15 +632,51 @@ main,
   background: var(--accent-emphasis);
 }
 
-.assessment-scale {
+.scope-panel {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.32fr) minmax(0, 1fr);
+  gap: 10px 24px;
+  align-items: center;
+  margin-bottom: 34px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 24px 0;
+}
+
+.scope-panel label {
+  grid-column: 1;
+  grid-row: 1;
+  font-size: 18px;
+  font-weight: 750;
+}
+
+.scope-panel input {
+  grid-column: 2;
+  grid-row: 1;
+  min-height: 46px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0 14px;
+  color: var(--fg);
+  background: var(--canvas);
+}
+
+.scope-panel p {
+  grid-column: 2;
+  grid-row: 2;
+  margin: 0;
+  color: var(--fg-muted);
+  font-size: 13px;
+}
+
+.section-scale {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin-bottom: 28px;
   border: 1px solid var(--border);
   background: var(--canvas);
 }
 
-.assessment-scale span {
+.section-scale span {
   display: grid;
   grid-template-columns: 24px 1fr;
   gap: 9px;
@@ -651,11 +687,11 @@ main,
   font-size: 13px;
 }
 
-.assessment-scale span + span {
+.section-scale span + span {
   border-left: 1px solid var(--border);
 }
 
-.assessment-scale b {
+.section-scale b {
   display: grid;
   place-items: center;
   width: 24px;
@@ -938,6 +974,14 @@ main,
   line-height: 1.5;
 }
 
+.result-scope {
+  display: block;
+  margin-top: 10px;
+  color: var(--fg-muted);
+  font-size: 14px;
+  font-weight: 650;
+}
+
 .dimension-summary {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -978,15 +1022,70 @@ main,
 }
 
 .dimension-summary article:nth-child(3) .score-track span {
-  background: var(--accent-emphasis);
+  background: var(--value);
 }
 
 .dimension-summary article:nth-child(4) .score-track span {
-  background: var(--value);
+  background: var(--attention);
 }
 
 .dimension-summary small {
   color: var(--fg-muted);
+}
+
+.score-pending {
+  margin-top: 16px;
+  border-top: 1px solid var(--border-muted);
+  padding-top: 12px;
+  color: var(--fg-muted);
+  font-size: 13px;
+}
+
+.dimension-status {
+  margin-top: 16px;
+  border-top: 1px solid var(--border-muted);
+  padding-top: 12px;
+  color: var(--fg-muted);
+  font-size: 13px;
+}
+
+.dimension-summary .participation-summary {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(180px, 0.35fr) minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
+  border-top: 1px solid var(--border);
+  border-left: 0;
+}
+
+.participation-summary p {
+  max-width: 64ch;
+  margin: 0;
+  color: var(--fg-muted);
+  line-height: 1.5;
+}
+
+.participation-position {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(74px, 1fr));
+  gap: 4px;
+}
+
+.participation-position span {
+  border: 1px solid var(--border);
+  padding: 7px 9px;
+  color: var(--fg-muted);
+  background: var(--canvas-subtle);
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.participation-position .participation-position--active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-muted);
 }
 
 .matrix-wrap {
@@ -1533,6 +1632,10 @@ main,
   .dimension-summary article:nth-child(4) {
     border-top: 1px solid var(--border);
   }
+
+  .dimension-summary .participation-summary {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 760px) {
@@ -1567,7 +1670,7 @@ main,
 
   .stock-grid,
   .framework-flow,
-  .assessment-scale,
+  .section-scale,
   .response-grid,
   .anti-pattern-grid {
     grid-template-columns: 1fr;
@@ -1587,14 +1690,14 @@ main,
   }
 
   .framework-flow > div + div,
-  .assessment-scale span + span,
+  .section-scale span + span,
   .matrix-cell:nth-child(even),
   .anti-pattern-grid article:nth-child(even) {
     border-left: 0;
   }
 
   .framework-flow > div + div,
-  .assessment-scale span + span,
+  .section-scale span + span,
   .matrix-cell:nth-child(n + 2) {
     border-top: 1px solid var(--border);
   }
@@ -1710,6 +1813,21 @@ main,
   .dimension-summary article + article {
     border-top: 1px solid var(--border);
     border-left: 0;
+  }
+
+  .scope-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .scope-panel label,
+  .scope-panel input,
+  .scope-panel p {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .participation-position {
+    grid-template-columns: 1fr;
   }
 
   .precondition-warning,

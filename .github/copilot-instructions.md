@@ -2,7 +2,7 @@
 
 ## Project goal
 
-Maintain a public, source-backed readiness assessment for GitHub's Agentic
+Maintain a public, source-backed readiness check based on GitHub's Agentic
 Engineering System. Help readers assess the system around agent work without
 turning AES into an opaque maturity score or certification.
 
@@ -13,8 +13,8 @@ turning AES into an opaque maturity score or certification.
 - Ground GitHub product recommendations in current public GitHub Docs.
 - Keep the Stock-Adoption quadrant model, thresholds, and limitations
   transparent.
-- Use neutral examples. Never add customer data, credentials, internal links,
-  private roadmap details, or copied internal collateral.
+- Use neutral examples. Never add customer data, credentials, non-public
+  sources, or roadmap details.
 - Keep the assessment directional. Risk appetite and consequence of failure
   still determine the real delegation boundary.
 
@@ -24,13 +24,13 @@ turning AES into an opaque maturity score or certification.
   implementation steps in `src/assessment/githubActions.ts`, and rendering in
   `src/components/`.
 - Preserve the `/agentic-engineering-readiness/` GitHub Pages base path.
-- Store answers only in browser local storage.
-- Analytics may use controlled interaction identifiers only. Never include
-  answers, scores, quadrant placement, recommendation text, or Markdown output.
+- Store scope and answers only in browser local storage.
+- Do not add analytics or any network transmission of scope, answers, scores,
+  placement, recommendation text, or Markdown output.
 - Preserve responsive behavior, keyboard access, reduced motion, secure
   external links, and WCAG A/AA checks.
 - Update focused tests when scoring, recommendations, metadata, persistence, or
-  analytics contracts change.
+  local-data contracts change.
 - When verified content changes, synchronize `verifiedDate`, structured
   metadata, and the sitemap date.
 - Edit agentic workflow Markdown sources and regenerate generated workflow

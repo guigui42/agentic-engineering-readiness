@@ -1,328 +1,253 @@
-import type { GitHubImplementation } from './types'
+import type { ImplementationGuide } from './types'
 
-export const githubImplementations: Record<string, GitHubImplementation> = {
+export const githubImplementations: Record<string, ImplementationGuide> = {
   'precondition-infrastructure': {
+    kind: 'github',
     surface:
-      'Repository settings: Actions, Environments, and Code security configurations',
+      'Repository Actions and Environments; organization security configurations; Copilot usage and billing',
     steps: [
-      'Choose one representative pilot repository and make its default build, test, and lint workflow required before merge.',
-      'Create a protected staging environment and require a reviewer for deployments that change customer-facing or production systems.',
-      'Apply an organization security configuration so code scanning, secret scanning, and dependency controls are consistent across the pilot repositories.',
+      'Choose one representative repository and require its standard build, test, and lint workflow before merge.',
+      'Create the staging or production environment used by the scoped workflow and configure its reviewer and deployment-branch rules.',
+      'Apply the intended organization security configuration to the repository.',
+      'Record the expected AI Credit and GitHub Actions-minute budget for the pilot volume.',
     ],
     verification: [
-      'A pull request cannot merge when the required workflow fails.',
-      'A staging or production deployment records the approving reviewer.',
-      'The repository appears under the intended organization security configuration.',
+      'A test pull request cannot merge while a required workflow fails.',
+      'A test deployment cannot enter the protected environment without the configured approval.',
+      'The repository is listed under the intended security configuration.',
+      'The pilot issue links to the current Copilot and Actions usage or budget view.',
     ],
   },
   'precondition-skills': {
-    surface:
-      'Repository files: .github/CODEOWNERS, pull request template, and review guidance',
+    kind: 'operating-model',
+    surface: 'Operating model outside GitHub configuration',
     steps: [
-      'Add CODEOWNERS entries for application code, workflows, infrastructure, security configuration, and repository instructions.',
-      'Add a pull request checklist that asks reviewers to confirm intent, evidence, rollback, and customer impact for agent-authored changes.',
-      'Require the relevant code owner review for sensitive paths through a ruleset or protected branch.',
+      'Name the human director who owns intent, constraints, and the decision to delegate.',
+      'Name the human assessor who owns evidence quality and final acceptance.',
+      'Run one calibration exercise where both reviewers independently assess the same agent-produced plan or pull request, then reconcile differences.',
     ],
     verification: [
-      'A pull request changing a sensitive path automatically requests the expected owner.',
-      'The pull request template makes assessment evidence visible before approval.',
+      'The pilot charter names the director, assessor, and escalation contact.',
+      'The calibration record lists agreed acceptance and stop criteria.',
     ],
   },
   'precondition-culture': {
-    surface: 'GitHub Issues: issue forms, labels, and a recurring review issue',
+    kind: 'operating-model',
+    surface: 'Pilot charter and leadership operating agreement',
     steps: [
-      'Create an issue form for agent failures and near misses with fields for the task, missing context, failed control, impact, and follow-up owner.',
-      'Add labels such as agent-failure, context-gap, control-gap, and review-burden.',
-      'Open a recurring monthly issue that reviews unresolved failures and records changes to instructions, rulesets, or policies.',
+      'State that reliability, customer value, and transparent escalation take priority over agent-usage targets.',
+      'Publish a named escalation route for stopping a session or narrowing the pilot.',
+      'Review one hypothetical failure with leaders and confirm that reporting it would not penalize the participant.',
     ],
     verification: [
-      'Teams can report an agent failure without using free-form private notes.',
-      'Every accepted finding has an owner and a linked repository or policy change.',
+      'The charter contains the stop-work rule and escalation owner.',
+      'Pilot participants can identify the escalation route without referring to private notes.',
     ],
   },
   'precondition-access': {
+    kind: 'github',
     surface:
-      'Enterprise AI controls, organization Copilot policies, and repository access',
+      'Enterprise or organization cloud-agent access; repository Copilot MCP servers and Internet access',
     steps: [
-      'Limit the initial Copilot and agent rollout to named organizations, repositories, and pilot teams.',
-      'Document which GitHub identities and approved tools may read or write each repository class.',
-      'Review repository access and remove unrelated repositories, package scopes, secrets, and environments from the pilot path.',
+      'Restrict Copilot cloud-agent access to the organizations and repositories in scope.',
+      'In Repository settings → Copilot → MCP servers, allowlist only the required tools. Review the GitHub and Playwright MCP servers that are enabled by default.',
+      'Configure repository or organization Internet access for the required domains, accounting for the documented firewall limitations.',
+      'Keep unrelated Agents secrets, variables, repositories, and environments outside the pilot.',
     ],
     verification: [
-      'A pilot user can identify the enterprise or organization policy governing the workflow.',
-      'The agent cannot access an out-of-scope repository or protected environment.',
+      'An approved tool call succeeds in a test session.',
+      'An out-of-scope repository, MCP tool, or domain is denied or unavailable.',
+      'Protected configuration files have an accountable CODEOWNER.',
     ],
   },
   'governance-scope': {
-    surface: 'Enterprise settings → AI controls → Copilot',
-    steps: [
-      'Record which Copilot features and agent entry points are enabled for each pilot organization.',
-      'Define approved repositories, GitHub identities, MCP servers, plugins, and write operations in a repository-linked policy document.',
-      'Keep non-pilot organizations and repositories disabled until their foundations are assessed.',
-    ],
-    verification: [
-      'The enabled organization list matches the documented pilot scope.',
-      'A repository owner can link from the pilot repository to the policy that governs it.',
-    ],
-  },
-  'governance-risk': {
-    surface: 'Organization settings → Repository → Custom properties and Rulesets',
-    steps: [
-      'Create repository properties such as agent_risk, data_classification, and deployment_impact with controlled values.',
-      'Assign values to pilot repositories and require owners to review them when the repository purpose changes.',
-      'Target rulesets and review requirements using those properties instead of maintaining manual repository lists.',
-    ],
-    verification: [
-      'Every pilot repository has a risk and impact value.',
-      'Changing a repository property changes the applicable ruleset as expected.',
-    ],
-  },
-  'governance-review': {
-    surface: 'Repository settings → Rules → Rulesets, plus .github/CODEOWNERS',
-    steps: [
-      'Create a branch ruleset for the default branch that requires pull requests, status checks, resolved conversations, and code owner review where needed.',
-      'Add CODEOWNERS coverage for workflows, infrastructure, security configuration, and production-critical code.',
-      'Test the ruleset with a pull request that intentionally fails one required check.',
-    ],
-    verification: [
-      'The test pull request cannot merge while a required check or review is missing.',
-      'Ruleset insights show the rule evaluating the pilot repository.',
-    ],
-  },
-  'governance-deployment': {
+    kind: 'github',
     surface:
-      'Repository settings → Environments and organization Code security → Configurations',
+      'Enterprise AI controls; organization cloud-agent access; repository Copilot, hooks, setup steps, and CODEOWNERS',
     steps: [
-      'Create separate staging and production environments with scoped secrets and deployment branches.',
-      'Require human approval for production and for changes with difficult-to-reverse customer impact.',
-      'Apply the intended security configuration and review dependency graph coverage for the repository.',
+      'Record which organizations and repositories have Copilot cloud-agent access and explicitly exclude the rest.',
+      'Review Repository settings → Copilot → MCP servers and Internet access, and remove tools or domains not required by the scoped workflow.',
+      'Add default-branch hook files under .github/hooks/ only for checks that have a named owner and a falsifiable expected result.',
+      'Review .github/workflows/copilot-setup-steps.yml permissions, runner choice, timeout-minutes, installed dependencies, and network behavior.',
+      'Protect Copilot instructions, MCP-related files, hooks, setup steps, and workflow files with CODEOWNERS and required code-owner review.',
     ],
     verification: [
-      'An agent-authored pull request can deploy to staging but cannot deploy to production without the configured approval.',
-      'Security configuration and dependency graph status are visible for the repository.',
+      'The enabled organization and repository lists match the written scope.',
+      'A pull request changing protected Copilot configuration requests the expected owner.',
+      'A test session shows only the approved MCP tools and required network paths.',
+      'A failing hook blocks or reports the documented condition in the session log.',
     ],
   },
-  'governance-audit': {
-    surface: 'Enterprise settings → Audit log and repository pull request history',
-    steps: [
-      'Create saved audit searches for Copilot policy changes, repository access changes, ruleset changes, and workflow or deployment activity.',
-      'Require agent work to use attributable GitHub identities and reviewable pull requests.',
-      'Document the audit search and pull request evidence responders should collect during an incident.',
-    ],
-    verification: [
-      'A reviewer can trace a test change from identity to pull request, checks, approval, merge, and deployment.',
-      'The saved audit searches return the expected policy or repository events.',
-    ],
-  },
-  'governance-learning': {
-    surface: 'GitHub Issues linked to rulesets, policies, workflows, and audit evidence',
-    steps: [
-      'Use the agent-failure issue form for exceptions, near misses, and repeated review friction.',
-      'Link each accepted finding to the ruleset, Copilot policy, workflow, CODEOWNERS entry, or instruction change that addresses it.',
-      'Close the issue only after the control change is tested in a pull request or pilot workflow.',
-    ],
-    verification: [
-      'Every closed governance finding links to a tested GitHub configuration or repository change.',
-      'Temporary exceptions include an owner and review date.',
-    ],
-  },
-  'knowledge-repository': {
+  'governance-proportionality': {
+    kind: 'github',
     surface:
-      'Repository file: .github/copilot-instructions.md and repository README',
+      'Organization repository custom properties and organization rulesets; repository branch rules where local requirements differ',
     steps: [
-      'Create .github/copilot-instructions.md with the supported build, test, lint, architecture, and validation paths.',
-      'State boundaries explicitly, including files that must not change, operations requiring approval, and the expected pull request evidence.',
-      'Link to deeper architecture and runbook documents instead of copying large, stale context into the instruction file.',
+      'Create organization repository properties for agent_risk, data_classification, and deployment_impact.',
+      'Assign controlled values to the repositories in scope.',
+      'Create organization rulesets targeted by those property values. Use repository rulesets only for repository-local branch requirements.',
+      'Test one low-risk path that should flow without a manual approval and one high-impact path that should require deeper review.',
+      'If a ruleset blocks Copilot cloud agent, change the incompatible rule or grant only the minimum documented bypass. Do not give a blanket bypass.',
     ],
     verification: [
-      'A fresh Copilot task uses the documented commands without correction.',
-      'A reviewer can identify the owner and last verification date for the instructions.',
+      'Ruleset insights show the expected organization ruleset evaluating each repository class.',
+      'The low-risk test proceeds through required automated checks without an unnecessary manual queue.',
+      'The high-impact test cannot merge without the required accountable review.',
+      'Any Copilot bypass is limited to a named rule and has a documented owner and review date.',
     ],
   },
-  'knowledge-decisions': {
+  'governance-layered': {
+    kind: 'github',
     surface:
-      'Repository files: .github/CODEOWNERS and docs/adr/, plus repository custom properties',
+      'Rulesets, CODEOWNERS, Environments, organization security configurations, and enterprise audit log',
     steps: [
-      'Add CODEOWNERS entries that identify accountable teams for services, workflows, and architecture documents.',
-      'Store active architecture decisions under docs/adr/ and link relevant decisions from issues and pull requests.',
-      'Use repository custom properties for owner, service tier, data classification, and deployment impact where those values drive governance.',
+      'Require pull requests, status checks, resolved conversations, and code-owner review for the relevant paths.',
+      'Configure protected environments and keep production secrets outside the agent session and setup steps.',
+      'Apply the intended organization security configuration and review dependency-graph coverage.',
+      'Create saved audit searches for Copilot policy changes, repository access, rulesets, workflow activity, and deployments.',
     ],
     verification: [
-      'An engineer unfamiliar with the repository can find the owner and relevant decision record from the repository.',
-      'The repository properties match the current service and risk classification.',
+      'A test pull request cannot merge with a failed required check or missing owner review.',
+      'An agent-authored change cannot deploy to the protected environment without the configured approval.',
+      'The test change can be traced from identity to pull request, checks, approval, merge, and deployment.',
+    ],
+  },
+  'knowledge-guidance': {
+    kind: 'github',
+    surface:
+      'Organization instructions; .github/copilot-instructions.md; .github/instructions/**/*.instructions.md; AGENTS.md; copilot-setup-steps.yml',
+    steps: [
+      'Use organization instructions only for rules that apply across the organization.',
+      'Keep repository-wide commands and boundaries in .github/copilot-instructions.md.',
+      'Use path-specific instruction files or AGENTS.md only where the current Copilot surface supports them.',
+      'Configure .github/workflows/copilot-setup-steps.yml for dependencies or tools that must exist before the agent starts.',
+      'Add an owner and review date to the instruction entry point.',
+    ],
+    verification: [
+      'From a clean clone, every documented build, test, and lint command exits successfully.',
+      'A test change in each path receives the expected path-specific or agent instruction.',
+      'The setup workflow completes with minimum permissions and does not expose protected secrets.',
     ],
   },
   'knowledge-definition': {
-    surface: 'Repository files: .github/ISSUE_TEMPLATE/*.yml',
+    kind: 'github',
+    surface: 'Repository issue forms and Copilot cloud-agent planning sessions',
     steps: [
-      'Create an agent-task issue form with required fields for outcome, customer context, constraints, acceptance criteria, affected systems, and validation.',
-      'Add a risk field that distinguishes reversible, low-impact work from changes requiring deeper direction and review.',
-      'Require links to relevant code, decisions, telemetry, or prior issues before the task can enter delivery.',
+      'Create an agent-task issue form with required fields for outcome, constraints, affected systems, acceptance criteria, and validation evidence.',
+      'Add a field confirming that the task fits one repository and one independently reviewable pull request.',
+      'Ask Copilot cloud agent to research and propose a plan before requesting code changes.',
+      'Record the human director decision and unresolved trade-offs in the issue.',
     ],
     verification: [
-      'A new agent task cannot be submitted without acceptance criteria and validation evidence.',
-      'A reviewer can decide whether the issue is safe to delegate without a separate discovery meeting.',
+      'The issue form cannot be submitted without outcome and validation fields.',
+      'The approved plan cites repository evidence and maps every acceptance criterion to a validation step.',
+      'Tasks exceeding the repository, pull-request, or session boundary are split before delivery.',
     ],
   },
-  'knowledge-signals': {
-    surface: 'GitHub Issues and pull requests linked to alerts, deployments, and external telemetry',
-    steps: [
-      'Add issue fields for the alert, dashboard, support pattern, customer feedback, or usage signal that triggered the work.',
-      'Link the delivery pull request and deployment back to the issue.',
-      'Record the expected signal change and a follow-up date in the issue before merge.',
-    ],
-    verification: [
-      'The issue connects the original signal, implementation pull request, deployment, and observed outcome.',
-      'The follow-up records whether the signal improved, stayed flat, or regressed.',
-    ],
-  },
-  'knowledge-freshness': {
+  'knowledge-context': {
+    kind: 'github',
     surface:
-      'CODEOWNERS, scheduled GitHub Actions workflows, and documentation pull requests',
+      'CODEOWNERS, repository custom properties, docs/adr/, dependency graph, and linked workflow or metric evidence',
     steps: [
-      'Assign owners to instructions, runbooks, schemas, and architecture records through CODEOWNERS.',
-      'Add a scheduled workflow that checks links, generated schemas, or documented commands that can be validated automatically.',
-      'Open an issue or pull request when a check fails instead of allowing stale guidance to remain silent.',
+      'Add CODEOWNERS coverage for application code, workflows, infrastructure, security configuration, and instruction files.',
+      'Set organization repository properties for owner, service tier, data classification, and deployment impact where those values drive governance.',
+      'Store active decisions under docs/adr/ and link the relevant records from the task issue.',
+      'Link the dependency graph, alert, workflow run, deployment, or Copilot metric that informs the task.',
     ],
     verification: [
-      'A deliberately broken documentation link or command fails the scheduled workflow.',
-      'Critical knowledge files have an accountable reviewer.',
-    ],
-  },
-  'knowledge-learning': {
-    surface: 'Pull request template, docs/adr/, repository instructions, and linked issues',
-    steps: [
-      'Add a pull request prompt asking what the change taught the team and which durable document needs an update.',
-      'Update the relevant ADR, runbook, schema, or Copilot instruction in the same pull request when the learning changes future work.',
-      'Link incidents and review findings to the durable update that incorporates the lesson.',
-    ],
-    verification: [
-      'Repeated tasks use the updated guidance without rediscovering the same constraint.',
-      'A closed incident or review finding links to a merged knowledge update.',
+      'A contributor unfamiliar with the repository can identify the accountable owner from the repository.',
+      'The issue links the decision and dependency context needed for the scoped change.',
+      'Repository property values match the current owner and impact classification.',
     ],
   },
   'adoption-define': {
-    surface: 'GitHub Issues and Copilot cloud agent planning sessions',
+    kind: 'github',
+    surface: 'GitHub Issues and Copilot cloud-agent research and planning',
     steps: [
-      'Start with a structured agent-task issue containing customer context, constraints, acceptance criteria, and source links.',
-      'Ask Copilot cloud agent to research the repository and propose a plan before requesting code changes.',
-      'Have the human director edit or approve the plan and record unresolved trade-offs in the issue.',
+      'Start from the completed agent-task issue and request repository research or a plan before code changes.',
+      'Keep the human director responsible for scope, trade-offs, and acceptance criteria.',
+      'If the agent is expected to assess its own plan, require it to identify missing evidence and contradictory constraints explicitly.',
     ],
     verification: [
-      'The approved plan cites repository evidence and matches the issue acceptance criteria.',
-      'Human decisions and unresolved trade-offs are visible before delivery starts.',
+      'The plan links to repository evidence and distinguishes facts, assumptions, and unresolved decisions.',
+      'The issue records the human decision before delivery starts.',
     ],
   },
   'adoption-deliver': {
-    surface: 'GitHub Issues → Copilot cloud agent → pull requests',
+    kind: 'github',
+    surface:
+      'GitHub Issues, Copilot cloud-agent sessions, pull requests, rulesets, hooks, and code review',
     steps: [
-      'Select one low-risk issue class such as documentation, test coverage, or a small reversible bug fix.',
-      'Start a Copilot cloud agent session from the issue and require it to open a pull request with tests and a concise evidence summary.',
-      'Keep branch rules, required checks, code owner review, and environment protections identical to comparable human work.',
+      'Choose a reversible task class that fits one repository, one pull request, and the documented session limit.',
+      'Start the Copilot cloud-agent session from the issue and require tests plus a concise evidence summary in the pull request.',
+      'Use preToolUse or postToolUse hooks only for deterministic validation or reporting that is tested locally.',
+      'Request Copilot code review as additional evidence while retaining required human or code-owner approval where impact demands it.',
     ],
     verification: [
       'The pull request links to the issue, passes required checks, and can be reverted independently.',
-      'Review effort and rework are recorded for the pilot task class.',
-    ],
-  },
-  'adoption-assess': {
-    surface: 'Pull request reviewers → Copilot code review plus accountable human review',
-    steps: [
-      'Request a Copilot code review on pilot pull requests and keep its comments visible as assessment evidence.',
-      'Retain required human or code owner approval for work with customer, security, architecture, or production impact.',
-      'Track recurring Copilot findings and convert useful patterns into tests, rules, or repository instructions.',
-    ],
-    verification: [
-      'Copilot review comments do not silently replace the required accountable reviewer.',
-      'Repeated findings lead to a durable automated check or instruction update.',
+      'The hook produces the expected pass and fail results with test input.',
+      'Copilot review does not satisfy the required accountable review unless that policy was explicitly chosen and tested.',
     ],
   },
   'adoption-detect': {
+    kind: 'github',
     surface:
-      'Failing GitHub Actions runs, security alerts, audit findings, and linked GitHub Issues',
+      'GitHub Actions runs, security alerts, deployments, Copilot usage metrics, and linked GitHub Issues',
     steps: [
-      'Choose one recurring detection source, such as a failing workflow, dependency alert, or deployment regression.',
-      'Start a Copilot cloud agent session to investigate and summarize evidence, without granting automatic production remediation.',
-      'Route the result to an issue with an owner, severity, proposed next step, and links to the source evidence.',
+      'Choose one named source such as a failing workflow, security alert, deployment regression, or repository-level Copilot metric.',
+      'Use Copilot cloud agent to summarize or correlate only the approved evidence.',
+      'Open a human-owned issue that links the source, separates facts from assumptions, and states the decision required.',
     ],
     verification: [
-      'The investigation links to the originating run or alert and identifies evidence separately from assumptions.',
-      'A human-owned issue decides whether remediation should proceed.',
-    ],
-  },
-  'adoption-portfolio': {
-    surface:
-      'Repository custom properties, issue labels, rulesets, and Copilot policies',
-    steps: [
-      'Create an agent_participation property with values such as none, assist, perform, and assess.',
-      'Set the property per repository or workflow class and document which human mode remains accountable.',
-      'Use labels or issue form fields to mark the intended participation mode for each agent task.',
-    ],
-    verification: [
-      'A repository and task show the intended agent participation before work starts.',
-      'Rulesets and policies remain stricter for higher-impact repository classes.',
-    ],
-  },
-  'adoption-evidence': {
-    surface: 'GitHub Issues, pull requests, checks, review history, and deployment records',
-    steps: [
-      'Add pilot labels for the task class and whether Copilot acted in define, perform, assess, or detect.',
-      'Record task success, review effort, rework, failed checks, rollback, and escaped defects in the linked issue.',
-      'Review the evidence before enabling the same task class in another repository or organization.',
-    ],
-    verification: [
-      'The expansion decision links to a sample of completed pull requests and outcome evidence.',
-      'Scope narrows when rework, incidents, or review burden exceed the agreed boundary.',
+      'The finding links to the originating run, alert, deployment, or metrics report.',
+      'The issue names the accountable owner and decision deadline.',
+      'A sample false positive is recorded and used to review signal quality.',
     ],
   },
   'value-outcomes': {
-    surface: 'GitHub Issues, pull requests, deployments, and Projects fields',
+    kind: 'github',
+    surface:
+      'GitHub issue forms, pull requests, deployments, Projects fields, and external metric links',
     steps: [
-      'Add an outcome field to the issue form for adoption, reliability, support volume, trust, or another customer result.',
+      'Add required issue fields for the named outcome, metric source, baseline window, expected change, and follow-up date.',
       'Link the implementation pull request and deployment to the issue.',
-      'Set an owner and follow-up date for recording the observed outcome after release.',
+      'Record the comparison-window result and the resulting product or operating decision.',
     ],
     verification: [
-      'The issue contains a before-and-after outcome signal, not only a merged pull request.',
-      'The follow-up result informs the next issue, roadmap decision, or rollback.',
+      'The issue contains a dated baseline and comparison window from a named source.',
+      'The observed result is recorded as improved, unchanged, or regressed.',
+      'The issue links the next decision, follow-up task, or rollback.',
     ],
   },
   'value-quality': {
+    kind: 'github',
     surface:
-      'Required checks, Code security configurations, deployments, and incident issues',
+      'Copilot usage metrics dashboard or API, pull request history, Actions runs, incident issues, and billing views',
     steps: [
-      'Track escaped defects, security findings, failed deployments, rollbacks, and support issues for the pilot task class.',
-      'Keep required checks and security configuration consistent as agent participation expands.',
-      'Review quality and delivery trends together before changing the delegation boundary.',
+      'Use the organization or enterprise Copilot usage metrics report, including repository-level cloud-agent pull request activity where available.',
+      'Record the baseline and comparison windows for pull requests created and merged, time to merge, failed checks, review effort, rework, defects, and rollbacks.',
+      'Record AI Credit and GitHub Actions-minute usage for the same pilot window.',
+      'Review speed, quality, correction cost, and usage together before expanding the task class.',
     ],
     verification: [
-      'Quality remains flat or improves while the pilot delivers faster.',
-      'A regression creates a linked issue and blocks further expansion until reviewed.',
+      'The pilot issue links the exact dashboard export, API query, or repository query used for both windows.',
+      'Every reported metric has a source, date range, and defined population.',
+      'An expansion decision cites quality and correction-cost evidence, not delivery speed alone.',
     ],
   },
-  'value-rework': {
-    surface: 'Pull request review history, GitHub Actions runs, and linked pilot issues',
-    steps: [
-      'Record major re-scoping, repeated Copilot iterations, failed checks, abandoned pull requests, and human review time in the pilot issue.',
-      'Use a consistent label or issue field so results can be compared across the same task class.',
-      'Convert repeated correction patterns into better issue fields, tests, rulesets, or repository instructions.',
-    ],
-    verification: [
-      'The pilot reports correction cost alongside delivery time.',
-      'A repeated source of rework has a linked improvement pull request or configuration change.',
-    ],
-  },
-  'value-feedback': {
+  'learning-loop': {
+    kind: 'github',
     surface:
-      'GitHub Issues linked to deployments, incidents, support signals, repository instructions, and rulesets',
+      'GitHub Issues linked to instructions, issue forms, tests, rulesets, policies, and product decisions',
     steps: [
-      'Create follow-up issues from material usage, customer feedback, incident, and quality findings.',
-      'Classify each finding as a definition gap, knowledge gap, governance gap, or product decision.',
-      'Update the relevant issue form, instruction file, test, ruleset, or Copilot policy and link the change back to the finding.',
+      'Open an owned issue for each material finding from incidents, reviews, customer outcomes, or pilot measurements.',
+      'Classify the finding as a definition, knowledge, governance, participation, or product-decision change.',
+      'Link the finding to the pull request or configuration change that updates the next cycle.',
+      'Verify the new behavior before closing the finding.',
     ],
     verification: [
-      'A detected outcome changes a future issue, durable repository document, or enforced GitHub control.',
-      'Closed feedback issues link to the merged or configured system change.',
+      'Every closed finding links to a merged or configured change and its verification evidence.',
+      'A repeated task uses the updated issue form, instruction, test, rule, or policy without rediscovering the same gap.',
     ],
   },
 }

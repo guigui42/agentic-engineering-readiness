@@ -8,10 +8,12 @@ import {
   ShieldCheckIcon,
   SunIcon,
 } from '@primer/octicons-react'
-import { buildActionPlan, exportAssessmentMarkdown } from './assessment/recommendations'
+import {
+  buildActionPlan,
+  exportAssessmentMarkdown,
+} from './assessment/recommendations'
 import { calculateAssessment } from './assessment/scoring'
 import type { Answers, ResponseValue } from './assessment/types'
-import { trackInteraction } from './analytics'
 import { ActionPlan } from './components/ActionPlan'
 import { Assessment } from './components/Assessment'
 import { DimensionSummary } from './components/DimensionSummary'
@@ -21,28 +23,41 @@ import { StockAdoptionMatrix } from './components/StockAdoptionMatrix'
 
 const PAGE_LINK =
   'https://guigui42.github.io/agentic-engineering-readiness/'
-const STORAGE_KEY = 'agentic-engineering-readiness-v1'
+const STORAGE_KEY = 'agentic-engineering-readiness-v2'
+const LEGACY_STORAGE_KEY = 'agentic-engineering-readiness-v1'
 
-interface StoredAssessment {
-  version: 1
+interface StoredReadinessCheck {
+  version: 2
+  scope: string
   answers: Answers
 }
 
-function loadAnswers(): Answers {
+function loadReadinessCheck(): StoredReadinessCheck {
   try {
     const stored = localStorage.getItem(STORAGE_KEY)
-    if (!stored) {
-      return {}
+    if (stored) {
+      const parsed = JSON.parse(stored) as StoredReadinessCheck
+      if (
+        parsed.version === 2 &&
+        typeof parsed.scope === 'string' &&
+        typeof parsed.answers === 'object'
+      ) {
+        return parsed
+      }
     }
-    const parsed = JSON.parse(stored) as StoredAssessment
-    if (parsed.version !== 1 || typeof parsed.answers !== 'object') {
-      return {}
+
+    const legacy = localStorage.getItem(LEGACY_STORAGE_KEY)
+    if (legacy) {
+      const parsed = JSON.parse(legacy) as { answers?: Answers }
+      if (typeof parsed.answers === 'object') {
+        return { version: 2, scope: '', answers: parsed.answers }
+      }
     }
-    return parsed.answers
   } catch (error) {
-    console.error('Unable to load the saved assessment.', error)
-    return {}
+    console.error('Unable to load the saved readiness check.', error)
   }
+
+  return { version: 2, scope: '', answers: {} }
 }
 
 async function copyText(value: string) {
@@ -52,8 +67,42 @@ async function copyText(value: string) {
   await navigator.clipboard.writeText(value)
 }
 
+function resultHeading(
+  scope: string,
+  placementStatus: ReturnType<typeof calculateAssessment>['placementStatus'],
+  quadrantLabel: string | undefined,
+) {
+  if (placementStatus === 'scope-required') {
+    return 'Name the workflow you are checking'
+  }
+  if (placementStatus === 'preconditions-required') {
+    return 'Resolve operating preconditions before placement'
+  }
+  if (placementStatus === 'core-incomplete') {
+    return 'Complete foundations and participation'
+  }
+  return quadrantLabel ?? `Result for ${scope}`
+}
+
+function resultDescription(
+  placementStatus: ReturnType<typeof calculateAssessment>['placementStatus'],
+  quadrantMove: string | undefined,
+) {
+  if (placementStatus === 'scope-required') {
+    return 'AES places each process or task separately. Start by naming one team, repository class, or workflow.'
+  }
+  if (placementStatus === 'preconditions-required') {
+    return 'Placement is not reliable while an operating precondition is missing or only partially present.'
+  }
+  if (placementStatus === 'core-incomplete') {
+    return 'Answer every governance, shared knowledge, and participation item to place the scoped workflow in the AES matrix.'
+  }
+  return quadrantMove ?? ''
+}
+
 function App() {
-  const [answers, setAnswers] = useState<Answers>(loadAnswers)
+  const [readinessCheck, setReadinessCheck] =
+    useState<StoredReadinessCheck>(loadReadinessCheck)
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const stored = localStorage.getItem('agentic-engineering-theme')
     if (stored === 'light' || stored === 'dark') {
@@ -68,7 +117,11 @@ function App() {
   const [copyError, setCopyError] = useState<string | null>(null)
   const [resetArmed, setResetArmed] = useState(false)
 
-  const result = useMemo(() => calculateAssessment(answers), [answers])
+  const { scope, answers } = readinessCheck
+  const result = useMemo(
+    () => calculateAssessment(answers, scope),
+    [answers, scope],
+  )
   const actions = useMemo(
     () => buildActionPlan(answers, result),
     [answers, result],
@@ -81,9 +134,9 @@ function App() {
   }, [theme])
 
   useEffect(() => {
-    const stored: StoredAssessment = { version: 1, answers }
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(stored))
-  }, [answers])
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(readinessCheck))
+    localStorage.removeItem(LEGACY_STORAGE_KEY)
+  }, [readinessCheck])
 
   useEffect(() => {
     if (!resetArmed) {
@@ -94,12 +147,10 @@ function App() {
   }, [resetArmed])
 
   const handleAnswer = (questionId: string, value: ResponseValue) => {
-    setAnswers((current) => ({ ...current, [questionId]: value }))
-    trackInteraction({
-      category: 'assessment',
-      action: 'change',
-      label: 'response-selected',
-    })
+    setReadinessCheck((current) => ({
+      ...current,
+      answers: { ...current.answers, [questionId]: value },
+    }))
   }
 
   const handlePageCopy = async () => {
@@ -107,11 +158,6 @@ function App() {
       await copyText(PAGE_LINK)
       setCopiedPageLink(true)
       setCopyError(null)
-      trackInteraction({
-        category: 'navigation',
-        action: 'copy',
-        label: 'page-link',
-      })
       window.setTimeout(() => setCopiedPageLink(false), 1800)
     } catch (error) {
       setCopyError(error instanceof Error ? error.message : String(error))
@@ -120,14 +166,9 @@ function App() {
 
   const handlePlanCopy = async () => {
     try {
-      await copyText(exportAssessmentMarkdown(result, actions))
+      await copyText(exportAssessmentMarkdown(scope, result, actions))
       setCopiedPlan(true)
       setCopyError(null)
-      trackInteraction({
-        category: 'result',
-        action: 'copy',
-        label: 'markdown-plan',
-      })
       window.setTimeout(() => setCopiedPlan(false), 1800)
     } catch (error) {
       setCopyError(error instanceof Error ? error.message : String(error))
@@ -139,15 +180,9 @@ function App() {
       setResetArmed(true)
       return
     }
-    setAnswers({})
-    localStorage.removeItem(STORAGE_KEY)
+    setReadinessCheck({ version: 2, scope: '', answers: {} })
     setResetArmed(false)
     setCopyError(null)
-    trackInteraction({
-      category: 'assessment',
-      action: 'reset',
-      label: 'local-assessment',
-    })
   }
 
   return (
@@ -169,7 +204,7 @@ function App() {
           {copiedPageLink ? <CheckIcon /> : <CopyIcon />}
         </button>
         <nav aria-label="Primary navigation">
-          <a href="#assessment">Assessment</a>
+          <a href="#assessment">Readiness check</a>
           <a href="#results">Results</a>
           <a href="#sources">Sources</a>
           <a
@@ -184,15 +219,7 @@ function App() {
             type="button"
             className="icon-button"
             aria-label={`Use ${theme === 'dark' ? 'light' : 'dark'} theme`}
-            onClick={() => {
-              const nextTheme = theme === 'dark' ? 'light' : 'dark'
-              setTheme(nextTheme)
-              trackInteraction({
-                category: 'appearance',
-                action: 'change',
-                label: `theme:${nextTheme}`,
-              })
-            }}
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
           >
             {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
           </button>
@@ -204,13 +231,14 @@ function App() {
           <div className="hero__content">
             <h1>Prepare your Agentic Engineering System before you scale the agents.</h1>
             <p>
-              Assess governance, shared knowledge, agent adoption, and customer
-              value signals. Then turn the gaps into exact GitHub settings,
-              repository files, workflows, and verification checks.
+              Check one workflow against AES preconditions, governance, shared
+              knowledge, agent participation, customer value, and system
+              learning. Turn the gaps into specific GitHub and operating-model
+              actions with observable verification.
             </p>
             <div className="hero__actions">
               <a className="primary-button" href="#assessment">
-                Start the assessment
+                Start the readiness check
               </a>
               <a
                 className="secondary-button"
@@ -222,10 +250,13 @@ function App() {
                 <LinkExternalIcon />
               </a>
             </div>
-            <p className="effort-note">26 evidence questions · about 8 minutes</p>
+            <p className="effort-note">
+              16 items · about 20 minutes solo · 60–75 minutes facilitated
+            </p>
             <p className="privacy-note">
-              Your answers stay in this browser. This is directional guidance,
-              not a certification or universal risk threshold.
+              Independent, unofficial resource. Not published or endorsed by
+              GitHub, Inc. No analytics are collected. Your scope and answers
+              stay in this browser.
             </p>
           </div>
           <div className="hero__visual" aria-label="AES activity and stock model">
@@ -251,15 +282,15 @@ function App() {
 
         <FrameworkExplainer />
 
-        <div className="progress-dock" aria-label="Assessment progress">
+        <div className="progress-dock" aria-label="Readiness check progress">
           <div>
             <strong>{result.answered} of {result.total}</strong>
-            <span>questions answered</span>
+            <span>items answered</span>
           </div>
           <div
             className="progress-track"
             role="progressbar"
-            aria-label="Assessment completion"
+            aria-label="Readiness check completion"
             aria-valuemin={0}
             aria-valuemax={100}
             aria-valuenow={progress}
@@ -269,31 +300,47 @@ function App() {
           <a href="#results">View results</a>
         </div>
 
-        <Assessment answers={answers} onAnswer={handleAnswer} />
+        <Assessment
+          scope={scope}
+          answers={answers}
+          onScopeChange={(nextScope) =>
+            setReadinessCheck((current) => ({
+              ...current,
+              scope: nextScope,
+            }))
+          }
+          onAnswer={handleAnswer}
+        />
 
         <section className="results" id="results" aria-labelledby="results-title">
           <div className="section-heading">
             <div>
               <h2 id="results-title">
-                {result.quadrant?.label ?? 'Complete the core assessment'}
+                {resultHeading(
+                  scope,
+                  result.placementStatus,
+                  result.quadrant?.label,
+                )}
               </h2>
+              {scope.trim() ? <span className="result-scope">{scope.trim()}</span> : null}
             </div>
             <p aria-live="polite">
-              {result.quadrant
-                ? result.quadrant.nextMove
-                : 'Answer every governance, shared knowledge, and agent adoption question to place the system in the AES matrix.'}
+              {resultDescription(
+                result.placementStatus,
+                result.quadrant?.nextMove,
+              )}
             </p>
           </div>
 
-          {result.missingPreconditions.length > 0 ? (
+          {scope.trim() && result.unresolvedPreconditions.length > 0 ? (
             <div className="precondition-warning" role="status">
               <strong>
-                {result.missingPreconditions.length} operating precondition
-                {result.missingPreconditions.length === 1 ? '' : 's'} need attention.
+                {result.unresolvedPreconditions.length} operating precondition
+                {result.unresolvedPreconditions.length === 1 ? '' : 's'} unresolved
               </strong>
               <p>
-                Treat these as blockers or constraints before expanding agent
-                execution.
+                Placement remains unavailable until every precondition is
+                Established or Measured and improving.
               </p>
             </div>
           ) : null}
@@ -304,12 +351,20 @@ function App() {
           <div className="threshold-note">
             <strong>How placement works</strong>
             <p>
-              Governance and shared knowledge form the foundations axis.
-              Agent adoption forms the participation axis. Established
-              foundations begin at 67%, and broader adoption begins at 50%.
-              These transparent thresholds provide direction, not a universal
-              delegation boundary. Risk appetite and consequence of failure
-              still matter.
+              Governance and shared knowledge are both necessary, so the weaker
+              stock sets the foundations position. Established begins when all
+              three items in a stock average at least 2 of 3; reported scores
+              are rounded down to the nearest 5 so the number cannot cross its
+              evidence band. Participation is broad when agents
+              perform in at least two of define, deliver, and detect. It is a
+              position, not a maturity score. Customer value and system
+              learning use their own completed-item bands rather than the
+              three-item foundation rule. Risk appetite and consequence of
+              failure still determine the real delegation boundary.
+              {result.foundationStepsToEstablished !== null &&
+              result.foundationStepsToEstablished > 0
+                ? ` The weaker stock is ${result.foundationStepsToEstablished} answer step${result.foundationStepsToEstablished === 1 ? '' : 's'} from Established.`
+                : ''}
             </p>
           </div>
 
@@ -326,10 +381,10 @@ function App() {
               className={resetArmed ? 'danger-button' : 'text-button'}
               onClick={handleReset}
             >
-              {resetArmed ? 'Confirm reset' : 'Reset local answers'}
+              {resetArmed ? 'Confirm reset' : 'Reset local readiness check'}
             </button>
             {resetArmed ? (
-              <span>This removes the assessment saved in this browser.</span>
+              <span>This removes the scope and answers saved in this browser.</span>
             ) : null}
           </div>
         </section>
@@ -349,7 +404,7 @@ function App() {
               </p>
             </article>
             <article>
-              <strong>Green checks are not complete assessment.</strong>
+              <strong>Green checks are not complete evaluation.</strong>
               <p>
                 Automated checks provide evidence. They do not replace judgment
                 about intent, trade-offs, and residual risk.
@@ -380,7 +435,10 @@ function App() {
           <ShieldCheckIcon />
           <strong>Agentic Engineering readiness</strong>
         </div>
-        <p>Public sources only. Assessment answers remain local.</p>
+        <p>
+          Independent, unofficial resource. No analytics. Scope and answers
+          remain local.
+        </p>
         <nav aria-label="Footer links">
           <a
             href="https://github.com/guigui42/agentic-engineering-readiness"

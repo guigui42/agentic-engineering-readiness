@@ -1,24 +1,29 @@
 # Agentic Engineering readiness
 
-A public, interactive readiness assessment for GitHub's Agentic Engineering
-System (AES).
+An independent, unofficial readiness check based on GitHub's public Agentic
+Engineering System (AES) framework. This project is not published or endorsed
+by GitHub, Inc.
 
 [Open the live site](https://guigui42.github.io/agentic-engineering-readiness/)
 
 ## What it does
 
-- Assesses operating preconditions, governance, shared knowledge, agent
-  adoption, and customer value signals.
-- Places the current operating model in the AES Stock-Adoption matrix.
-- Shows separate, transparent dimension scores instead of one opaque maturity
-  grade.
+- Checks one named team, repository class, or workflow at a time.
+- Treats missing operating preconditions as blockers to placement.
+- Uses the weaker of governance and shared knowledge for the foundations axis.
+- Positions agent participation across define, deliver, and detect without
+  treating more participation as a maturity goal.
 - Produces a prioritized GitHub implementation checklist with exact settings
   areas, repository files, workflow steps, and verification evidence.
-- Copies the result as Markdown for workshops, issues, and planning documents.
+- Includes explicit operating-model actions where no GitHub control can solve
+  the gap.
+- Copies the scoped result as Markdown for workshops and planning documents.
 - Stores answers only in the visitor's browser.
+- Collects no analytics.
 
-This is directional guidance. It is not a certification or a universal
-delegation threshold.
+The questions, scoring, and thresholds are project-authored directional
+guidance. They are not an official GitHub assessment, certification, or
+universal delegation threshold.
 
 ## Sources
 
@@ -28,8 +33,7 @@ The publication content is grounded in:
 - [Building an Agentic Engineering System on GitHub](https://learn.github.com/well-architected/governance/recommendations/agentic-engineering-system-on-github)
 - Current public GitHub Docs linked from each product-specific recommendation.
 
-Internal collateral, private roadmap information, customer data, and internal
-links are not publication sources.
+Only public sources are publication sources.
 
 ## Local development
 
@@ -61,23 +65,24 @@ bun run test:e2e
 ## Project structure
 
 ```text
-src/assessment/            Questions, sources, scoring, and recommendations
+src/assessment/            Scope, questions, scoring, actions, and sources
 src/components/            Assessment, matrix, result, and source UI
 src/App.tsx                Page composition and local persistence
-src/analytics.ts           Privacy-bounded interaction analytics
 public/                    Search, sharing, and crawl assets
-e2e/site.spec.ts           Browser, accessibility, metadata, and privacy checks
+e2e/site.spec.ts           Browser, accessibility, metadata, and local-data checks
 .github/workflows/         CI, GitHub Pages, and content validation
 ```
 
 ## Content methodology
 
 - Keep the AES quadrant model faithful to the current public framework.
-- Treat thresholds as directional and keep them visible in the UI and code.
+- Run placement per workflow and require all operating preconditions.
+- Treat governance and shared knowledge as jointly necessary.
+- Keep participation positional rather than presenting it as a maturity score.
+- Treat thresholds as project-authored, directional, and visible.
 - Verify every GitHub product recommendation against current public
   documentation.
-- Never collect assessment answers, scores, quadrant placement, or exported
-  plan text in analytics.
+- Do not add analytics or transmit the scope, answers, result, or export.
 - Update the visible verification date, structured metadata, and sitemap when
   factual content changes.
 

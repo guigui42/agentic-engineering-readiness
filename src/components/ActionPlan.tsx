@@ -3,7 +3,7 @@ import { sources } from '../assessment/questions'
 import { phaseContent } from '../assessment/recommendations'
 import type { ActionItem, ActionPhase } from '../assessment/types'
 
-const phases: ActionPhase[] = ['do-first', 'do-next', 'expand', 'measure']
+const phases: ActionPhase[] = ['do-first', 'do-next', 'measure', 'expand']
 
 function SourceLinks({
   action,
@@ -32,13 +32,18 @@ function SourceLinks({
   )
 }
 
-function GitHubImplementation({
+function ImplementationDetails({
   action,
   compact = false,
 }: {
   action: ActionItem
   compact?: boolean
 }) {
+  const surfaceLabel =
+    action.implementation.kind === 'github'
+      ? 'GitHub surface'
+      : 'Implementation surface'
+
   return (
     <div
       className={
@@ -48,21 +53,21 @@ function GitHubImplementation({
       }
     >
       <div className="github-surface">
-        <b>GitHub surface</b>
-        <span>{action.github.surface}</span>
+        <b>{surfaceLabel}</b>
+        <span>{action.implementation.surface}</span>
       </div>
       <div className="github-steps">
-        <b>Implement in GitHub</b>
+        <b>Implement</b>
         <ol>
-          {action.github.steps.map((step) => (
+          {action.implementation.steps.map((step) => (
             <li key={step}>{step}</li>
           ))}
         </ol>
       </div>
       <div className="github-verification">
-        <b>Verify in GitHub</b>
+        <b>Verify</b>
         <ul>
-          {action.github.verification.map((evidence) => (
+          {action.implementation.verification.map((evidence) => (
             <li key={evidence}>{evidence}</li>
           ))}
         </ul>
@@ -90,23 +95,24 @@ export function ActionPlan({
     <section className="action-plan" aria-labelledby="action-plan-title">
       <div className="action-plan__header">
         <div>
-          <h3 id="action-plan-title">GitHub implementation plan</h3>
+          <h3 id="action-plan-title">Implementation plan</h3>
           <p>
-            Each priority names the GitHub settings, files, or workflow to
-            change and the evidence that confirms it works.
+            The plan assumes GitHub Enterprise Cloud. Feature availability
+            depends on your Copilot plan, repository visibility, and enterprise
+            policy. Operating preconditions that GitHub cannot solve are marked
+            explicitly.
           </p>
         </div>
         <button type="button" className="secondary-button" onClick={onCopy}>
           {copied ? <CheckIcon /> : <CopyIcon />}
-          {copied ? 'Copied' : 'Copy GitHub checklist'}
+          {copied ? 'Copied' : 'Copy implementation checklist'}
         </button>
       </div>
       {copyError ? <p className="error-message" role="alert">{copyError}</p> : null}
 
       {actions.length === 0 ? (
         <div className="empty-plan">
-          Answer assessment questions to generate a GitHub implementation
-          checklist.
+          Complete the readiness check to generate an implementation checklist.
         </div>
       ) : (
         <>
@@ -118,7 +124,7 @@ export function ActionPlan({
                   <small>{phaseContent[action.phase].label}</small>
                   <strong>{action.title}</strong>
                   <p>{action.detail}</p>
-                  <GitHubImplementation action={action} />
+                  <ImplementationDetails action={action} />
                   <SourceLinks action={action} sourceMap={sourceMap} />
                 </div>
               </article>
@@ -127,7 +133,7 @@ export function ActionPlan({
           {additionalActions.length > 0 ? (
             <details className="additional-actions">
               <summary>
-                {additionalActions.length} additional GitHub action
+                {additionalActions.length} additional action
                 {additionalActions.length === 1 ? '' : 's'}
               </summary>
               <div className="action-groups">
@@ -154,12 +160,16 @@ export function ActionPlan({
                             <strong>{action.title}</strong>
                             <p>{action.detail}</p>
                             <div className="compact-surface">
-                              <b>GitHub surface</b>
-                              <span>{action.github.surface}</span>
+                              <b>
+                                {action.implementation.kind === 'github'
+                                  ? 'GitHub surface'
+                                  : 'Implementation surface'}
+                              </b>
+                              <span>{action.implementation.surface}</span>
                             </div>
                             <details className="compact-implementation">
-                              <summary>Show GitHub implementation</summary>
-                              <GitHubImplementation action={action} compact />
+                              <summary>Show implementation and verification</summary>
+                              <ImplementationDetails action={action} compact />
                             </details>
                             <SourceLinks
                               action={action}

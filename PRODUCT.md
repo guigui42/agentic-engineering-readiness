@@ -30,27 +30,29 @@ publicly documented GitHub practices.
 ## Operating Context
 
 - Used as a self-guided assessment or facilitated workshop.
+- Run once per team, repository class, or workflow rather than once per
+  organization.
 - Answers and generated results stay in the visitor's browser.
 - Results can be copied as Markdown into an issue, planning document, or
   workshop record.
 - Each recommendation identifies the GitHub settings area, repository file, or
   workflow to change and the evidence that verifies completion.
 - The canonical public deployment is GitHub Pages.
-- Public GitHub AES, Well-Architected, and Docs pages are the publication
-  sources. Internal Seismic material is research input only.
+- Public GitHub AES, Well-Architected, Docs, and Changelog pages are the only
+  publication sources.
 
 ## Capabilities and Constraints
 
-- Four-state evidence scale: not in place, partially in place, established,
-  measured and improving.
-- Separate scores for governance, shared knowledge, agent adoption, and
-  customer value signals.
+- Four-state readiness evidence scale for preconditions, governance, shared
+  knowledge, customer value, and system learning.
+- A separate participation scale for define, deliver, and detect.
+- Separate scores for governance, shared knowledge, customer value, and system
+  learning. Agent participation is a position, not a maturity score.
 - Primary classification uses the four AES Stock-Adoption quadrants.
 - Missing operating preconditions become blockers or constraints, not score
   boosters.
-- No backend and no collection of assessment answers.
-- Anonymous analytics, when configured, never include answers, scores,
-  quadrant placement, or exported plan text.
+- No backend and no collection of readiness-check scope or answers.
+- No analytics or other transmission of the scope, answers, result, or export.
 - The assessment is directional guidance, not a certification or universal
   delegation threshold.
 

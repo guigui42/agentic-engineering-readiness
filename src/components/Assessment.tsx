@@ -4,7 +4,10 @@ import {
   dimensionContent,
   sources,
 } from '../assessment/questions'
-import { responseOptions } from '../assessment/scoring'
+import {
+  participationOptions,
+  readinessOptions,
+} from '../assessment/scoring'
 import type {
   Answers,
   AssessmentDimension,
@@ -17,13 +20,18 @@ const dimensionOrder: AssessmentDimension[] = [
   'knowledge',
   'adoption',
   'value',
+  'learning',
 ]
 
 export function Assessment({
+  scope,
   answers,
+  onScopeChange,
   onAnswer,
 }: {
+  scope: string
   answers: Answers
+  onScopeChange: (scope: string) => void
   onAnswer: (questionId: string, value: ResponseValue) => void
 }) {
   const sourceMap = new Map(sources.map((source) => [source.id, source]))
@@ -32,21 +40,28 @@ export function Assessment({
     <section className="assessment" id="assessment" aria-labelledby="assessment-title">
       <div className="section-heading">
         <div>
-          <h2 id="assessment-title">Assess the system around agent work</h2>
+          <h2 id="assessment-title">Check one workflow, not the whole organization</h2>
         </div>
         <p>
-          Choose the answer supported by evidence today. Answers stay in this
-          browser and are never included in analytics.
+          Use one team, repository class, or delivery workflow. AES places each
+          process separately because the surrounding conditions differ.
         </p>
       </div>
 
-      <div className="assessment-scale" aria-label="Assessment response scale">
-        {responseOptions.map((option) => (
-          <span key={option.value}>
-            <b>{option.value}</b>
-            {option.label}
-          </span>
-        ))}
+      <div className="scope-panel">
+        <label htmlFor="assessment-scope">What are you checking?</label>
+        <input
+          id="assessment-scope"
+          type="text"
+          value={scope}
+          maxLength={120}
+          placeholder="For example: payments service bug fixes"
+          onChange={(event) => onScopeChange(event.target.value)}
+        />
+        <p>
+          This scope appears in the result and copied checklist. It stays in
+          this browser.
+        </p>
       </div>
 
       <div className="assessment-sections">
@@ -65,6 +80,8 @@ export function Assessment({
           const nextLabel = nextDimension
             ? dimensionContent[nextDimension].label
             : 'results'
+          const options =
+            dimension === 'adoption' ? participationOptions : readinessOptions
 
           return (
             <details
@@ -82,6 +99,14 @@ export function Assessment({
                 <b>{answered}/{questions.length}</b>
               </summary>
               <div className="question-list">
+                <div className="section-scale" aria-label={`${content.label} response scale`}>
+                  {options.map((option) => (
+                    <span key={option.value}>
+                      <b>{option.value}</b>
+                      {option.label}
+                    </span>
+                  ))}
+                </div>
                 {questions.map((question, questionIndex) => (
                   <fieldset className="question-card" key={question.id}>
                     <legend>
@@ -90,7 +115,7 @@ export function Assessment({
                     </legend>
                     <p>{question.prompt}</p>
                     <div className="response-grid">
-                      {responseOptions.map((option) => (
+                      {options.map((option) => (
                         <label key={option.value}>
                           <input
                             type="radio"

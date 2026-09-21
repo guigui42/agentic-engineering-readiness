@@ -51,14 +51,26 @@ export const sources: Source[] = [
   },
   {
     id: 'copilot-policies',
-    title: 'Managing policies and features for GitHub Copilot in your enterprise',
+    title: 'Managing Copilot policies and features for your enterprise',
     url: 'https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-enterprise-policies',
+    category: 'GitHub Docs',
+  },
+  {
+    id: 'cloud-agent-access',
+    title: 'Managing access to GitHub Copilot cloud agent',
+    url: 'https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/enterprise/cloud-agent-access',
     category: 'GitHub Docs',
   },
   {
     id: 'custom-instructions',
     title: 'Adding repository custom instructions for GitHub Copilot',
-    url: 'https://docs.github.com/en/enterprise-cloud@latest/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot',
+    url: 'https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/copilot-on-github/customize-copilot/add-custom-instructions/add-repository-instructions',
+    category: 'GitHub Docs',
+  },
+  {
+    id: 'custom-instructions-support',
+    title: 'Support for different types of custom instructions',
+    url: 'https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/custom-instructions-support',
     category: 'GitHub Docs',
   },
   {
@@ -74,6 +86,12 @@ export const sources: Source[] = [
     category: 'GitHub Docs',
   },
   {
+    id: 'cloud-agent-guardrails',
+    title: 'Building guardrails for GitHub Copilot cloud agent',
+    url: 'https://docs.github.com/en/enterprise-cloud@latest/copilot/tutorials/cloud-agent/build-guardrails',
+    category: 'GitHub Docs',
+  },
+  {
     id: 'copilot-code-review',
     title: 'Using GitHub Copilot code review',
     url: 'https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/use-copilot-agents/request-a-code-review/use-code-review',
@@ -86,16 +104,58 @@ export const sources: Source[] = [
     category: 'GitHub Docs',
   },
   {
-    id: 'required-reviews',
-    title: 'About protected branches',
-    url: 'https://docs.github.com/en/enterprise-cloud@latest/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches',
-    category: 'GitHub Docs',
-  },
-  {
     id: 'dependency-graph',
     title: 'About the dependency graph',
     url: 'https://docs.github.com/en/enterprise-cloud@latest/code-security/supply-chain-security/understanding-your-software-supply-chain/about-the-dependency-graph',
     category: 'GitHub Docs',
+  },
+  {
+    id: 'mcp-servers',
+    title: 'Configure MCP servers for your repository',
+    url: 'https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/copilot-on-github/customize-copilot/configure-mcp-servers',
+    category: 'GitHub Docs',
+  },
+  {
+    id: 'copilot-hooks',
+    title: 'Customize agent workflows with hooks',
+    url: 'https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/use-hooks',
+    category: 'GitHub Docs',
+  },
+  {
+    id: 'copilot-firewall',
+    title: 'Customizing or disabling the firewall for GitHub Copilot',
+    url: 'https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/copilot-on-github/customize-copilot/customize-the-firewall',
+    category: 'GitHub Docs',
+  },
+  {
+    id: 'agent-environment',
+    title: 'Configure the development environment for Copilot cloud agent',
+    url: 'https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/customize-the-agent-environment',
+    category: 'GitHub Docs',
+  },
+  {
+    id: 'copilot-metrics',
+    title: 'Data available in Copilot usage metrics',
+    url: 'https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/copilot-usage-metrics/copilot-usage-metrics',
+    category: 'GitHub Docs',
+  },
+  {
+    id: 'copilot-metrics-api',
+    title: 'REST API endpoints for Copilot usage metrics',
+    url: 'https://docs.github.com/en/enterprise-cloud@latest/rest/copilot/copilot-usage-metrics',
+    category: 'GitHub Docs',
+  },
+  {
+    id: 'copilot-billing-update',
+    title: 'Updates to GitHub Copilot billing and plans',
+    url: 'https://github.blog/changelog/2026-06-01-updates-to-github-copilot-billing-and-plans/',
+    category: 'GitHub Changelog',
+  },
+  {
+    id: 'copilot-ruleset-bypass',
+    title: 'Configure Copilot coding agent as a bypass actor for rulesets',
+    url: 'https://github.blog/changelog/2025-11-13-configure-copilot-coding-agent-as-a-bypass-actor-for-rulesets/',
+    category: 'GitHub Changelog',
   },
 ]
 
@@ -111,31 +171,37 @@ export const dimensionContent: Record<
     label: 'Operating preconditions',
     eyebrow: 'Readiness gate',
     description:
-      'Check the environment AES assumes before deciding how much work to delegate.',
+      'Confirm the conditions AES assumes before interpreting a Stock-Adoption placement.',
   },
   governance: {
     label: 'Governance',
     eyebrow: 'Leading stock',
     description:
-      'Define what people and agents may do, under which conditions, and with which oversight.',
+      'Check whether agent boundaries are explicit, proportional to risk, and independently enforced.',
   },
   knowledge: {
     label: 'Shared knowledge',
     eyebrow: 'Leading stock',
     description:
-      'Make the right code, decisions, constraints, telemetry, and customer context usable by people and agents.',
+      'Check whether the scoped workflow has current guidance, clear work definition, and discoverable context.',
   },
   adoption: {
-    label: 'Agent adoption',
-    eyebrow: 'Participation range',
+    label: 'Agent participation',
+    eyebrow: 'Position, not maturity',
     description:
-      'Assess how deeply agents participate across define, deliver, and detect, and whether that scope matches the foundations.',
+      'Record how agents participate in define, deliver, and detect. More participation is not automatically better.',
   },
   value: {
-    label: 'Customer value signals',
-    eyebrow: 'Lagging stock',
+    label: 'Customer value',
+    eyebrow: 'Outcome stock',
     description:
-      'Verify that faster delivery improves outcomes instead of increasing defects, rework, or review burden.',
+      'Check whether delivery is connected to a named outcome and whether quality and correction cost are visible.',
+  },
+  learning: {
+    label: 'System learning',
+    eyebrow: 'Feedback loop',
+    description:
+      'Check whether evidence changes governance, shared knowledge, and the next cycle of work.',
   },
 }
 
@@ -143,482 +209,342 @@ export const assessmentQuestions: AssessmentQuestion[] = [
   {
     id: 'precondition-infrastructure',
     dimension: 'preconditions',
-    title: 'Reliable and secure infrastructure',
+    scale: 'readiness',
+    title: 'Reliable delivery path',
     prompt:
-      'Can teams and agents rely on stable build, test, deployment, identity, and security foundations?',
+      'Can the scoped workflow complete its standard build, test, and deployment path reliably?',
     evidence: [
-      'Build and deployment paths have clear owners and service expectations.',
-      'Identity, secrets, dependencies, and environments have defined controls.',
+      'A representative change follows a documented path from pull request to the intended environment.',
+      'Required checks and deployment approvals fail closed when deliberately tested.',
+      'Runner, AI Credit, and Actions-minute budgets are reviewed for the planned volume.',
     ],
     action: {
-      title: 'Stabilize the delivery foundation',
+      title: 'Prove the delivery path before expanding agent work',
       detail:
-        'Resolve unreliable build, test, identity, dependency, and deployment paths before expanding autonomous execution.',
+        'Run one representative change through the same build, test, review, and deployment controls the agent will use.',
     },
-    sourceIds: ['aes-framework', 'aes-well-architected'],
-    weight: 2,
+    sourceIds: [
+      'cloud-agent-guardrails',
+      'environments',
+      'agent-environment',
+      'copilot-billing-update',
+    ],
   },
   {
     id: 'precondition-skills',
     dimension: 'preconditions',
-    title: 'Skilled human direction and assessment',
+    scale: 'readiness',
+    title: 'Accountable human capability',
     prompt:
-      'Do teams have enough product, engineering, security, and operational skill to direct and assess agent work?',
+      'Is a named human able to direct and assess this workflow?',
     evidence: [
-      'People can identify unsafe, incomplete, or poorly grounded output.',
-      'Escalation paths exist when work exceeds a team or agent boundary.',
+      'A named owner can define intent, identify unacceptable trade-offs, and stop the workflow.',
+      'Reviewers can distinguish task completion from correct, useful, and safe outcomes.',
     ],
     action: {
-      title: 'Build director and assessor capability',
+      title: 'Assign and calibrate human directors and assessors',
       detail:
-        'Train teams to define intent, evaluate evidence, recognize residual risk, and escalate work that needs deeper judgment.',
+        'This capability gap cannot be fixed by a GitHub setting. Name accountable people and run a review-calibration exercise before delegation.',
     },
     sourceIds: ['aes-framework'],
-    weight: 2,
   },
   {
     id: 'precondition-culture',
     dimension: 'preconditions',
-    title: 'Responsible participation culture',
+    scale: 'readiness',
+    title: 'Permission to challenge agent work',
     prompt:
-      'Can people question agent output, report failures, and improve the system without pressure to maximize automation?',
+      'Can participants challenge or stop agent work without pressure to maximize automation?',
     evidence: [
-      'Teams are rewarded for reliable outcomes, not agent usage alone.',
-      'Near misses and failed tasks produce learning rather than concealment.',
+      'The pilot charter prioritizes reliability and customer value over agent-usage targets.',
+      'A named escalation contact accepts concerns, failures, and near misses.',
     ],
     action: {
-      title: 'Set responsible adoption expectations',
+      title: 'Set the operating expectations outside GitHub',
       detail:
-        'Make reliability, customer value, and transparent escalation more important than maximizing agent participation.',
+        'No repository control creates psychological safety. Publish the pilot charter, escalation route, and decision owner before the readiness check continues.',
     },
     sourceIds: ['aes-framework'],
-    weight: 1,
   },
   {
     id: 'precondition-access',
     dimension: 'preconditions',
-    title: 'Sufficient, governed data access',
+    scale: 'readiness',
+    title: 'Approved context access',
     prompt:
-      'Can people and agents retrieve the relevant code, documentation, decisions, and signals without bypassing access controls?',
+      'Can the agent retrieve only the approved context required for this workflow?',
     evidence: [
-      'Approved tools expose the context needed for the task.',
-      'Sensitive or irrelevant information is not broadly exposed by default.',
+      'The repository, tool, MCP, secret, and network scope is explicitly listed.',
+      'An out-of-scope repository or tool is denied in a test session.',
     ],
     action: {
-      title: 'Create governed context paths',
+      title: 'Define and test the approved context boundary',
       detail:
-        'Provide approved access to task-relevant code, documentation, decisions, and telemetry while preserving least privilege.',
+        'Restrict the pilot to selected repositories and tools, then test both an allowed request and a denied out-of-scope request.',
     },
-    sourceIds: ['aes-framework', 'aes-well-architected', 'custom-properties'],
-    weight: 2,
+    sourceIds: [
+      'cloud-agent-access',
+      'mcp-servers',
+      'copilot-firewall',
+      'copilot-policies',
+    ],
   },
   {
     id: 'governance-scope',
     dimension: 'governance',
-    title: 'Scope and policy are explicit',
+    scale: 'readiness',
+    title: 'Enforced operating scope',
     prompt:
-      'Are approved agent capabilities, repositories, tools, identities, and prohibited actions defined centrally?',
+      'Is the permitted agent scope explicit and enforced?',
     evidence: [
-      'Copilot and agent policies target the intended enterprise, organization, and repository scope.',
-      'Teams know which source of policy applies to each workflow.',
+      'Enterprise or organization policy identifies the enabled organizations and repositories.',
+      'Repository MCP, firewall, hook, setup-step, and instruction files have named owners.',
+      'Repositories outside the approved class are excluded from cloud-agent access.',
     ],
     action: {
-      title: 'Define the approved agent operating scope',
+      title: 'Enforce the pilot boundary in GitHub',
       detail:
-        'Document approved identities, repositories, tools, data paths, and actions, then enforce the available controls centrally.',
+        'Align enterprise and organization access, repository MCP tools, network access, hooks, and protected configuration files with the declared scope.',
     },
-    sourceIds: ['aes-framework', 'copilot-policies'],
-    weight: 2,
+    sourceIds: [
+      'copilot-policies',
+      'cloud-agent-access',
+      'mcp-servers',
+      'copilot-hooks',
+      'copilot-firewall',
+      'cloud-agent-guardrails',
+    ],
   },
   {
-    id: 'governance-risk',
+    id: 'governance-proportionality',
     dimension: 'governance',
-    title: 'Delegation matches risk',
+    scale: 'readiness',
+    title: 'Risk-proportional flow',
     prompt:
-      'Is work classified by ambiguity, reversibility, customer impact, and consequence of failure before agent participation expands?',
+      'Do review gates match task risk without needlessly queueing low-risk work?',
     evidence: [
-      'Low-risk, bounded work has a lighter path than high-impact changes.',
-      'Escalation is required when assumptions, scope, or consequences change.',
+      'Repository custom properties classify the workflow by impact and reversibility.',
+      'Organization rulesets target repository classes, while repository rules handle local branch requirements.',
+      'Any cloud-agent bypass is limited to the minimum incompatible rule and reviewed explicitly.',
+      'Low-risk work can proceed without manual gates that add no assessment value.',
     ],
     action: {
-      title: 'Create a risk-based delegation model',
+      title: 'Make GitHub controls proportional to task risk',
       detail:
-        'Classify work by ambiguity, impact, reversibility, and evidence needs so agent participation expands only where the system supports it.',
-    },
-    sourceIds: ['aes-framework', 'aes-well-architected', 'custom-properties'],
-    weight: 2,
-  },
-  {
-    id: 'governance-review',
-    dimension: 'governance',
-    title: 'Review boundaries are enforced',
-    prompt:
-      'Do repository rules, ownership, required checks, and review requirements match the risk of the change?',
-    evidence: [
-      'Rulesets and branch protections cannot be bypassed by ordinary delivery paths.',
-      'CODEOWNERS and required reviewers cover sensitive code and configuration.',
-    ],
-    action: {
-      title: 'Enforce repository review boundaries',
-      detail:
-        'Use rulesets, required checks, CODEOWNERS, and protected branches to keep assessment proportional to change risk.',
-    },
-    sourceIds: ['rulesets', 'codeowners', 'required-reviews'],
-    weight: 2,
-  },
-  {
-    id: 'governance-deployment',
-    dimension: 'governance',
-    title: 'Deployment and security controls are layered',
-    prompt:
-      'Are production environments, secrets, dependencies, and code security protected independently of the agent?',
-    evidence: [
-      'Environment protection rules gate sensitive deployments.',
-      'Security configurations and dependency visibility apply consistently.',
-    ],
-    action: {
-      title: 'Layer deployment and security controls',
-      detail:
-        'Protect environments, secrets, dependencies, and code scanning independently so task completion is not equivalent to production authorization.',
-    },
-    sourceIds: ['environments', 'security-configurations', 'dependency-graph'],
-    weight: 2,
-  },
-  {
-    id: 'governance-audit',
-    dimension: 'governance',
-    title: 'Activity is attributable and reviewable',
-    prompt:
-      'Can the organization reconstruct what an agent changed, which identity acted, which checks ran, and who approved the outcome?',
-    evidence: [
-      'Audit events and repository history identify meaningful actions.',
-      'Incident responders can connect policy, identity, change, and approval evidence.',
-    ],
-    action: {
-      title: 'Make agent activity attributable',
-      detail:
-        'Align identity, audit logs, pull requests, checks, and approvals so important actions can be reconstructed and investigated.',
-    },
-    sourceIds: ['audit-log', 'aes-well-architected'],
-    weight: 1,
-  },
-  {
-    id: 'governance-learning',
-    dimension: 'governance',
-    title: 'Governance improves after evidence',
-    prompt:
-      'Do incidents, exceptions, review friction, and near misses lead to policy or workflow changes?',
-    evidence: [
-      'Exceptions have owners and expiry or review dates.',
-      'Repeated failures change controls rather than remaining tribal knowledge.',
-    ],
-    action: {
-      title: 'Close the governance feedback loop',
-      detail:
-        'Review exceptions, incidents, and near misses regularly, then update policies, checks, and escalation paths.',
-    },
-    sourceIds: ['aes-framework', 'audit-log'],
-    weight: 1,
-  },
-  {
-    id: 'knowledge-repository',
-    dimension: 'knowledge',
-    title: 'Repository guidance is usable',
-    prompt:
-      'Do repositories contain concise, current instructions about architecture, commands, conventions, validation, and boundaries?',
-    evidence: [
-      'Instructions identify the correct build, test, and review paths.',
-      'Guidance is scoped and avoids stale or contradictory detail.',
-    ],
-    action: {
-      title: 'Curate repository instructions',
-      detail:
-        'Add concise repository guidance for architecture, commands, conventions, validation, and safety boundaries, with a clear owner.',
-    },
-    sourceIds: ['custom-instructions', 'aes-framework'],
-    weight: 2,
-  },
-  {
-    id: 'knowledge-decisions',
-    dimension: 'knowledge',
-    title: 'Decisions and ownership are discoverable',
-    prompt:
-      'Can people and agents find current architecture decisions, service ownership, dependencies, and escalation contacts?',
-    evidence: [
-      'Important trade-offs and constraints are recorded near the work.',
-      'Ownership does not depend on an informal network or one experienced person.',
-    ],
-    action: {
-      title: 'Document decisions and ownership',
-      detail:
-        'Record current architecture decisions, constraints, owners, dependencies, and escalation paths in durable repository-linked locations.',
+        'Use organization custom properties and rulesets to separate low-risk flow from high-impact review, then test both paths.',
     },
     sourceIds: [
       'aes-framework',
-      'codeowners',
-      'dependency-graph',
       'custom-properties',
+      'rulesets',
+      'cloud-agent-guardrails',
+      'copilot-ruleset-bypass',
     ],
-    weight: 2,
+  },
+  {
+    id: 'governance-layered',
+    dimension: 'governance',
+    scale: 'readiness',
+    title: 'Independent production controls',
+    prompt:
+      'Can a change reach production only through controls independent of the agent?',
+    evidence: [
+      'Required checks, environment approvals, and security configuration apply to agent and human pull requests.',
+      'A test change can be traced from identity to pull request, checks, approval, merge, and deployment.',
+    ],
+    action: {
+      title: 'Layer merge, deployment, security, and audit controls',
+      detail:
+        'Keep required checks, environment approvals, security configurations, and attribution independent of how the change was authored.',
+    },
+    sourceIds: [
+      'rulesets',
+      'codeowners',
+      'environments',
+      'security-configurations',
+      'audit-log',
+      'cloud-agent-guardrails',
+    ],
+  },
+  {
+    id: 'knowledge-guidance',
+    dimension: 'knowledge',
+    scale: 'readiness',
+    title: 'Usable repository guidance',
+    prompt:
+      'Can a new contributor follow current repository guidance to validate work?',
+    evidence: [
+      'A clean clone can run every documented build, test, and lint command successfully.',
+      'Repository-wide, path-specific, agent, and organization instructions are used only where supported.',
+      'Instruction files name an owner and review date.',
+    ],
+    action: {
+      title: 'Build a tested instruction hierarchy',
+      detail:
+        'Use the supported instruction scopes for the workflow and validate the documented commands from a clean environment.',
+    },
+    sourceIds: [
+      'custom-instructions',
+      'custom-instructions-support',
+      'agent-environment',
+    ],
   },
   {
     id: 'knowledge-definition',
     dimension: 'knowledge',
-    title: 'Work is defined with evidence',
+    scale: 'readiness',
+    title: 'Evidence-based work definition',
     prompt:
-      'Do issues include customer context, constraints, acceptance criteria, affected systems, and the evidence needed to assess completion?',
+      'Does each task define the intended outcome before delivery starts?',
     evidence: [
-      'Issue templates prompt for the information the delivery path needs.',
-      'Ambiguity is resolved before inexpensive execution creates rework.',
+      'The issue records acceptance criteria, constraints, affected systems, and validation evidence.',
+      'The task is small enough for one repository and one reviewable pull request.',
     ],
     action: {
-      title: 'Strengthen work definition',
+      title: 'Create a bounded agent-task issue form',
       detail:
-        'Use issue forms or templates to capture customer context, constraints, acceptance criteria, affected systems, and assessment evidence.',
+        'Require the outcome, constraints, affected systems, acceptance criteria, and evidence before starting a Copilot cloud-agent session.',
     },
-    sourceIds: ['aes-framework', 'issue-templates'],
-    weight: 2,
+    sourceIds: ['aes-framework', 'issue-templates', 'cloud-agent'],
   },
   {
-    id: 'knowledge-signals',
+    id: 'knowledge-context',
     dimension: 'knowledge',
-    title: 'Operational and customer signals are connected',
+    scale: 'readiness',
+    title: 'Discoverable ownership and context',
     prompt:
-      'Can delivery work use relevant telemetry, incidents, support patterns, usage, and customer feedback?',
+      'Can participants find the current owner and decision context for the task?',
     evidence: [
-      'Signals can be connected to the change or product decision they inform.',
-      'Teams can distinguish high-value evidence from high-volume noise.',
+      'CODEOWNERS and repository properties identify accountable teams.',
+      'The task links relevant architecture decisions, dependencies, and operational signals.',
     ],
     action: {
-      title: 'Connect delivery to real-world signals',
+      title: 'Connect ownership, decisions, dependencies, and signals',
       detail:
-        'Make telemetry, incidents, support patterns, usage, and customer feedback discoverable from the work they should influence.',
+        'Make the accountable owner and the context needed for this workflow discoverable from the issue and repository.',
     },
-    sourceIds: ['aes-framework', 'aes-well-architected'],
-    weight: 2,
-  },
-  {
-    id: 'knowledge-freshness',
-    dimension: 'knowledge',
-    title: 'Knowledge has freshness signals',
-    prompt:
-      'Are critical instructions, runbooks, schemas, and architecture records reviewed, tested, or retired when they become stale?',
-    evidence: [
-      'Important content has an owner or automated validation path.',
-      'Outdated instructions are corrected after task failures or system changes.',
+    sourceIds: [
+      'codeowners',
+      'custom-properties',
+      'dependency-graph',
+      'aes-framework',
     ],
-    action: {
-      title: 'Add knowledge freshness controls',
-      detail:
-        'Assign owners, review dates, tests, or validation workflows to critical instructions, runbooks, schemas, and architecture records.',
-    },
-    sourceIds: ['aes-framework', 'custom-instructions'],
-    weight: 1,
-  },
-  {
-    id: 'knowledge-learning',
-    dimension: 'knowledge',
-    title: 'Each cycle leaves reusable learning',
-    prompt:
-      'Are decisions, failures, review findings, and operational outcomes captured where the next define-deliver-detect cycle can use them?',
-    evidence: [
-      'Post-incident and review findings update durable context.',
-      'Repeated work becomes easier because the system retains useful learning.',
-    ],
-    action: {
-      title: 'Capture reusable learning',
-      detail:
-        'Feed decisions, review findings, incidents, and outcome evidence back into repository guidance and future work definition.',
-    },
-    sourceIds: ['aes-framework'],
-    weight: 1,
   },
   {
     id: 'adoption-define',
     dimension: 'adoption',
-    title: 'Agents support define work',
+    scale: 'participation',
+    title: 'Define participation',
     prompt:
-      'Do agents help synthesize evidence, clarify requirements, identify constraints, or draft acceptance criteria under human direction?',
+      'What is the highest agent participation used in Define for this workflow?',
     evidence: [
-      'The human director remains accountable for intent and trade-offs.',
-      'Agent proposals cite the context they used and expose uncertainty.',
+      'Assists: synthesizes evidence or drafts acceptance criteria under human direction.',
+      'Performs: proposes scope and a plan from approved context.',
+      'Performs and assesses: challenges its proposed plan against constraints before a human decision.',
     ],
     action: {
-      title: 'Pilot bounded agent support in define',
+      title: 'Pilot agent support in Define',
       detail:
-        'Use agents to synthesize evidence and draft requirements while a human owns intent, trade-offs, and acceptance criteria.',
+        'Use a Copilot cloud-agent planning session only after the task context and accountable human director are established.',
     },
     sourceIds: ['aes-framework', 'cloud-agent'],
-    weight: 1,
   },
   {
     id: 'adoption-deliver',
     dimension: 'adoption',
-    title: 'Agents perform bounded delivery',
+    scale: 'participation',
+    title: 'Deliver participation',
     prompt:
-      'Do agents complete low-risk, well-scoped changes with appropriate identity, tests, review, and deployment boundaries?',
+      'What is the highest agent participation used in Deliver for this workflow?',
     evidence: [
-      'The task is small enough to assess and reverse.',
-      'The delivery path produces a reviewable pull request and evidence.',
+      'Assists: drafts code or tests while a human performs the change.',
+      'Performs: creates a bounded change and reviewable pull request.',
+      'Performs and assesses: runs checks and compares the result with task evidence before review.',
     ],
     action: {
-      title: 'Delegate one bounded delivery class',
+      title: 'Pilot one bounded delivery class',
       detail:
-        'Select a low-risk, reversible class of work with strong context and checks, then let agents produce reviewable pull requests.',
+        'Choose a reversible issue class that fits one repository, one pull request, and the cloud-agent session limit.',
     },
-    sourceIds: ['aes-framework', 'rulesets', 'cloud-agent'],
-    weight: 2,
-  },
-  {
-    id: 'adoption-assess',
-    dimension: 'adoption',
-    title: 'Agents support assessment',
-    prompt:
-      'Do agents run tests, compare work with standards, summarize evidence, or flag anomalies without replacing accountable review?',
-    evidence: [
-      'Automated assessment is tied to intent and known risk.',
-      'Human judgment remains where customer impact or accountability requires it.',
-    ],
-    action: {
-      title: 'Add evidence-focused agent assessment',
-      detail:
-        'Use agents to run checks, compare standards, summarize diffs, and flag anomalies while preserving accountable review.',
-    },
-    sourceIds: [
-      'aes-framework',
-      'required-reviews',
-      'copilot-code-review',
-    ],
-    weight: 1,
+    sourceIds: ['aes-framework', 'cloud-agent', 'cloud-agent-guardrails'],
   },
   {
     id: 'adoption-detect',
     dimension: 'adoption',
-    title: 'Agents support detect work',
+    scale: 'participation',
+    title: 'Detect participation',
     prompt:
-      'Do agents help correlate telemetry, incidents, support signals, and recent changes into actionable findings?',
+      'What is the highest agent participation used in Detect for this workflow?',
     evidence: [
-      'Detection outputs route to an owner and a defined next step.',
-      'Signal quality and false positives are measured.',
+      'Assists: summarizes a named run, alert, or customer signal.',
+      'Performs: correlates approved evidence and opens a human-owned finding.',
+      'Performs and assesses: checks signal quality and identifies missing evidence before escalation.',
     ],
     action: {
-      title: 'Pilot agent-supported detection',
+      title: 'Pilot evidence-linked detection',
       detail:
-        'Use agents to correlate operational and customer signals, then route evidence to a human-owned decision or issue.',
+        'Start from a specific GitHub Actions run, alert, deployment, or metric and route the result to a human-owned issue.',
     },
-    sourceIds: ['aes-framework', 'cloud-agent'],
-    weight: 1,
-  },
-  {
-    id: 'adoption-portfolio',
-    dimension: 'adoption',
-    title: 'Participation varies by task',
-    prompt:
-      'Can teams explain which tasks use agents as directors, performers, or assessors, and why that mix is safe?',
-    evidence: [
-      'Participation decisions are made per workflow, not as a blanket maturity claim.',
-      'High-consequence tasks retain stronger human direction and assessment.',
-    ],
-    action: {
-      title: 'Map participation by workflow',
-      detail:
-        'Record who directs, performs, and assesses each candidate workflow, then align the mix with risk and foundation health.',
-    },
-    sourceIds: [
-      'aes-framework',
-      'aes-well-architected',
-      'custom-properties',
-    ],
-    weight: 2,
-  },
-  {
-    id: 'adoption-evidence',
-    dimension: 'adoption',
-    title: 'Expansion follows evidence',
-    prompt:
-      'Does broader agent use depend on task success, quality, rework, review burden, and incident evidence?',
-    evidence: [
-      'Teams expand one safe class of work at a time.',
-      'Scope narrows when foundations or outcomes deteriorate.',
-    ],
-    action: {
-      title: 'Gate expansion on outcome evidence',
-      detail:
-        'Expand agent participation one workflow at a time only when quality, rework, review burden, and incident signals remain healthy.',
-    },
-    sourceIds: ['aes-framework'],
-    weight: 2,
+    sourceIds: ['aes-framework', 'cloud-agent', 'copilot-metrics'],
   },
   {
     id: 'value-outcomes',
     dimension: 'value',
-    title: 'Delivery connects to customer outcomes',
+    scale: 'readiness',
+    title: 'Named customer outcome',
     prompt:
-      'Can teams connect shipped work to adoption, usefulness, reliability, trust, or another customer outcome?',
+      'Is delivery connected to a named customer or operational outcome?',
     evidence: [
-      'Success criteria describe an outcome, not only a merged pull request.',
-      'Teams can identify who benefited and how they know.',
+      'The issue names the metric source, baseline window, expected change, and follow-up date.',
+      'The pull request and deployment link back to the outcome issue.',
     ],
     action: {
-      title: 'Define outcome measures before delivery',
+      title: 'Define the outcome before delivery',
       detail:
-        'Add adoption, usefulness, reliability, trust, or another customer outcome to the work definition and follow-up.',
+        'Record a measurable customer or operational outcome, its source, and the comparison window in the issue.',
     },
-    sourceIds: ['aes-framework'],
-    weight: 2,
+    sourceIds: ['aes-framework', 'copilot-metrics', 'copilot-metrics-api'],
   },
   {
     id: 'value-quality',
     dimension: 'value',
-    title: 'Quality keeps pace with speed',
+    scale: 'readiness',
+    title: 'Quality and correction cost',
     prompt:
-      'Are escaped defects, incidents, rollbacks, and support volume flat or improving as agent use expands?',
+      'Are quality and correction cost tracked alongside delivery speed?',
     evidence: [
-      'Quality trends are compared with delivery and agent adoption trends.',
-      'Teams investigate divergence instead of treating speed as success.',
+      'A baseline and comparison window record merged pull requests, time to merge, review effort, failed checks, rework, and defects.',
+      'Copilot usage metrics or a documented repository query provides the source data.',
+      'AI Credit and Actions-minute usage is reviewed with the delivery evidence.',
     ],
     action: {
-      title: 'Pair speed with quality measures',
+      title: 'Measure quality, correction cost, and usage together',
       detail:
-        'Track escaped defects, incidents, rollbacks, and support volume alongside delivery speed and agent participation.',
+        'Use Copilot usage metrics and linked workflow evidence to compare speed with rework, defects, review effort, AI Credits, and Actions minutes.',
     },
-    sourceIds: ['aes-framework'],
-    weight: 2,
+    sourceIds: [
+      'aes-framework',
+      'copilot-metrics',
+      'copilot-metrics-api',
+      'copilot-billing-update',
+    ],
   },
   {
-    id: 'value-rework',
-    dimension: 'value',
-    title: 'Rework and review burden are visible',
+    id: 'learning-loop',
+    dimension: 'learning',
+    scale: 'readiness',
+    title: 'Evidence changes the system',
     prompt:
-      'Do teams measure re-scoping, retries, tool-call churn, abandoned output, and human review effort?',
+      'Does outcome evidence change the next cycle of work?',
     evidence: [
-      'Fast generation is not counted as a gain when correction cost rises.',
-      'Repeated failures identify missing context or weak controls.',
+      'A finding links to a changed issue form, instruction, test, rule, policy, or product decision.',
+      'The change is verified before the finding is closed.',
     ],
     action: {
-      title: 'Measure the cost of correction',
+      title: 'Close the learning loop in GitHub',
       detail:
-        'Track re-scoping, retries, abandoned output, and human review effort so apparent speed gains include correction cost.',
+        'Route material findings to owned issues and link each one to the merged or configured change that improves the next cycle.',
     },
-    sourceIds: ['aes-framework'],
-    weight: 1,
-  },
-  {
-    id: 'value-feedback',
-    dimension: 'value',
-    title: 'Outcome evidence changes the next cycle',
-    prompt:
-      'Do usage, feedback, incidents, and quality findings update future work, shared knowledge, and governance?',
-    evidence: [
-      'Detect outputs become structured inputs to define.',
-      'The system changes when evidence shows a weak assumption or control.',
-    ],
-    action: {
-      title: 'Feed outcome evidence into the system',
-      detail:
-        'Route usage, feedback, incidents, and quality findings into future issues, repository knowledge, and governance reviews.',
-    },
-    sourceIds: ['aes-framework', 'aes-well-architected'],
-    weight: 2,
+    sourceIds: ['aes-framework', 'aes-well-architected', 'audit-log'],
   },
 ]

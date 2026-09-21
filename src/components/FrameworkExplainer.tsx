@@ -69,15 +69,26 @@ export function FrameworkExplainer() {
           <ul className="mode-list">
             <li>
               <CheckCircleFillIcon />
-              <span><strong>Director</strong> sets intent, scope, and constraints.</span>
+              <span>
+                <strong>Director</strong> sets intent, scope, and constraints.
+                People usually hold this mode when judgment or accountability
+                matters; agents can propose direction within approved bounds.
+              </span>
             </li>
             <li>
               <CheckCircleFillIcon />
-              <span><strong>Performer</strong> carries out the bounded work.</span>
+              <span>
+                <strong>Performer</strong> carries out bounded work. People or
+                agents can perform when the task, context, and controls support it.
+              </span>
             </li>
             <li>
               <CheckCircleFillIcon />
-              <span><strong>Assessor</strong> evaluates evidence, risk, and outcomes.</span>
+              <span>
+                <strong>Assessor</strong> evaluates evidence, risk, and
+                outcomes. Agents can support assessment, while accountable
+                human judgment remains where impact requires it.
+              </span>
             </li>
           </ul>
         </div>

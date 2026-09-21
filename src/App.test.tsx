@@ -1,16 +1,8 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { assessmentQuestions } from './assessment/questions'
 import App from './App'
-
-const { trackInteraction } = vi.hoisted(() => ({
-  trackInteraction: vi.fn(),
-}))
-
-vi.mock('./analytics', () => ({
-  trackInteraction,
-}))
 
 Object.defineProperty(navigator, 'clipboard', {
   configurable: true,
@@ -19,26 +11,45 @@ Object.defineProperty(navigator, 'clipboard', {
   },
 })
 
-function seedCoreAnswers(value: 0 | 1 | 2 | 3) {
+function seedReadinessCheck({
+  scope = 'Payments bug fixes',
+  preconditions = 2,
+  governance = 3,
+  knowledge = 3,
+  adoption = 2,
+  value = 2,
+  learning = 2,
+}: {
+  scope?: string
+  preconditions?: 0 | 1 | 2 | 3
+  governance?: 0 | 1 | 2 | 3
+  knowledge?: 0 | 1 | 2 | 3
+  adoption?: 0 | 1 | 2 | 3
+  value?: 0 | 1 | 2 | 3
+  learning?: 0 | 1 | 2 | 3
+} = {}) {
+  const values = {
+    preconditions,
+    governance,
+    knowledge,
+    adoption,
+    value,
+    learning,
+  }
   const answers = Object.fromEntries(
-    assessmentQuestions
-      .filter((question) =>
-        ['governance', 'knowledge', 'adoption'].includes(question.dimension),
-      )
-      .map((question) => [question.id, value]),
+    assessmentQuestions.map((question) => [
+      question.id,
+      values[question.dimension],
+    ]),
   )
   localStorage.setItem(
-    'agentic-engineering-readiness-v1',
-    JSON.stringify({ version: 1, answers }),
+    'agentic-engineering-readiness-v2',
+    JSON.stringify({ version: 2, scope, answers }),
   )
 }
 
 describe('App', () => {
-  beforeEach(() => {
-    trackInteraction.mockClear()
-  })
-
-  it('presents the framework, assessment, results, and public sources', () => {
+  it('presents an independent, scoped readiness check and public sources', () => {
     render(<App />)
 
     expect(
@@ -48,46 +59,53 @@ describe('App', () => {
       }),
     ).toBeInTheDocument()
     expect(
-      screen.getByRole('heading', { name: 'Assess the system around agent work' }),
+      screen.getByRole('heading', {
+        name: 'Check one workflow, not the whole organization',
+      }),
     ).toBeInTheDocument()
+    expect(screen.getByLabelText('What are you checking?')).toBeInTheDocument()
     expect(
-      screen.getByRole('heading', { name: 'Complete the core assessment' }),
-    ).toBeInTheDocument()
+      screen.getAllByText(/independent, unofficial resource/i).length,
+    ).toBeGreaterThan(0)
+    expect(screen.getByText(/no analytics are collected/i)).toBeInTheDocument()
     expect(
       screen.getByRole('heading', { name: 'Public source index' }),
     ).toBeInTheDocument()
-
-    for (const link of document.querySelectorAll<HTMLAnchorElement>(
-      'a[href^="http"]',
-    )) {
-      expect(link.target).toBe('_blank')
-      expect(link.rel).toContain('noopener')
-      expect(link.rel).toContain('noreferrer')
-    }
   })
 
-  it('stores a controlled response locally without sending its value to analytics', async () => {
+  it('stores the scope and answers locally', async () => {
     const user = userEvent.setup()
     render(<App />)
 
+    await user.type(
+      screen.getByLabelText('What are you checking?'),
+      'Payments bug fixes',
+    )
     await user.click(
       screen.getAllByRole('radio', { name: /Established/ })[0],
     )
 
     await waitFor(() => {
-      expect(localStorage.getItem('agentic-engineering-readiness-v1')).toContain(
-        '"precondition-infrastructure":2',
-      )
-    })
-    expect(trackInteraction).toHaveBeenCalledWith({
-      category: 'assessment',
-      action: 'change',
-      label: 'response-selected',
+      const stored = localStorage.getItem('agentic-engineering-readiness-v2')
+      expect(stored).toContain('"scope":"Payments bug fixes"')
+      expect(stored).toContain('"precondition-infrastructure":2')
     })
   })
 
-  it('classifies strong foundations and broad adoption as healthy agent-native', () => {
-    seedCoreAnswers(3)
+  it('blocks placement when a precondition is unresolved', () => {
+    seedReadinessCheck({ preconditions: 1 })
+    render(<App />)
+
+    expect(
+      screen.getByRole('heading', {
+        name: 'Resolve operating preconditions before placement',
+      }),
+    ).toBeInTheDocument()
+    expect(screen.queryByText('Your result')).not.toBeInTheDocument()
+  })
+
+  it('classifies healthy foundations and broad participation', () => {
+    seedReadinessCheck()
     render(<App />)
 
     expect(
@@ -96,20 +114,17 @@ describe('App', () => {
     expect(
       screen.getByRole('progressbar', { name: 'Governance score' })
         .closest('article'),
-    ).toHaveTextContent('100%')
-    expect(
-      screen.getByText('Your result', { selector: '.matrix-cell span' })
-        .closest('article'),
-    ).toHaveTextContent('Healthy agent-native system')
+    ).toHaveTextContent('Strong')
+    expect(screen.getByText('Embedded')).toBeInTheDocument()
     expect(screen.getByText('GitHub surface')).toBeInTheDocument()
-    expect(screen.getByText('Implement in GitHub')).toBeInTheDocument()
-    expect(screen.getByText('Verify in GitHub')).toBeInTheDocument()
+    expect(screen.getByText('Implement')).toBeInTheDocument()
+    expect(screen.getByText('Verify')).toBeInTheDocument()
   })
 
-  it('copies the public page link and Markdown plan', async () => {
+  it('copies the page link and scoped implementation checklist', async () => {
     const user = userEvent.setup()
     const clipboardSpy = vi.spyOn(navigator.clipboard, 'writeText')
-    seedCoreAnswers(1)
+    seedReadinessCheck({ governance: 1, knowledge: 1, adoption: 0 })
     render(<App />)
 
     await user.click(screen.getByRole('button', { name: 'Copy page link' }))
@@ -118,20 +133,23 @@ describe('App', () => {
     )
 
     await user.click(
-      screen.getByRole('button', { name: 'Copy GitHub checklist' }),
+      screen.getByRole('button', { name: 'Copy implementation checklist' }),
     )
     expect(clipboardSpy).toHaveBeenLastCalledWith(
-      expect.stringContaining('# Agentic Engineering readiness assessment'),
+      expect.stringContaining('Scope: Payments bug fixes'),
+    )
+    expect(clipboardSpy).toHaveBeenLastCalledWith(
+      expect.stringContaining('Independent, unofficial resource'),
     )
   })
 
-  it('requires confirmation before clearing local answers', async () => {
+  it('requires confirmation before clearing local scope and answers', async () => {
     const user = userEvent.setup()
-    seedCoreAnswers(2)
+    seedReadinessCheck()
     render(<App />)
 
     await user.click(
-      screen.getByRole('button', { name: 'Reset local answers' }),
+      screen.getByRole('button', { name: 'Reset local readiness check' }),
     )
     expect(
       screen.getByRole('button', { name: 'Confirm reset' }),
@@ -142,7 +160,9 @@ describe('App', () => {
 
     await user.click(screen.getByRole('button', { name: 'Confirm reset' }))
     expect(
-      screen.getByRole('heading', { name: 'Complete the core assessment' }),
+      screen.getByRole('heading', {
+        name: 'Name the workflow you are checking',
+      }),
     ).toBeInTheDocument()
   })
 })

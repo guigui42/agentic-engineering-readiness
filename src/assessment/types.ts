@@ -4,8 +4,15 @@ export type AssessmentDimension =
   | 'knowledge'
   | 'adoption'
   | 'value'
+  | 'learning'
 
-export type ScoredDimension = Exclude<AssessmentDimension, 'preconditions'>
+export type ScoredDimension =
+  | 'governance'
+  | 'knowledge'
+  | 'value'
+  | 'learning'
+
+export type ResponseScale = 'readiness' | 'participation'
 
 export type ResponseValue = 0 | 1 | 2 | 3
 
@@ -15,18 +22,23 @@ export type QuadrantId =
   | 'stretched'
   | 'healthy'
 
-export type ActionPhase = 'do-first' | 'do-next' | 'expand' | 'measure'
+export type ActionPhase = 'do-first' | 'do-next' | 'measure' | 'expand'
 
 export interface Source {
   id: string
   title: string
   url: string
-  category: 'AES framework' | 'GitHub Well-Architected' | 'GitHub Docs'
+  category:
+    | 'AES framework'
+    | 'GitHub Well-Architected'
+    | 'GitHub Docs'
+    | 'GitHub Changelog'
 }
 
 export interface AssessmentQuestion {
   id: string
   dimension: AssessmentDimension
+  scale: ResponseScale
   title: string
   prompt: string
   evidence: string[]
@@ -35,7 +47,6 @@ export interface AssessmentQuestion {
     detail: string
   }
   sourceIds: string[]
-  weight: 1 | 2
 }
 
 export type Answers = Partial<Record<string, ResponseValue>>
@@ -46,6 +57,16 @@ export interface DimensionScore {
   answered: number
   total: number
   score: number | null
+  band: 'Not scored' | 'Emerging' | 'Developing' | 'Established' | 'Strong'
+}
+
+export interface AdoptionPosition {
+  answered: number
+  total: number
+  performerActivities: number
+  activities: Record<'define' | 'deliver' | 'detect', ResponseValue | null>
+  label: 'Not positioned' | 'Narrow' | 'Assisted' | 'Broad' | 'Embedded'
+  description: string
 }
 
 export interface Quadrant {
@@ -55,15 +76,26 @@ export interface Quadrant {
   nextMove: string
 }
 
+export type PlacementStatus =
+  | 'scope-required'
+  | 'preconditions-required'
+  | 'core-incomplete'
+  | 'ready'
+
 export interface AssessmentResult {
   dimensions: Record<ScoredDimension, DimensionScore>
   foundationsScore: number | null
+  weakerFoundation: 'governance' | 'knowledge' | null
+  foundationStepsToEstablished: number | null
+  adoption: AdoptionPosition
   quadrant: Quadrant | null
+  placementStatus: PlacementStatus
   answered: number
   total: number
   coreComplete: boolean
   complete: boolean
-  missingPreconditions: AssessmentQuestion[]
+  preconditionsReady: boolean
+  unresolvedPreconditions: AssessmentQuestion[]
 }
 
 export interface ActionItem {
@@ -71,12 +103,14 @@ export interface ActionItem {
   phase: ActionPhase
   title: string
   detail: string
-  github: GitHubImplementation
+  implementation: ImplementationGuide
   sourceIds: string[]
   questionId?: string
+  primary?: boolean
 }
 
-export interface GitHubImplementation {
+export interface ImplementationGuide {
+  kind: 'github' | 'operating-model'
   surface: string
   steps: string[]
   verification: string[]

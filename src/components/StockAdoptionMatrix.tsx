@@ -33,7 +33,7 @@ export function StockAdoptionMatrix({ result }: { result: AssessmentResult }) {
         })}
       </div>
       <div className="matrix-axis matrix-axis--horizontal">
-        <span>Broader agent adoption</span>
+        <span>Broader agent participation</span>
         <b aria-hidden="true">→</b>
       </div>
     </div>

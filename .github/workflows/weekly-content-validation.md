@@ -1,6 +1,6 @@
 ---
-description: Validate public AES assessment claims and links against authoritative sources
-intent: Keep the public readiness assessment accurate without publishing internal material or making unsupported scoring changes.
+description: Validate public AES readiness claims and links against authoritative sources
+intent: Keep the public readiness check accurate without using sources outside the declared public source policy or making unsupported scoring changes.
 labels: [documentation, maintenance]
 on:
   schedule: weekly on monday
@@ -80,7 +80,7 @@ safe-outputs:
 
 # Weekly public AES content validation
 
-Audit the public assessment claims and links against current authoritative
+Audit the public readiness-check claims and links against current authoritative
 sources. Create one focused draft pull request only when public evidence
 supports a substantive correction.
 
@@ -107,9 +107,11 @@ Use only current public sources:
    `https://learn.github.com/well-architected/governance/recommendations/agentic-engineering-system-on-github`
 3. GitHub Enterprise Cloud documentation under:
    `https://docs.github.com/en/enterprise-cloud@latest`
+4. GitHub Changelog entries under:
+   `https://github.blog/changelog/`
 
-Do not use Seismic, Slack, internal repositories, roadmap material, customer
-data, private links, or search-result summaries as publication evidence.
+Do not use any source outside this list. Do not use customer data, private
+links, or search-result summaries as publication evidence.
 
 ## Validation rules
 
@@ -119,12 +121,13 @@ data, private links, or search-result summaries as publication evidence.
 - Verify every settings path, repository file, workflow step, and completion
   check in `src/assessment/githubActions.ts`.
 - Preserve the distinction between leading stocks, customer value signals,
-  operating preconditions, and agent adoption.
-- Do not turn the assessment into a certification or universal risk threshold.
+  operating preconditions, and agent participation.
+- Preserve the independent, unofficial disclaimer.
+- Do not turn the readiness check into a certification or universal risk threshold.
 - Do not change scoring thresholds or recommendation priority logic. Those
   require human review and are outside this workflow's allowed files.
-- Keep assessment answers, scores, quadrant placement, and Markdown output out
-  of analytics.
+- Do not add analytics or transmit the scope, answers, scores, placement, or
+  Markdown output.
 - Keep metadata, verification dates, and sitemap dates synchronized when
   factual content changes.
 - Replace stale or redirected documentation URLs with current canonical URLs.
