@@ -75,7 +75,10 @@ describe('App', () => {
         name: 'Check one workflow, not the whole organization',
       }),
     ).toBeInTheDocument()
-    expect(screen.getByLabelText('What are you checking?')).toBeInTheDocument()
+    expect(
+      screen.getByLabelText('Name the workflow, team, or repository class'),
+    ).toBeInTheDocument()
+    expect(screen.getByText(/This is a label, not a search/i)).toBeInTheDocument()
     expect(
       screen.getAllByText(/anonymous usage analytics/i).length,
     ).toBeGreaterThan(0)
@@ -95,7 +98,7 @@ describe('App', () => {
     render(<App />)
 
     await user.type(
-      screen.getByLabelText('What are you checking?'),
+      screen.getByLabelText('Name the workflow, team, or repository class'),
       'Payments bug fixes',
     )
     await user.click(

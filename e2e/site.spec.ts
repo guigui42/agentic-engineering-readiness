@@ -239,7 +239,9 @@ test('keeps Hydro analytics controlled and readiness content local', async ({
   })
 
   await page.goto('./')
-  await page.getByLabel('What are you checking?').fill('Payments bug fixes')
+  await page
+    .getByLabel('Name the workflow, team, or repository class')
+    .fill('Payments bug fixes')
   await page.getByRole('radio', { name: 'Established' }).first().check()
 
   await expect.poll(() =>

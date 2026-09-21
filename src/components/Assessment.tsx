@@ -49,18 +49,22 @@ export function Assessment({
       </div>
 
       <div className="scope-panel">
-        <label htmlFor="assessment-scope">What are you checking?</label>
+        <label htmlFor="assessment-scope">
+          Name the workflow, team, or repository class
+        </label>
         <input
           id="assessment-scope"
           type="text"
           value={scope}
           maxLength={120}
-          placeholder="For example: payments service bug fixes"
+          aria-describedby="assessment-scope-help"
+          placeholder="For example: documentation updates"
           onChange={(event) => onScopeChange(event.target.value)}
         />
-        <p>
-          This scope appears in the result and copied checklist. It stays in
-          this browser.
+        <p id="assessment-scope-help">
+          This is a label, not a search. Use a repeatable scope such as
+          dependency upgrades, payments bug fixes, or documentation updates.
+          It appears in the result and copied checklist.
         </p>
       </div>
 
