@@ -52,7 +52,10 @@ publicly documented GitHub practices.
 - Missing operating preconditions become blockers or constraints, not score
   boosters.
 - No backend and no collection of readiness-check scope or answers.
-- No analytics or other transmission of the scope, answers, result, or export.
+- Anonymous Hydro page views and controlled interaction labels use app ID
+  `aes-assessment`.
+- Analytics never include the scope, answers, scores, placement,
+  recommendations, or exported content.
 - The assessment is directional guidance, not a certification or universal
   delegation threshold.
 

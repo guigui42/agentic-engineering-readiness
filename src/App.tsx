@@ -14,6 +14,7 @@ import {
 } from './assessment/recommendations'
 import { calculateAssessment } from './assessment/scoring'
 import type { Answers, ResponseValue } from './assessment/types'
+import { trackInteraction } from './analytics'
 import { ActionPlan } from './components/ActionPlan'
 import { Assessment } from './components/Assessment'
 import { DimensionSummary } from './components/DimensionSummary'
@@ -151,6 +152,11 @@ function App() {
       ...current,
       answers: { ...current.answers, [questionId]: value },
     }))
+    trackInteraction({
+      category: 'readiness',
+      action: 'change',
+      label: 'response-selected',
+    })
   }
 
   const handlePageCopy = async () => {
@@ -158,6 +164,11 @@ function App() {
       await copyText(PAGE_LINK)
       setCopiedPageLink(true)
       setCopyError(null)
+      trackInteraction({
+        category: 'navigation',
+        action: 'copy',
+        label: 'page-link',
+      })
       window.setTimeout(() => setCopiedPageLink(false), 1800)
     } catch (error) {
       setCopyError(error instanceof Error ? error.message : String(error))
@@ -169,6 +180,11 @@ function App() {
       await copyText(exportAssessmentMarkdown(scope, result, actions))
       setCopiedPlan(true)
       setCopyError(null)
+      trackInteraction({
+        category: 'result',
+        action: 'copy',
+        label: 'implementation-checklist',
+      })
       window.setTimeout(() => setCopiedPlan(false), 1800)
     } catch (error) {
       setCopyError(error instanceof Error ? error.message : String(error))
@@ -183,6 +199,11 @@ function App() {
     setReadinessCheck({ version: 2, scope: '', answers: {} })
     setResetArmed(false)
     setCopyError(null)
+    trackInteraction({
+      category: 'readiness',
+      action: 'reset',
+      label: 'local-readiness-check',
+    })
   }
 
   return (
@@ -219,7 +240,15 @@ function App() {
             type="button"
             className="icon-button"
             aria-label={`Use ${theme === 'dark' ? 'light' : 'dark'} theme`}
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            onClick={() => {
+              const nextTheme = theme === 'dark' ? 'light' : 'dark'
+              setTheme(nextTheme)
+              trackInteraction({
+                category: 'appearance',
+                action: 'change',
+                label: `theme:${nextTheme}`,
+              })
+            }}
           >
             {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
           </button>
@@ -251,12 +280,12 @@ function App() {
               </a>
             </div>
             <p className="effort-note">
-              16 items · about 20 minutes solo · 60–75 minutes facilitated
+              16 items · about 20 minutes alone · 60–75 minutes as a team workshop
             </p>
             <p className="privacy-note">
-              Independent, unofficial resource. Not published or endorsed by
-              GitHub, Inc. No analytics are collected. Your scope and answers
-              stay in this browser.
+              Anonymous usage analytics record page views and fixed
+              interaction labels. Your scope, answers, scores, placement, and
+              copied checklist stay in this browser.
             </p>
           </div>
           <div className="hero__visual" aria-label="AES activity and stock model">
@@ -436,8 +465,10 @@ function App() {
           <strong>Agentic Engineering readiness</strong>
         </div>
         <p>
-          Independent, unofficial resource. No analytics. Scope and answers
-          remain local.
+          Independent, unofficial resource. Not published or endorsed by
+          GitHub, Inc. Anonymous usage analytics record page views and fixed
+          interaction labels. Scope, answers, scores, placement, and copied
+          content remain local.
         </p>
         <nav aria-label="Footer links">
           <a

@@ -419,7 +419,7 @@
   ],
   "narrative": {
     "northStar": "The Operational System Map",
-    "overview": "The system presents readiness as a connected operating model rather than a dashboard score. GitHub-native neutrals, one-pixel rules, direct typography, and source links create a technical field guide that supports both reading and operating. The instrument is a readiness check for one named workflow: a required scope field and 16 items establish preconditions, foundations, agent participation, customer value, and system learning before producing a result.\n\nThe visual voice is crisp, source-forward, and restrained. Violet, blue, and green identify the three AES stocks without turning the page into a multicolor dashboard. Dense readiness-check content stays legible through strong hierarchy, long reading measures, visible borders, and responsive reflow. Preconditions visibly block matrix placement; governance and shared knowledge determine foundations through the weaker stock; agent participation appears as a lifecycle position rather than a percentage. Independent, unofficial, no-analytics, and browser-local framing stays visible near entry and exit points.",
+    "overview": "The system presents readiness as a connected operating model rather than a dashboard score. GitHub-native neutrals, one-pixel rules, direct typography, and source links create a technical field guide that supports both reading and operating. The instrument is a readiness check for one named workflow: a required scope field and 16 items establish preconditions, foundations, agent participation, customer value, and system learning before producing a result.\n\nThe visual voice is crisp, source-forward, and restrained. Violet, blue, and green identify the three AES stocks without turning the page into a multicolor dashboard. Dense readiness-check content stays legible through strong hierarchy, long reading measures, visible borders, and responsive reflow. Preconditions visibly block matrix placement; governance and shared knowledge determine foundations through the weaker stock; agent participation appears as a lifecycle position rather than a percentage. The hero carries a concise anonymous Hydro analytics and local-data summary without affiliation language; the independent, unofficial disclaimer is reserved for the footer.",
     "keyCharacteristics": [
       "GitHub-native light and dark neutral surfaces.",
       "Strong editorial headings paired with practical evidence text.",
@@ -430,7 +430,7 @@
       "A Stock-Adoption matrix that combines the weaker foundation stock with a lifecycle participation position.",
       "Percentage rails only for governance and shared knowledge, with display scores rounded down to the nearest five and bands derived from raw evidence; completed-item bands without rails for customer value and system learning.",
       "Implementation guidance that moves from either a GitHub surface or an operating-model surface to ordered steps, verification evidence, and public sources.",
-      "Public sources and independent, unofficial, no-analytics assurances placed in the reading flow."
+      "Analytics privacy summarized near the hero, with the independent, unofficial affiliation disclaimer confined to the footer."
     ],
     "rules": [
       {
@@ -499,7 +499,7 @@
       "Do collapse multi-column evidence controls into a clear single-column mobile flow.",
       "Do keep GitHub and operating-model actions ordered from surface to steps to verification, with sources attached to the action.",
       "Do expose the highest-priority actions and progressively disclose the rest by phase.",
-      "Do keep the independent, unofficial, no-analytics, browser-local framing visible.",
+      "Do summarize aes-assessment Hydro analytics and local-data privacy near the hero, and reserve the independent, unofficial affiliation disclaimer for the footer.",
       "Do preserve visible keyboard focus and reduced-motion behavior."
     ],
     "donts": [

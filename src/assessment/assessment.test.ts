@@ -68,7 +68,7 @@ describe('AES readiness content', () => {
     }
   })
 
-  it('keeps non-public provenance, telemetry, and design notes out of public text', () => {
+  it('keeps non-public provenance and design notes out of public text', () => {
     const files = [
       'README.md',
       'PRODUCT.md',
@@ -80,7 +80,6 @@ describe('AES readiness content', () => {
     const forbiddenFragments = [
       ['S', 'e', 'i', 's', 'm', 'i', 'c'].join(''),
       ['S', 'l', 'a', 'c', 'k'].join(''),
-      ['c', 'o', 'l', 'l', 'e', 'c', 't', 'o', 'r', '.', 'g', 'i', 't', 'h', 'u', 'b', 'a', 'p', 'p', '.', 'c', 'o', 'm'].join(''),
       ['T', 'H', 'E', 'S', 'I', 'S', ':'].join(''),
       ['O', 'W', 'N', '-', 'W', 'O', 'R', 'L', 'D', ':'].join(''),
     ]

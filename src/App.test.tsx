@@ -1,8 +1,16 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { assessmentQuestions } from './assessment/questions'
 import App from './App'
+
+const { trackInteraction } = vi.hoisted(() => ({
+  trackInteraction: vi.fn(),
+}))
+
+vi.mock('./analytics', () => ({
+  trackInteraction,
+}))
 
 Object.defineProperty(navigator, 'clipboard', {
   configurable: true,
@@ -49,6 +57,10 @@ function seedReadinessCheck({
 }
 
 describe('App', () => {
+  beforeEach(() => {
+    trackInteraction.mockClear()
+  })
+
   it('presents an independent, scoped readiness check and public sources', () => {
     render(<App />)
 
@@ -65,9 +77,14 @@ describe('App', () => {
     ).toBeInTheDocument()
     expect(screen.getByLabelText('What are you checking?')).toBeInTheDocument()
     expect(
-      screen.getAllByText(/independent, unofficial resource/i).length,
+      screen.getAllByText(/anonymous usage analytics/i).length,
     ).toBeGreaterThan(0)
-    expect(screen.getByText(/no analytics are collected/i)).toBeInTheDocument()
+    expect(
+      screen.getByText(/independent, unofficial resource/i),
+    ).toBeInTheDocument()
+    expect(document.querySelector('.hero')).not.toHaveTextContent(
+      'Independent, unofficial',
+    )
     expect(
       screen.getByRole('heading', { name: 'Public source index' }),
     ).toBeInTheDocument()
@@ -89,6 +106,11 @@ describe('App', () => {
       const stored = localStorage.getItem('agentic-engineering-readiness-v2')
       expect(stored).toContain('"scope":"Payments bug fixes"')
       expect(stored).toContain('"precondition-infrastructure":2')
+    })
+    expect(trackInteraction).toHaveBeenCalledWith({
+      category: 'readiness',
+      action: 'change',
+      label: 'response-selected',
     })
   })
 
@@ -141,6 +163,16 @@ describe('App', () => {
     expect(clipboardSpy).toHaveBeenLastCalledWith(
       expect.stringContaining('Independent, unofficial resource'),
     )
+    expect(trackInteraction).toHaveBeenCalledWith({
+      category: 'navigation',
+      action: 'copy',
+      label: 'page-link',
+    })
+    expect(trackInteraction).toHaveBeenCalledWith({
+      category: 'result',
+      action: 'copy',
+      label: 'implementation-checklist',
+    })
   })
 
   it('requires confirmation before clearing local scope and answers', async () => {

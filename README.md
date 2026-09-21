@@ -1,8 +1,7 @@
 # Agentic Engineering readiness
 
-An independent, unofficial readiness check based on GitHub's public Agentic
-Engineering System (AES) framework. This project is not published or endorsed
-by GitHub, Inc.
+An interactive, workflow-scoped readiness check based on GitHub's public
+Agentic Engineering System (AES) framework.
 
 [Open the live site](https://guigui42.github.io/agentic-engineering-readiness/)
 
@@ -19,7 +18,9 @@ by GitHub, Inc.
   the gap.
 - Copies the scoped result as Markdown for workshops and planning documents.
 - Stores answers only in the visitor's browser.
-- Collects no analytics.
+- Uses GitHub Hydro app ID `aes-assessment` for anonymous page views and fixed
+  interaction labels. Analytics never include scope, answers, scores,
+  placement, recommendations, or copied content.
 
 The questions, scoring, and thresholds are project-authored directional
 guidance. They are not an official GitHub assessment, certification, or
@@ -68,6 +69,7 @@ bun run test:e2e
 src/assessment/            Scope, questions, scoring, actions, and sources
 src/components/            Assessment, matrix, result, and source UI
 src/App.tsx                Page composition and local persistence
+src/analytics.ts           Privacy-bounded Hydro page views and interactions
 public/                    Search, sharing, and crawl assets
 e2e/site.spec.ts           Browser, accessibility, metadata, and local-data checks
 .github/workflows/         CI, GitHub Pages, and content validation
@@ -82,7 +84,8 @@ e2e/site.spec.ts           Browser, accessibility, metadata, and local-data chec
 - Treat thresholds as project-authored, directional, and visible.
 - Verify every GitHub product recommendation against current public
   documentation.
-- Do not add analytics or transmit the scope, answers, result, or export.
+- Keep Hydro events limited to controlled identifiers. Never transmit scope,
+  answers, scores, placement, recommendation text, or exported content.
 - Update the visible verification date, structured metadata, and sitemap when
   factual content changes.
 
@@ -90,6 +93,13 @@ e2e/site.spec.ts           Browser, accessibility, metadata, and local-data chec
 
 Pushes to `main` build the static site, upload the `dist` artifact, and deploy
 through the protected `github-pages` environment.
+
+## Disclaimer
+
+This is an independent, unofficial resource. It is not published or endorsed
+by GitHub, Inc. The AES framework and quadrant model are GitHub publications;
+the questions, scoring, thresholds, and implementation guidance in this
+project are project-authored.
 
 ## License
 

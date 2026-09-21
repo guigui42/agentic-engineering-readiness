@@ -175,7 +175,7 @@ components:
 
 The system presents readiness as a connected operating model rather than a dashboard score. GitHub-native neutrals, one-pixel rules, direct typography, and source links create a technical field guide that supports both reading and operating. The instrument is a readiness check for one named workflow: a required scope field and 16 items establish preconditions, foundations, agent participation, customer value, and system learning before producing a result.
 
-The visual voice is crisp, source-forward, and restrained. Violet, blue, and green identify the three AES stocks without turning the page into a multicolor dashboard. Dense readiness-check content stays legible through strong hierarchy, long reading measures, visible borders, and responsive reflow. Preconditions visibly block matrix placement; governance and shared knowledge determine foundations through the weaker stock; agent participation appears as a lifecycle position rather than a percentage. Independent, unofficial, no-analytics, and browser-local framing stays visible near entry and exit points.
+The visual voice is crisp, source-forward, and restrained. Violet, blue, and green identify the three AES stocks without turning the page into a multicolor dashboard. Dense readiness-check content stays legible through strong hierarchy, long reading measures, visible borders, and responsive reflow. Preconditions visibly block matrix placement; governance and shared knowledge determine foundations through the weaker stock; agent participation appears as a lifecycle position rather than a percentage. The hero carries a concise anonymous Hydro analytics and local-data summary without affiliation language; the independent, unofficial disclaimer is reserved for the footer.
 
 **Key Characteristics:**
 - GitHub-native light and dark neutral surfaces.
@@ -187,7 +187,7 @@ The visual voice is crisp, source-forward, and restrained. Violet, blue, and gre
 - A Stock-Adoption matrix that combines the weaker foundation stock with a lifecycle participation position.
 - Percentage rails only for governance and shared knowledge; completed-item bands for customer value and system learning.
 - Implementation guidance that moves from either a GitHub surface or an operating-model surface to ordered steps, verification evidence, and public sources.
-- Public sources and independent, unofficial, no-analytics assurances placed in the reading flow.
+- Analytics privacy summarized near the hero, with the independent, unofficial affiliation disclaimer confined to the footer.
 
 ## Colors
 
@@ -242,7 +242,7 @@ The palette uses GitHub neutrals as the operating field, GitHub blue for interac
 
 ## Layout
 
-The page is a centered field with a maximum width of 1440px. Major sections use fluid horizontal insets from 20px to 88px and a recurring 112px vertical interval. The first viewport pairs the operational promise with the circular AES system map, the 16-item effort estimate, and the independent, unofficial, no-analytics assurance. This composition becomes one column below 1050px.
+The page is a centered field with a maximum width of 1440px. Major sections use fluid horizontal insets from 20px to 88px and a recurring 112px vertical interval. The first viewport pairs the operational promise with the circular AES system map, the 16-item effort estimate, and a concise analytics and local-data disclosure without the affiliation disclaimer. This composition becomes one column below 1050px.
 
 The readiness check begins with a required workflow-scope field, then six ruled disclosure sections containing 16 items. Preconditions, governance, shared knowledge, customer value, and system learning use the four-state readiness scale: Not present, Partially present, Established, and Measured and improving. Define, deliver, and detect use the participation scale: No agent participation, Agent assists, Agent performs, and Agent performs and assesses.
 
@@ -343,7 +343,7 @@ The plan turns a recommendation into an inspectable implementation record rather
 
 ### Trust Framing
 
-The hero and footer identify the site as an independent, unofficial resource that is not published or endorsed by GitHub, Inc. The same framing states **No analytics are collected** and explains that workflow scope and answers remain in the browser. Keep this copy readable and in the main flow, not hidden behind a legal or privacy disclosure.
+Near the hero, summarize that anonymous Hydro page views and fixed interaction identifiers use app ID `aes-assessment`, while scope, answers, scores, placement, recommendations, and copied content remain local. Do not include affiliation language there. The footer alone identifies the site as an independent, unofficial resource that is not published or endorsed by GitHub, Inc. Keep both disclosures readable in the main flow rather than hidden behind a legal or privacy disclosure.
 
 ### System Map
 
@@ -366,7 +366,7 @@ The hero system map uses three colored circular stock nodes around a central dar
 - **Do** collapse multi-column evidence controls into a clear single-column mobile flow.
 - **Do** keep GitHub and operating-model actions ordered from surface to steps to verification, with sources attached to the action.
 - **Do** expose the highest-priority actions and progressively disclose the rest by phase.
-- **Do** keep the independent, unofficial, no-analytics, browser-local framing visible.
+- **Do** summarize `aes-assessment` Hydro analytics and local-data privacy near the hero, and reserve the independent, unofficial affiliation disclaimer for the footer.
 - **Do** preserve visible keyboard focus and reduced-motion behavior.
 
 ### Don't:

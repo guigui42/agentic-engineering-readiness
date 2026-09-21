@@ -1,6 +1,20 @@
 import AxeBuilder from '@axe-core/playwright'
 import { expect, test, type Page } from '@playwright/test'
 
+interface HydroPayload {
+  page_views?: Array<{
+    context?: Record<string, string>
+    page: string
+    title: string
+  }>
+  events?: Array<{
+    context?: Record<string, string>
+    page: string
+    title: string
+    type: string
+  }>
+}
+
 const questionDimensions = {
   'precondition-infrastructure': 'preconditions',
   'precondition-skills': 'preconditions',
@@ -19,6 +33,24 @@ const questionDimensions = {
   'value-quality': 'value',
   'learning-loop': 'learning',
 } as const
+
+test.beforeEach(async ({ page }) => {
+  await page.route('https://collector.githubapp.com/**', async (route) => {
+    await route.fulfill({ status: 204 })
+  })
+})
+
+async function interceptAnalytics(
+  page: Page,
+  payloads: HydroPayload[] = [],
+) {
+  await page.unroute('https://collector.githubapp.com/**')
+  await page.route('https://collector.githubapp.com/**', async (route) => {
+    payloads.push(route.request().postDataJSON() as HydroPayload)
+    await route.fulfill({ status: 204 })
+  })
+  return payloads
+}
 
 async function seedReadinessCheck(
   page: Page,
@@ -132,7 +164,7 @@ test('publishes independent search and sharing metadata', async ({ page, request
   await page.goto('./')
 
   await expect(page).toHaveTitle(
-    'Independent Agentic Engineering Readiness Check',
+    'Agentic Engineering Readiness | GitHub AES Check',
   )
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
@@ -140,7 +172,7 @@ test('publishes independent search and sharing metadata', async ({ page, request
   )
   await expect(page.locator('meta[name="description"]')).toHaveAttribute(
     'content',
-    /independent, unofficial AES readiness check/i,
+    /AES readiness check for one workflow/i,
   )
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
     'content',
@@ -187,11 +219,21 @@ test('fits the selected viewport without horizontal overflow', async ({ page }) 
   expect(hasOverflow).toBe(false)
 })
 
-test('keeps scope and answers local without external requests', async ({ page }) => {
+test('keeps Hydro analytics controlled and readiness content local', async ({
+  page,
+}, testInfo) => {
+  test.skip(
+    testInfo.project.name === 'mobile-chromium',
+    'Hydro batch timing is covered deterministically by unit tests and desktop Chromium.',
+  )
+  const payloads = await interceptAnalytics(page)
   const externalRequests: string[] = []
   page.on('request', (request) => {
     const url = new URL(request.url())
-    if (url.origin !== 'http://127.0.0.1:4173') {
+    if (
+      url.origin !== 'http://127.0.0.1:4173' &&
+      url.origin !== 'https://collector.githubapp.com'
+    ) {
       externalRequests.push(request.url())
     }
   })
@@ -205,5 +247,31 @@ test('keeps scope and answers local without external requests', async ({ page })
       localStorage.getItem('agentic-engineering-readiness-v2'),
     ),
   ).toContain('"scope":"Payments bug fixes"')
+
+  await expect
+    .poll(
+      () => payloads.flatMap((payload) => payload.events ?? []).length,
+      { timeout: 15_000 },
+    )
+    .toBe(1)
+
+  const pageViews = payloads.flatMap((payload) => payload.page_views ?? [])
+  const events = payloads.flatMap((payload) => payload.events ?? [])
+  expect(pageViews).toHaveLength(1)
+  expect(events[0]).toMatchObject({
+    context: {
+      action: 'change',
+      category: 'readiness',
+      label: 'response-selected',
+      site: 'agentic-engineering-readiness',
+    },
+    type: 'aes_assessment.interaction',
+  })
+
+  const serialized = JSON.stringify(payloads)
+  expect(serialized).not.toContain('Payments bug fixes')
+  expect(serialized).not.toContain('precondition-infrastructure')
+  expect(serialized).not.toContain('"score"')
+  expect(serialized).not.toContain('"quadrant"')
   expect(externalRequests).toEqual([])
 })

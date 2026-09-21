@@ -126,8 +126,9 @@ links, or search-result summaries as publication evidence.
 - Do not turn the readiness check into a certification or universal risk threshold.
 - Do not change scoring thresholds or recommendation priority logic. Those
   require human review and are outside this workflow's allowed files.
-- Do not add analytics or transmit the scope, answers, scores, placement, or
-  Markdown output.
+- Preserve Hydro app ID `aes-assessment` and controlled page-view or
+  interaction identifiers. Never transmit scope, answers, scores, placement,
+  recommendation text, or Markdown output.
 - Keep metadata, verification dates, and sitemap dates synchronized when
   factual content changes.
 - Replace stale or redirected documentation URLs with current canonical URLs.
