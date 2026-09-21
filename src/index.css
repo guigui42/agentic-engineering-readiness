@@ -906,7 +906,7 @@ main,
 }
 
 .inline-sources a,
-.action-group li > div a {
+.action-sources a {
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -915,7 +915,7 @@ main,
 }
 
 .inline-sources svg,
-.action-group li > div svg {
+.action-sources svg {
   width: 12px;
   height: 12px;
 }
@@ -1179,27 +1179,60 @@ main,
   line-height: 1.55;
 }
 
-.done-when {
+.github-implementation {
   display: grid;
-  grid-template-columns: 82px minmax(0, 1fr);
-  gap: 12px;
-  max-width: 84ch;
+  grid-template-columns: minmax(180px, 0.65fr) minmax(0, 1.2fr) minmax(0, 1fr);
+  max-width: 1040px;
+  margin-top: 20px;
   border-top: 1px solid var(--border-muted);
-  padding-top: 12px;
+  border-bottom: 1px solid var(--border-muted);
+  background: var(--canvas-subtle);
 }
 
-.done-when b {
-  color: var(--value);
+.github-implementation > div {
+  min-width: 0;
+  padding: 18px;
+}
+
+.github-implementation > div + div {
+  border-left: 1px solid var(--border-muted);
+}
+
+.github-implementation b,
+.compact-surface b {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--fg);
   font-size: 13px;
 }
 
-.done-when ul {
+.github-surface span,
+.compact-surface span {
+  color: var(--fg-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.github-steps ol,
+.github-verification ul {
   display: grid;
-  gap: 5px;
+  gap: 8px;
   margin: 0;
   padding-left: 18px;
   color: var(--fg-muted);
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.github-verification b {
+  color: var(--value);
+}
+
+.action-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 14px;
+  margin-top: 16px;
 }
 
 .additional-actions {
@@ -1299,10 +1332,43 @@ main,
   line-height: 1.55;
 }
 
-.action-group li > div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px 14px;
+.compact-surface {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 12px;
+  margin-top: 14px;
+  border-top: 1px solid var(--border-muted);
+  padding-top: 12px;
+}
+
+.compact-surface b {
+  margin: 0;
+}
+
+.compact-implementation {
+  margin-top: 14px;
+  border: 1px solid var(--border);
+  background: var(--canvas-subtle);
+}
+
+.compact-implementation > summary {
+  padding: 10px 12px;
+  color: var(--fg);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.github-implementation--compact {
+  grid-template-columns: 1fr 1fr;
+  margin: 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 0;
+  background: var(--canvas);
+}
+
+.github-implementation--compact .github-surface {
+  display: none;
 }
 
 .reset-row {
@@ -1679,7 +1745,17 @@ main,
     font-size: 10px;
   }
 
-  .done-when {
+  .github-implementation,
+  .github-implementation--compact {
+    grid-template-columns: 1fr;
+  }
+
+  .github-implementation > div + div {
+    border-top: 1px solid var(--border-muted);
+    border-left: 0;
+  }
+
+  .compact-surface {
     grid-template-columns: 1fr;
   }
 }

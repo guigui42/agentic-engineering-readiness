@@ -77,6 +77,35 @@ test('classifies a completed core assessment and persists it locally', async ({
   ).toBeVisible()
 })
 
+test('renders a concrete GitHub implementation checklist', async ({ page }) => {
+  await interceptAnalytics(page)
+  await page.goto('./')
+  await seedCoreAssessment(page, 1)
+
+  await expect(
+    page.getByRole('heading', { name: 'GitHub implementation plan' }),
+  ).toBeVisible()
+  await expect(page.getByText('GitHub surface').first()).toBeVisible()
+  await expect(page.getByText('Implement in GitHub').first()).toBeVisible()
+  await expect(page.getByText('Verify in GitHub').first()).toBeVisible()
+  await expect(
+    page.getByText(/additional GitHub actions/i),
+  ).toBeVisible()
+
+  const results = await new AxeBuilder({ page })
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+    .analyze()
+  expect(
+    results.violations,
+    JSON.stringify(results.violations, null, 2),
+  ).toEqual([])
+
+  const hasOverflow = await page.evaluate(
+    () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
+  )
+  expect(hasOverflow).toBe(false)
+})
+
 test('publishes complete search and sharing metadata', async ({ page, request }) => {
   await interceptAnalytics(page)
   await page.goto('./')

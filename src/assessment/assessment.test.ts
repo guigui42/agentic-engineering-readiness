@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { assessmentQuestions, sources } from './questions'
+import { githubImplementations } from './githubActions'
 import {
   buildActionPlan,
   exportAssessmentMarkdown,
@@ -41,6 +42,22 @@ describe('AES assessment content', () => {
       expect(source.url).toMatch(/^https:\/\//)
       expect(source.url).not.toContain('seismic')
       expect(source.url).not.toContain('stafftools')
+    }
+  })
+
+  it('grounds every assessment question in a concrete GitHub implementation', () => {
+    expect(Object.keys(githubImplementations).sort()).toEqual(
+      assessmentQuestions.map((question) => question.id).sort(),
+    )
+
+    for (const implementation of Object.values(githubImplementations)) {
+      expect(
+        [implementation.surface, ...implementation.steps].join(' '),
+      ).toMatch(
+        /GitHub|repository|enterprise|organization|pull request|issue|CODEOWNERS|ruleset|workflow|environment|Copilot/i,
+      )
+      expect(implementation.steps.length).toBeGreaterThanOrEqual(2)
+      expect(implementation.verification.length).toBeGreaterThan(0)
     }
   })
 
@@ -96,6 +113,9 @@ describe('AES assessment content', () => {
 
     expect(markdown).toContain('Underdeveloped foundations')
     expect(markdown).toContain('## Prioritized action plan')
+    expect(markdown).toContain('GitHub surface:')
+    expect(markdown).toContain('Implement:')
+    expect(markdown).toContain('Verify:')
     expect(markdown).toContain('https://github.com/resources/insights/agentic-engineering-system')
     expect(markdown).not.toContain('seismic')
   })

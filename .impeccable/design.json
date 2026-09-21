@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-21T13:19:12.965+02:00",
+  "generatedAt": "2026-09-21T14:09:55.502+02:00",
   "title": "Design System: Agentic Engineering readiness",
   "extensions": {
     "colorMeta": {
@@ -391,17 +391,26 @@
       "description": "A circular semantic node used inside the AES system-map visual.",
       "html": "<div class=\"ds-stock-node\"><span>Stock</span><strong>Governance</strong></div>",
       "css": ".ds-stock-node { width: 170px; aspect-ratio: 1; display: grid; place-content: center; gap: 4px; border: 1px solid var(--governance, #8250df); border-radius: 50%; padding: 18px; color: var(--fg, #1f2328); background: var(--governance-muted, #f5f0ff); text-align: center; box-shadow: 0 12px 30px color-mix(in srgb, var(--governance, #8250df) 16%, transparent); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; } .ds-stock-node span { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; } .ds-stock-node strong { font-size: 20px; line-height: 1.15; }"
+    },
+    {
+      "name": "GitHub Implementation Plan",
+      "kind": "custom",
+      "refersTo": "github-implementation-panel",
+      "description": "A priority action record that connects the GitHub surface, ordered implementation, verification evidence, public sources, and compact overflow disclosure.",
+      "html": "<section class=\"ds-action-plan\"><article class=\"ds-priority-action\"><span class=\"ds-action-number\">1</span><div><small>Do first</small><strong>Protect the pilot path</strong><p>Apply the minimum controls before expanding agent participation.</p><div class=\"ds-implementation\"><div><b>GitHub surface</b><span>Repository settings → Rulesets</span></div><div><b>Implement in GitHub</b><ol><li>Require the default build and test workflow.</li><li>Protect the staging environment.</li></ol></div><div><b class=\"ds-verify-label\">Verify in GitHub</b><ul><li>A pull request cannot merge when the workflow fails.</li></ul></div></div><div class=\"ds-action-sources\"><a href=\"#\">GitHub Docs ↗</a><a href=\"#\">Well-Architected ↗</a></div></div></article><details class=\"ds-additional-actions\"><summary>4 additional GitHub actions</summary><div class=\"ds-compact-action\"><strong>Document repository guidance</strong><p>Make supported commands and boundaries durable.</p><div class=\"ds-compact-surface\"><b>GitHub surface</b><span>.github/copilot-instructions.md</span></div><details class=\"ds-compact-implementation\"><summary>Show GitHub implementation</summary><div class=\"ds-compact-grid\"><div><b>Implement in GitHub</b><ol><li>Document build, test, lint, and validation paths.</li></ol></div><div><b class=\"ds-verify-label\">Verify in GitHub</b><ul><li>A fresh task uses the documented commands.</li></ul></div></div></details><div class=\"ds-action-sources\"><a href=\"#\">GitHub Docs ↗</a></div></div></details></section>",
+      "css": ".ds-action-plan { color: var(--fg, #1f2328); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; } .ds-priority-action { display: grid; grid-template-columns: 42px minmax(0, 1fr); gap: 18px; border-top: 1px solid var(--border, #d1d9e0); border-bottom: 1px solid var(--border, #d1d9e0); padding: 28px 0; } .ds-action-number { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; color: #fff; background: var(--accent-emphasis, #1f6feb); font-weight: 800; } .ds-priority-action small { display: block; margin-bottom: 7px; color: var(--fg-muted, #59636e); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; } .ds-priority-action > div > strong { display: block; font-size: 24px; letter-spacing: -0.02em; } .ds-priority-action p, .ds-compact-action p { margin: 10px 0 16px; color: var(--fg-muted, #59636e); line-height: 1.55; } .ds-implementation { display: grid; grid-template-columns: minmax(180px, 0.65fr) minmax(0, 1.2fr) minmax(0, 1fr); max-width: 1040px; margin-top: 20px; border-top: 1px solid var(--border-muted, #e7ebef); border-bottom: 1px solid var(--border-muted, #e7ebef); background: var(--canvas-subtle, #f6f8fa); } .ds-implementation > div, .ds-compact-grid > div { min-width: 0; padding: 18px; } .ds-implementation > div + div, .ds-compact-grid > div + div { border-left: 1px solid var(--border-muted, #e7ebef); } .ds-implementation b, .ds-compact-surface b, .ds-compact-grid b { display: block; margin-bottom: 8px; font-size: 13px; } .ds-implementation span, .ds-compact-surface span { color: var(--fg-muted, #59636e); font-size: 14px; line-height: 1.5; } .ds-implementation ol, .ds-implementation ul, .ds-compact-grid ol, .ds-compact-grid ul { display: grid; gap: 8px; margin: 0; padding-left: 18px; color: var(--fg-muted, #59636e); font-size: 14px; line-height: 1.55; } .ds-verify-label { color: var(--value, #1a7f37); } .ds-action-sources { display: flex; flex-wrap: wrap; gap: 7px 14px; margin-top: 16px; } .ds-action-sources a { color: var(--accent, #0969da); font-size: 12px; text-underline-offset: 3px; } .ds-additional-actions { margin-top: 26px; border: 1px solid var(--border, #d1d9e0); background: var(--canvas-subtle, #f6f8fa); } .ds-additional-actions > summary { padding: 16px 18px; font-weight: 700; cursor: pointer; } .ds-compact-action { border-top: 1px solid var(--border, #d1d9e0); padding: 26px 18px; background: var(--canvas, #fff); } .ds-compact-surface { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; margin-top: 14px; border-top: 1px solid var(--border-muted, #e7ebef); padding-top: 12px; } .ds-compact-surface b { margin: 0; } .ds-compact-implementation { margin-top: 14px; border: 1px solid var(--border, #d1d9e0); background: var(--canvas-subtle, #f6f8fa); } .ds-compact-implementation > summary { padding: 10px 12px; font-size: 13px; font-weight: 700; cursor: pointer; } .ds-compact-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border, #d1d9e0); background: var(--canvas, #fff); } .ds-action-plan summary:focus-visible, .ds-action-sources a:focus-visible { outline: 3px solid var(--accent, #0969da); outline-offset: 3px; } @media (max-width: 520px) { .ds-implementation, .ds-compact-grid, .ds-compact-surface { grid-template-columns: 1fr; } .ds-implementation > div + div, .ds-compact-grid > div + div { border-top: 1px solid var(--border-muted, #e7ebef); border-left: 0; } }"
     }
   ],
   "narrative": {
     "northStar": "The Operational System Map",
-    "overview": "The system presents readiness as a connected operating model rather than a dashboard score. GitHub-native neutrals, one-pixel rules, direct typography, and source links create a technical field guide that supports both reading and operating. Large statements establish the consequence of the work, while evidence controls, the Stock-Adoption matrix, and the preparation plan make the model actionable.\n\nThe visual voice is crisp, source-forward, and restrained. Violet, blue, and green identify the three AES stocks without turning the page into a multicolor dashboard. Dense assessment content stays legible through strong hierarchy, long reading measures, visible borders, and responsive reflow.",
+    "overview": "The system presents readiness as a connected operating model rather than a dashboard score. GitHub-native neutrals, one-pixel rules, direct typography, and source links create a technical field guide that supports both reading and operating. Large statements establish the consequence of the work, while evidence controls, the Stock-Adoption matrix, and a GitHub implementation plan that connects settings, ordered work, and verification evidence make the model actionable.\n\nThe visual voice is crisp, source-forward, and restrained. Violet, blue, and green identify the three AES stocks without turning the page into a multicolor dashboard. Dense assessment content stays legible through strong hierarchy, long reading measures, visible borders, and responsive reflow.",
     "keyCharacteristics": [
       "GitHub-native light and dark neutral surfaces.",
       "Strong editorial headings paired with practical evidence text.",
       "Crisp rules and square field structures instead of rounded dashboard cards.",
       "Three stock colors with stable semantic roles.",
       "System diagrams and matrices that explain relationships, not isolated metrics.",
+      "Implementation guidance that moves from GitHub surface to ordered steps, verification evidence, and public sources.",
       "Public sources and local-data assurances placed in the reading flow."
     ],
     "rules": [
@@ -431,6 +440,11 @@
         "section": "layout"
       },
       {
+        "name": "The Priority Disclosure Rule",
+        "body": "Keep the first three actions fully inspectable. Place lower-priority actions in one phase-grouped disclosure, with each action's GitHub surface and source links visible before its detailed steps are opened.",
+        "section": "layout"
+      },
+      {
         "name": "The Flat-by-Default Rule",
         "body": "Use rules and tonal separation first. Add elevation only when an element floats, remains sticky, or represents a framed system object.",
         "section": "elevation"
@@ -439,6 +453,11 @@
         "name": "The Circle Means System Rule",
         "body": "Use circles for stocks, cycles, markers, and bounded positions. Keep reading containers rectilinear.",
         "section": "shapes"
+      },
+      {
+        "name": "The Surface-to-Evidence Rule",
+        "body": "Every implementation recommendation must name the GitHub surface, provide ordered changes, state observable verification evidence, and link to its public sources in that sequence.",
+        "section": "components"
       }
     ],
     "dos": [
@@ -446,6 +465,8 @@
       "Do keep stock colors bound to governance, shared knowledge, and customer value.",
       "Do pair large operational headings with muted source-forward explanations.",
       "Do collapse multi-column evidence controls into a clear single-column mobile flow.",
+      "Do keep GitHub implementation guidance ordered from surface to steps to verification, with sources attached to the action.",
+      "Do expose the highest-priority actions and progressively disclose the rest by phase.",
       "Do preserve visible keyboard focus and reduced-motion behavior."
     ],
     "donts": [
@@ -453,6 +474,8 @@
       "Don't replace the connected field with detached KPI cards or a generic metrics dashboard.",
       "Don't round major reading containers, matrices, warnings, or evidence groups.",
       "Don't use color without a text label, structural position, or state cue.",
+      "Don't hide the GitHub surface or public source links inside an implementation disclosure.",
+      "Don't present verification evidence as another implementation step.",
       "Don't add ambient shadows to every card."
     ]
   }

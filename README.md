@@ -12,7 +12,8 @@ System (AES).
 - Places the current operating model in the AES Stock-Adoption matrix.
 - Shows separate, transparent dimension scores instead of one opaque maturity
   grade.
-- Produces a prioritized, source-backed GitHub preparation plan.
+- Produces a prioritized GitHub implementation checklist with exact settings
+  areas, repository files, workflow steps, and verification evidence.
 - Copies the result as Markdown for workshops, issues, and planning documents.
 - Stores answers only in the visitor's browser.
 

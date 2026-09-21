@@ -62,6 +62,24 @@ export const sources: Source[] = [
     category: 'GitHub Docs',
   },
   {
+    id: 'custom-properties',
+    title: 'Managing custom properties for repositories',
+    url: 'https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-organization-settings/managing-custom-properties-for-repositories-in-your-organization',
+    category: 'GitHub Docs',
+  },
+  {
+    id: 'cloud-agent',
+    title: 'About GitHub Copilot cloud agent',
+    url: 'https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/agents/cloud-agent/about-cloud-agent',
+    category: 'GitHub Docs',
+  },
+  {
+    id: 'copilot-code-review',
+    title: 'Using GitHub Copilot code review',
+    url: 'https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/use-copilot-agents/request-a-code-review/use-code-review',
+    category: 'GitHub Docs',
+  },
+  {
     id: 'issue-templates',
     title: 'Configuring issue templates for your repository',
     url: 'https://docs.github.com/en/enterprise-cloud@latest/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository',
@@ -191,7 +209,7 @@ export const assessmentQuestions: AssessmentQuestion[] = [
       detail:
         'Provide approved access to task-relevant code, documentation, decisions, and telemetry while preserving least privilege.',
     },
-    sourceIds: ['aes-framework', 'aes-well-architected'],
+    sourceIds: ['aes-framework', 'aes-well-architected', 'custom-properties'],
     weight: 2,
   },
   {
@@ -227,7 +245,7 @@ export const assessmentQuestions: AssessmentQuestion[] = [
       detail:
         'Classify work by ambiguity, impact, reversibility, and evidence needs so agent participation expands only where the system supports it.',
     },
-    sourceIds: ['aes-framework', 'aes-well-architected'],
+    sourceIds: ['aes-framework', 'aes-well-architected', 'custom-properties'],
     weight: 2,
   },
   {
@@ -335,7 +353,12 @@ export const assessmentQuestions: AssessmentQuestion[] = [
       detail:
         'Record current architecture decisions, constraints, owners, dependencies, and escalation paths in durable repository-linked locations.',
     },
-    sourceIds: ['aes-framework', 'codeowners', 'dependency-graph'],
+    sourceIds: [
+      'aes-framework',
+      'codeowners',
+      'dependency-graph',
+      'custom-properties',
+    ],
     weight: 2,
   },
   {
@@ -425,7 +448,7 @@ export const assessmentQuestions: AssessmentQuestion[] = [
       detail:
         'Use agents to synthesize evidence and draft requirements while a human owns intent, trade-offs, and acceptance criteria.',
     },
-    sourceIds: ['aes-framework'],
+    sourceIds: ['aes-framework', 'cloud-agent'],
     weight: 1,
   },
   {
@@ -443,7 +466,7 @@ export const assessmentQuestions: AssessmentQuestion[] = [
       detail:
         'Select a low-risk, reversible class of work with strong context and checks, then let agents produce reviewable pull requests.',
     },
-    sourceIds: ['aes-framework', 'rulesets'],
+    sourceIds: ['aes-framework', 'rulesets', 'cloud-agent'],
     weight: 2,
   },
   {
@@ -461,7 +484,11 @@ export const assessmentQuestions: AssessmentQuestion[] = [
       detail:
         'Use agents to run checks, compare standards, summarize diffs, and flag anomalies while preserving accountable review.',
     },
-    sourceIds: ['aes-framework', 'required-reviews'],
+    sourceIds: [
+      'aes-framework',
+      'required-reviews',
+      'copilot-code-review',
+    ],
     weight: 1,
   },
   {
@@ -479,7 +506,7 @@ export const assessmentQuestions: AssessmentQuestion[] = [
       detail:
         'Use agents to correlate operational and customer signals, then route evidence to a human-owned decision or issue.',
     },
-    sourceIds: ['aes-framework'],
+    sourceIds: ['aes-framework', 'cloud-agent'],
     weight: 1,
   },
   {
@@ -497,7 +524,11 @@ export const assessmentQuestions: AssessmentQuestion[] = [
       detail:
         'Record who directs, performs, and assesses each candidate workflow, then align the mix with risk and foundation health.',
     },
-    sourceIds: ['aes-framework', 'aes-well-architected'],
+    sourceIds: [
+      'aes-framework',
+      'aes-well-architected',
+      'custom-properties',
+    ],
     weight: 2,
   },
   {

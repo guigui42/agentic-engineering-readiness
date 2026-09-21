@@ -33,6 +33,8 @@ publicly documented GitHub practices.
 - Answers and generated results stay in the visitor's browser.
 - Results can be copied as Markdown into an issue, planning document, or
   workshop record.
+- Each recommendation identifies the GitHub settings area, repository file, or
+  workflow to change and the evidence that verifies completion.
 - The canonical public deployment is GitHub Pages.
 - Public GitHub AES, Well-Architected, and Docs pages are the publication
   sources. Internal Seismic material is research input only.

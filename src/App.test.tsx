@@ -101,6 +101,9 @@ describe('App', () => {
       screen.getByText('Your result', { selector: '.matrix-cell span' })
         .closest('article'),
     ).toHaveTextContent('Healthy agent-native system')
+    expect(screen.getByText('GitHub surface')).toBeInTheDocument()
+    expect(screen.getByText('Implement in GitHub')).toBeInTheDocument()
+    expect(screen.getByText('Verify in GitHub')).toBeInTheDocument()
   })
 
   it('copies the public page link and Markdown plan', async () => {
@@ -115,7 +118,7 @@ describe('App', () => {
     )
 
     await user.click(
-      screen.getByRole('button', { name: 'Copy as Markdown' }),
+      screen.getByRole('button', { name: 'Copy GitHub checklist' }),
     )
     expect(clipboardSpy).toHaveBeenLastCalledWith(
       expect.stringContaining('# Agentic Engineering readiness assessment'),

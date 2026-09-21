@@ -1,4 +1,5 @@
 import { assessmentQuestions, sources } from './questions'
+import { githubImplementations } from './githubActions'
 import type {
   ActionItem,
   ActionPhase,
@@ -65,10 +66,25 @@ function quadrantAction(result: AssessmentResult): ActionItem | null {
       title: 'Hold broader delegation until foundations improve',
       detail:
         'Keep agent work narrow and reversible while governance and shared knowledge are strengthened.',
-      successEvidence: [
-        'Governance and shared knowledge are established for the workflows in scope.',
+      github: {
+        surface:
+          'Enterprise AI controls, repository custom properties, rulesets, and pilot repository files',
+        steps: [
+          'Limit agent use to named pilot organizations and repositories in enterprise AI controls.',
+          'Classify pilot repositories with custom properties and target a ruleset that requires pull requests, checks, and accountable review.',
+          'Add .github/copilot-instructions.md, CODEOWNERS, and an agent-task issue form before enabling another task class.',
+        ],
+        verification: [
+          'The pilot scope, repository classification, enforced ruleset, owners, and instructions are all visible in GitHub.',
+        ],
+      },
+      sourceIds: [
+        'aes-framework',
+        'copilot-policies',
+        'custom-properties',
+        'rulesets',
+        'custom-instructions',
       ],
-      sourceIds: ['aes-framework'],
     },
     underused: {
       id: 'quadrant-underused',
@@ -76,10 +92,23 @@ function quadrantAction(result: AssessmentResult): ActionItem | null {
       title: 'Choose the next safe class of work',
       detail:
         'Pilot one low-risk, well-defined workflow with clear evidence, review, and rollback paths.',
-      successEvidence: [
-        'The pilot completes with healthy quality, review effort, and rollback evidence.',
+      github: {
+        surface: 'GitHub Issues, Copilot cloud agent, pull requests, and required checks',
+        steps: [
+          'Choose a low-risk issue class and capture it with the agent-task issue form.',
+          'Start a Copilot cloud agent session from the issue and require a reviewable pull request with tests.',
+          'Compare review effort, failed checks, rework, and rollback evidence with similar human-delivered work.',
+        ],
+        verification: [
+          'At least one bounded task completes through the full GitHub issue-to-pull-request path without weakening review or quality.',
+        ],
+      },
+      sourceIds: [
+        'aes-framework',
+        'cloud-agent',
+        'issue-templates',
+        'rulesets',
       ],
-      sourceIds: ['aes-framework'],
     },
     stretched: {
       id: 'quadrant-stretched',
@@ -87,10 +116,24 @@ function quadrantAction(result: AssessmentResult): ActionItem | null {
       title: 'Narrow agent scope while repairing foundations',
       detail:
         'Pause expansion in workflows where weak context or controls are creating hidden risk, rework, or review burden.',
-      successEvidence: [
-        'Agent scope is narrowed and every material foundation gap has an owner and next step.',
+      github: {
+        surface:
+          'Enterprise AI controls, repository custom properties, rulesets, and GitHub Issues',
+        steps: [
+          'Disable or narrow agent entry points for repository classes with weak context or controls.',
+          'Use custom properties to identify affected repositories and target stricter rulesets.',
+          'Open owned issues for each missing instruction, review boundary, security configuration, or outcome signal.',
+        ],
+        verification: [
+          'Out-of-bound repositories cannot start the expanded workflow, and every foundation gap is tracked in GitHub.',
+        ],
+      },
+      sourceIds: [
+        'aes-framework',
+        'copilot-policies',
+        'custom-properties',
+        'rulesets',
       ],
-      sourceIds: ['aes-framework'],
     },
     healthy: {
       id: 'quadrant-healthy',
@@ -98,10 +141,24 @@ function quadrantAction(result: AssessmentResult): ActionItem | null {
       title: 'Expand one workflow at a time',
       detail:
         'Add the next bounded class of work and keep quality, review burden, and customer outcomes visible.',
-      successEvidence: [
-        'The expanded workflow preserves quality and improves a defined customer or operational outcome.',
+      github: {
+        surface:
+          'GitHub Issues, Copilot cloud agent, Copilot code review, pull requests, and deployments',
+        steps: [
+          'Select the next task class using completed pilot evidence and define it in a reusable issue form.',
+          'Use Copilot cloud agent for bounded delivery and Copilot code review as additional assessment evidence.',
+          'Keep human review, required checks, and deployment protections aligned with impact, then record the outcome in the issue.',
+        ],
+        verification: [
+          'The new task class shows healthy review effort, quality, deployment, and customer or operational outcomes.',
+        ],
+      },
+      sourceIds: [
+        'aes-framework',
+        'cloud-agent',
+        'copilot-code-review',
+        'required-reviews',
       ],
-      sourceIds: ['aes-framework'],
     },
   }
 
@@ -120,12 +177,17 @@ export function buildActionPlan(
       continue
     }
 
+    const github = githubImplementations[question.id]
+    if (!github) {
+      throw new Error(`Missing GitHub implementation for ${question.id}`)
+    }
+
     items.push({
       id: `question-${question.id}`,
       phase: phaseForQuestion(question.dimension, result),
       title: question.action.title,
       detail: question.action.detail,
-      successEvidence: question.evidence,
+      github,
       sourceIds: question.sourceIds,
       questionId: question.id,
       value,
@@ -203,8 +265,14 @@ export function exportAssessmentMarkdown(
         lines.push(
           `- **${action.title}.** ${action.detail}${links ? ` Sources: ${links}.` : ''}`,
         )
-        if (action.successEvidence.length > 0) {
-          lines.push(`  - Done when: ${action.successEvidence.join(' ')}`)
+        lines.push(`  - GitHub surface: ${action.github.surface}`)
+        lines.push('  - Implement:')
+        for (const step of action.github.steps) {
+          lines.push(`    - ${step}`)
+        }
+        lines.push('  - Verify:')
+        for (const evidence of action.github.verification) {
+          lines.push(`    - ${evidence}`)
         }
       }
       lines.push('')

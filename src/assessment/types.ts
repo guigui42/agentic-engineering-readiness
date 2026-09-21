@@ -71,7 +71,13 @@ export interface ActionItem {
   phase: ActionPhase
   title: string
   detail: string
-  successEvidence: string[]
+  github: GitHubImplementation
   sourceIds: string[]
   questionId?: string
+}
+
+export interface GitHubImplementation {
+  surface: string
+  steps: string[]
+  verification: string[]
 }

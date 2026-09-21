@@ -63,6 +63,7 @@ safe-outputs:
       - content-validation/*
     allowed-files:
       - src/assessment/questions.ts
+      - src/assessment/githubActions.ts
       - src/App.tsx
       - README.md
       - index.html
@@ -88,6 +89,7 @@ supports a substantive correction.
 Review these files completely:
 
 - `src/assessment/questions.ts`
+- `src/assessment/githubActions.ts`
 - `src/App.tsx`
 - `README.md`
 - `index.html`
@@ -114,6 +116,8 @@ data, private links, or search-result summaries as publication evidence.
 - Verify the AES stock names, activity names, participation modes, quadrant
   names, quadrant guidance, and stated limitations.
 - Verify every GitHub product recommendation and URL in the source index.
+- Verify every settings path, repository file, workflow step, and completion
+  check in `src/assessment/githubActions.ts`.
 - Preserve the distinction between leading stocks, customer value signals,
   operating preconditions, and agent adoption.
 - Do not turn the assessment into a certification or universal risk threshold.

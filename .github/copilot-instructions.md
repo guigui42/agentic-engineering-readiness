@@ -20,7 +20,9 @@ turning AES into an opaque maturity score or certification.
 
 ## Engineering rules
 
-- Keep typed content in `src/assessment/` and rendering in `src/components/`.
+- Keep framework questions in `src/assessment/questions.ts`, concrete GitHub
+  implementation steps in `src/assessment/githubActions.ts`, and rendering in
+  `src/components/`.
 - Preserve the `/agentic-engineering-readiness/` GitHub Pages base path.
 - Store answers only in browser local storage.
 - Analytics may use controlled interaction identifiers only. Never include

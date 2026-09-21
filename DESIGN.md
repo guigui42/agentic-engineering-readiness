@@ -144,6 +144,16 @@ components:
     textColor: "{colors.foreground-light}"
     rounded: "{rounded.circle}"
     padding: "18px"
+  github-implementation-panel:
+    backgroundColor: "{colors.canvas-subtle-light}"
+    textColor: "{colors.foreground-light}"
+    rounded: "{rounded.none}"
+    padding: "18px"
+  additional-actions-disclosure:
+    backgroundColor: "{colors.canvas-subtle-light}"
+    textColor: "{colors.foreground-light}"
+    rounded: "{rounded.none}"
+    padding: "16px 18px"
 ---
 
 # Design System: Agentic Engineering readiness
@@ -152,7 +162,7 @@ components:
 
 **Creative North Star: "The Operational System Map"**
 
-The system presents readiness as a connected operating model rather than a dashboard score. GitHub-native neutrals, one-pixel rules, direct typography, and source links create a technical field guide that supports both reading and operating. Large statements establish the consequence of the work, while evidence controls, the Stock-Adoption matrix, and the preparation plan make the model actionable.
+The system presents readiness as a connected operating model rather than a dashboard score. GitHub-native neutrals, one-pixel rules, direct typography, and source links create a technical field guide that supports both reading and operating. Large statements establish the consequence of the work, while evidence controls, the Stock-Adoption matrix, and a GitHub implementation plan that connects settings, ordered work, and verification evidence make the model actionable.
 
 The visual voice is crisp, source-forward, and restrained. Violet, blue, and green identify the three AES stocks without turning the page into a multicolor dashboard. Dense assessment content stays legible through strong hierarchy, long reading measures, visible borders, and responsive reflow.
 
@@ -162,6 +172,7 @@ The visual voice is crisp, source-forward, and restrained. Violet, blue, and gre
 - Crisp rules and square field structures instead of rounded dashboard cards.
 - Three stock colors with stable semantic roles.
 - System diagrams and matrices that explain relationships, not isolated metrics.
+- Implementation guidance that moves from GitHub surface to ordered steps, verification evidence, and public sources.
 - Public sources and local-data assurances placed in the reading flow.
 
 ## Colors
@@ -219,7 +230,9 @@ The palette uses GitHub neutrals as the operating field, GitHub blue for interac
 
 The page is a centered field with a maximum width of 1440px. Major sections use fluid horizontal insets from 20px to 88px and a recurring 112px vertical interval. The first viewport pairs the operational promise with the circular AES system map. This composition becomes one column below 1050px.
 
-Content structure relies on grids with shared borders: three stock columns, two framework columns, four response options, four dimension summaries, a two-by-two matrix, and two-column action groups. At 760px, most content grids collapse to one column and the header hides text navigation links. At 520px, horizontal insets tighten, hero actions become full-width, dimension summaries stack, and matrix descriptions are hidden to protect the placement view.
+Content structure relies on grids with shared borders: three stock columns, two framework columns, four response options, four dimension summaries, a two-by-two matrix, and two-column action groups. The first three implementation priorities stay fully expanded. Each priority contains a three-column field for GitHub surface, ordered implementation steps, and verification evidence, followed by source links. Remaining actions sit in one compact native disclosure, grouped by phase; their GitHub surface stays visible while the detailed implementation opens on demand.
+
+At 760px, most content grids and action phase groups collapse to one column and the header hides text navigation links. At 520px, horizontal insets tighten, hero actions become full-width, dimension summaries stack, matrix descriptions are hidden to protect the placement view, and implementation panels stack surface, steps, and verification vertically with horizontal separators.
 
 Sticky elements remain functional rather than decorative. The 64px header and assessment progress dock keep orientation visible during a long operate-and-read flow. Mobile header height reduces to 58px.
 
@@ -228,6 +241,8 @@ Sticky elements remain functional rather than decorative. The 64px header and as
 **The Connected Field Rule.** Prefer adjacent regions separated by shared one-pixel rules over collections of detached cards.
 
 **The Hero Grid Is Local Rule.** The 32px grid and concentric rings belong only to the circular system-map visual. They are not a page background, section texture, or reusable panel treatment.
+
+**The Priority Disclosure Rule.** Keep the first three actions fully inspectable. Place lower-priority actions in one phase-grouped disclosure, with each action's GitHub surface and source links visible before its detailed steps are opened.
 
 ## Elevation & Depth
 
@@ -286,6 +301,19 @@ The sticky progress dock combines the answered count, a six-pixel inset track, a
 
 The matrix is a square two-by-two ruled field with explicit vertical and horizontal axes. The current quadrant uses muted blue fill and a three-pixel inset blue outline. It never substitutes for the explanatory text or transparent threshold note that follows it.
 
+### GitHub Implementation Plan
+
+The plan turns a recommendation into an inspectable implementation record rather than another summary card.
+
+- **Content hierarchy:** Phase label, action title, and rationale introduce each priority. The implementation field then moves left to right from GitHub surface, to ordered steps, to verification evidence. Public source links close the record.
+- **Priority treatment:** The first three actions use numbered blue markers and show the complete implementation field by default. Verification headings use customer-value green to distinguish evidence from instruction without adding a new status color.
+- **Implementation field:** A square, subtle-canvas panel uses shared muted rules, 18px internal padding, compact 13px labels, and 14px operational copy. Steps are ordered; verification evidence remains an unordered list.
+- **Additional actions:** One bordered native disclosure reports the remaining count. Inside, actions are grouped by phase. Each action keeps its surface and sources visible, while a nested compact disclosure reveals only implementation steps and verification.
+- **Responsive behavior:** The full and compact fields use three and two columns respectively on wider screens. Both become one vertical flow below 520px, replacing vertical dividers with horizontal rules.
+- **Accessibility:** Use native `details` and `summary` behavior and the global three-pixel focus outline. Disclosure labels state what will appear rather than using icon-only controls.
+
+**The Surface-to-Evidence Rule.** Every implementation recommendation must name the GitHub surface, provide ordered changes, state observable verification evidence, and link to its public sources in that sequence.
+
 ### System Map
 
 The hero system map uses three colored circular stock nodes around a central dark activity cycle. Concentric rings and the 32px grid clarify orbital relationships only within this visual. The map settles once with a 720ms blur-and-rise animation and honors reduced-motion preferences.
@@ -297,6 +325,8 @@ The hero system map uses three colored circular stock nodes around a central dar
 - **Do** keep stock colors bound to governance, shared knowledge, and customer value.
 - **Do** pair large operational headings with muted source-forward explanations.
 - **Do** collapse multi-column evidence controls into a clear single-column mobile flow.
+- **Do** keep GitHub implementation guidance ordered from surface to steps to verification, with sources attached to the action.
+- **Do** expose the highest-priority actions and progressively disclose the rest by phase.
 - **Do** preserve visible keyboard focus and reduced-motion behavior.
 
 ### Don't:
@@ -304,4 +334,6 @@ The hero system map uses three colored circular stock nodes around a central dar
 - **Don't** replace the connected field with detached KPI cards or a generic metrics dashboard.
 - **Don't** round major reading containers, matrices, warnings, or evidence groups.
 - **Don't** use color without a text label, structural position, or state cue.
+- **Don't** hide the GitHub surface or public source links inside an implementation disclosure.
+- **Don't** present verification evidence as another implementation step.
 - **Don't** add ambient shadows to every card.

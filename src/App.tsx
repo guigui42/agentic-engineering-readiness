@@ -205,8 +205,8 @@ function App() {
             <h1>Prepare your Agentic Engineering System before you scale the agents.</h1>
             <p>
               Assess governance, shared knowledge, agent adoption, and customer
-              value signals. Then turn the gaps into a source-backed GitHub
-              preparation plan.
+              value signals. Then turn the gaps into exact GitHub settings,
+              repository files, workflows, and verification checks.
             </p>
             <div className="hero__actions">
               <a className="primary-button" href="#assessment">
